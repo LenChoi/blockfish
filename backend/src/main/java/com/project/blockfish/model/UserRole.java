@@ -1,4 +1,4 @@
-package com.project.blockfish.entity;
+package com.project.blockfish.model;
 
 public enum UserRole {
     ROLE_NOT_PERMITTED, ROLE_USER, ROLE_MANAGER, ROLE_ADMIN

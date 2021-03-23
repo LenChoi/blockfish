@@ -1,4 +1,4 @@
-package com.project.blockfish.entity;
+package com.project.blockfish.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,10 +22,17 @@ public class Member {
     @Column(unique = true)
     @NotBlank
     private String userId;
+
     @NotBlank
     private String password;
+
     @NotBlank
     private String name;
+
+    @NotBlank
+    private String email;
+
+    private Boolean lock = false;
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
@@ -38,4 +45,7 @@ public class Member {
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateAt;
+
+    //fileList
+    //downloadList
 }

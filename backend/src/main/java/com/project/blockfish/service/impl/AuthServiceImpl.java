@@ -1,9 +1,8 @@
-package com.project.blockfish.auth.impl;
+package com.project.blockfish.service.impl;
 
-import com.project.blockfish.auth.AuthService;
-import com.project.blockfish.entity.Member;
+import com.project.blockfish.model.Member;
 import com.project.blockfish.repository.MemberRepository;
-import lombok.RequiredArgsConstructor;
+import com.project.blockfish.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

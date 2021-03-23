@@ -1,6 +1,6 @@
-package com.project.blockfish.auth;
+package com.project.blockfish.service;
 
-import com.project.blockfish.entity.Member;
+import com.project.blockfish.model.Member;
 
 public interface AuthService {
     void signUpUser(Member membner);
