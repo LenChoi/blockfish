@@ -14,6 +14,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public void signUpUser(Member member) {
+        System.out.println(member);
         String password = member.getPassword();
         //암호 해쉬화 하기
         member.setPassword(password);

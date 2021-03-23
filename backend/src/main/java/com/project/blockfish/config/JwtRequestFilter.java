@@ -3,6 +3,8 @@ package com.project.blockfish.config;
 import com.project.blockfish.model.Member;
 import com.project.blockfish.service.CookieUtil;
 import com.project.blockfish.service.JwtUtil;
+import com.project.blockfish.service.MyUserDetailsService;
+import com.project.blockfish.service.RedisUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,9 +29,9 @@ import java.io.IOException;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     private final MyUserDetailsService userDetailsService;
-    private JwtUtil jwtUtil;
-    private CookieUtil cookieUtil;
-    private RedisUtil redisUtil;
+    private final JwtUtil jwtUtil;
+    private final CookieUtil cookieUtil;
+    private final RedisUtil redisUtil;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -48,7 +50,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
            }
 
            if(userId!=null) {
-               UserDetails userDetails = userDetailsService.loadUserByUserId(userId);
+               UserDetails userDetails = userDetailsService.loadUserByUsername(userId);
 
                if(jwtUtil.validateToken(jwt, userDetails)) {
                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
@@ -67,23 +69,23 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         try{
             if(refreshJwt != null){
-                refreshUname = redisUtil.getData(refreshJwt);
+                refreshUserId = redisUtil.getData(refreshJwt);
 
-                if(refreshUname.equals(jwtUtil.getUsername(refreshJwt))){
-                    UserDetails userDetails = userDetailsService.loadUserByUsername(refreshUname);
+                if(refreshUserId.equals(jwtUtil.getUserId(refreshJwt))){
+                    UserDetails userDetails = userDetailsService.loadUserByUsername(refreshUserId);
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
-                    usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+                    usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 
                     Member member = new Member();
-                    member.setUsername(refreshUname);
+                    member.setUserId(refreshUserId);
                     String newToken =jwtUtil.generateToken(member);
 
                     Cookie newAccessToken = cookieUtil.createCookie(JwtUtil.ACCESS_TOKEN_NAME,newToken);
                     response.addCookie(newAccessToken);
                 }
             }
-        }catch(ExpiredJwtException e){
+        } catch(ExpiredJwtException e){
 
         }
 

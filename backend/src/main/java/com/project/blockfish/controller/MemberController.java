@@ -7,6 +7,7 @@ import com.project.blockfish.model.Response;
 import com.project.blockfish.service.AuthService;
 import com.project.blockfish.service.CookieUtil;
 import com.project.blockfish.service.JwtUtil;
+import com.project.blockfish.service.RedisUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,12 +23,12 @@ public class MemberController {
     private final AuthService authService;
     private final JwtUtil jwtUtil;
     private final CookieUtil cookieUtil;
-    private RedisUtil redisUtil;
+    private final RedisUtil redisUtil;
 
     @PostMapping("/signup")
     public Response signUpUser(@RequestBody Member member) {
         Response response = new Response();
-
+        System.out.println(member);
         try{
             authService.signUpUser(member);
             response.setResponse("success");
@@ -51,14 +52,22 @@ public class MemberController {
                           HttpServletRequest req,
                           HttpServletResponse res) throws Exception {
         try {
+            System.out.println(user.getUserId()+" "+user.getPassword());
             final Member member = authService.loginUser(user.getUserId(), user.getPassword());
+            System.out.println(member);
             final String token = jwtUtil.generateToken(member);
+            System.out.println("token = " + token);
             final String refreshJwt = jwtUtil.generateRefreshToken(member);
+            System.out.println("refreshJwt = " + refreshJwt);
             Cookie accessToken = cookieUtil.createCookie(JwtUtil.ACCESS_TOKEN_NAME, token);
+            System.out.println("accessToken = " + accessToken);
             Cookie refreshToken = cookieUtil.createCookie(JwtUtil.REFRESH_TOKEN_NAME, refreshJwt);
+            System.out.println("refreshToken = " + refreshToken);
+            System.out.println("refreshJwt = " + refreshJwt);
             redisUtil.setDataExpire(refreshJwt, member.getUserId(), JwtUtil.REFRESH_TOKEN_VALIDATION_SECOND);
             res.addCookie(accessToken);
             res.addCookie(refreshToken);
+            System.out.println("redisUtil.getData(refreshJwt); = " + redisUtil.getData(refreshJwt));
             return new Response("success", "로그인에 성공했습니다.", token);
         } catch (Exception e) {
             return new Response("error", "로그인에 실패했습니다.", e.getMessage());

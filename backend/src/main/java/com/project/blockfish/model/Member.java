@@ -1,5 +1,6 @@
 package com.project.blockfish.model;
 
+import com.project.blockfish.config.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -32,7 +33,7 @@ public class Member {
     @NotBlank
     private String email;
 
-    private Boolean lock = false;
+    //private Boolean userLock = false; //BOOlean 수정하기
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
