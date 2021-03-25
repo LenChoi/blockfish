@@ -1,6 +1,7 @@
 package com.project.blockfish.config;
 
 import com.project.blockfish.service.MyUserDetailsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,13 +13,12 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private MyUserDetailsService myUserDetailsService;
+    private final MyUserDetailsService myUserDetailsService;
 
-    @Autowired
-    private JwtRequestFilter jwtRequestFilter;
+    private final JwtRequestFilter jwtRequestFilter;
 
     //@Autowired
     //private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
@@ -40,9 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/user/signup").permitAll()
                 .antMatchers("/user/login").permitAll()
+                .antMatchers("/user/logout").permitAll()
                 .antMatchers("/user/verify/**").permitAll()
-                .antMatchers("/oauth/**").permitAll()
-                .antMatchers("/test/user").hasRole("USER")
+                .antMatchers("/oauth/**").permitAll() //이 윗 부븐들은 모두 허용
+                .antMatchers("/test/user").hasRole("USER") //아래 두개는 권한이 필요
                 .antMatchers("/test/admin").hasRole("ADMIN")
                 .anyRequest().authenticated();
 

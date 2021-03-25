@@ -33,7 +33,7 @@ public class Member {
     @NotBlank
     private String email;
 
-    //private Boolean userLock = false; //BOOlean 수정하기
+    private boolean userLock; //check the boolean value in mysql
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)

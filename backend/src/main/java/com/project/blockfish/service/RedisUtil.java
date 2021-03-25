@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 
 @Service
+@RequiredArgsConstructor
 public class RedisUtil {
 
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
+    private final StringRedisTemplate stringRedisTemplate;
 
     public String getData(String key){
         ValueOperations<String,String> valueOperations = stringRedisTemplate.opsForValue();
@@ -24,8 +24,11 @@ public class RedisUtil {
         valueOperations.set(key,value);
     }
 
-    public void setDataExpire(String key,String value,long duration){
+    public void setDataExpire(String key,String value,long duration){ //redis에 expired time을 설정
         ValueOperations<String,String> valueOperations = stringRedisTemplate.opsForValue();
+        System.out.println("key = " + key);
+        System.out.println("value = " + value);
+        System.out.println("duration = " + duration);
         Duration expireDuration = Duration.ofSeconds(duration);
         valueOperations.set(key,value,expireDuration);
     }

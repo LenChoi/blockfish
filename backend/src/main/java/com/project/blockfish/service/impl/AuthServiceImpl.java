@@ -3,14 +3,15 @@ package com.project.blockfish.service.impl;
 import com.project.blockfish.model.Member;
 import com.project.blockfish.repository.MemberRepository;
 import com.project.blockfish.service.AuthService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
-    @Autowired
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
     @Override
     public void signUpUser(Member member) {

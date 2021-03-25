@@ -44,7 +44,11 @@ public class JwtUtil {
         return jwt;
     }
 
-    public String generateRefreshToken(Member member) {
+    public String generateToken(Member member) { //Access Token 생성
+        return doGenerateToken(member.getUserId(), TOKEN_VALIDATION_SECOND);
+    }
+
+    public String generateRefreshToken(Member member) { //refresh token 생성
         return doGenerateToken(member.getUserId(), REFRESH_TOKEN_VALIDATION_SECOND);
     }
 
@@ -61,17 +65,14 @@ public class JwtUtil {
     }
 
     public Boolean isTokenExpired(String token) { //토큰이 만료되었는지 확인
-        final Date expiration = extractAllClaims(token).getExpiration();
+        final Date expiration = extractAllClaims(token).getExpiration(); //getExpiration은 JWT claims에서 지원해준다
         return expiration.before(new Date());
     }
 
-    public String generateToken(Member member) { //Access/Refresh Token을 형성
-        return doGenerateToken(member.getUserId(), TOKEN_VALIDATION_SECOND);
-    }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUserId(token);
 
-        return (username.equals(userDetails.getUsername()) && ! isTokenExpired(token));
+        return (username.equals(userDetails.getUsername()) && ! isTokenExpired(token)); //
     }
 }
