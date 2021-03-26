@@ -4,11 +4,11 @@ import com.project.blockfish.model.Member;
 import com.project.blockfish.exception.Message;
 import com.project.blockfish.model.RequestLoginUser;
 import com.project.blockfish.model.Response;
-import com.project.blockfish.service.AuthService;
-import com.project.blockfish.service.CookieUtil;
-import com.project.blockfish.service.JwtUtil;
-import com.project.blockfish.service.RedisUtil;
+import com.project.blockfish.service.*;
+import com.project.blockfish.service.impl.EmailServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
@@ -24,6 +24,9 @@ public class MemberController {
     private final JwtUtil jwtUtil;
     private final CookieUtil cookieUtil;
     private final RedisUtil redisUtil;
+    private final EmailService emailService;
+
+    private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
     @PostMapping("/signup")
     public Response signUpUser(@RequestBody Member member) {
@@ -41,11 +44,7 @@ public class MemberController {
         return response;
     }
 
-    @GetMapping("/test")
-    public String test() {
-        System.out.println("here1");
-        return "test";
-    }
+
 
     @PostMapping("/login")
     public Response login(@RequestBody RequestLoginUser user,
@@ -59,9 +58,9 @@ public class MemberController {
             System.out.println("token = " + token);
             final String refreshJwt = jwtUtil.generateRefreshToken(member); //refresh token 발급
             System.out.println("refreshJwt = " + refreshJwt);
-            Cookie accessToken = cookieUtil.createCookie(JwtUtil.ACCESS_TOKEN_NAME, token);
+            Cookie accessToken = cookieUtil.createCookie(JwtUtil.ACCESS_TOKEN_NAME, token, JwtUtil.TOKEN_VALIDATION_SECOND);
             System.out.println("accessToken = " + accessToken);
-            Cookie refreshToken = cookieUtil.createCookie(JwtUtil.REFRESH_TOKEN_NAME, refreshJwt);
+            Cookie refreshToken = cookieUtil.createCookie(JwtUtil.REFRESH_TOKEN_NAME, refreshJwt, JwtUtil.REFRESH_TOKEN_VALIDATION_SECOND);
             System.out.println("refreshToken = " + refreshToken);
             System.out.println("refreshJwt = " + refreshJwt);
             redisUtil.setDataExpire(refreshJwt, member.getUserId(), JwtUtil.REFRESH_TOKEN_VALIDATION_SECOND);
@@ -74,6 +73,28 @@ public class MemberController {
         }
     }
 
+
+    @PostMapping("/mail")
+    public void emailConfirm(@RequestBody String email)throws Exception{
+        logger.info("post emailConfirm");
+        System.out.println("전달 받은 이메일 : "+ email);
+        emailService.sendSimpleMessage(email);
+    }
+
+    @PostMapping("/verifyCode")
+    public int verifyCode(String code) {
+        logger.info("Post verifyCode");
+
+        int result = 0;
+        System.out.println("code : "+code);
+        System.out.println("code match : "+ EmailServiceImpl.ePw.equals(code));
+        if(EmailServiceImpl.ePw.equals(code)) {
+            result =1;
+        }
+
+        return result;
+    }
+
     @PostMapping("/logout")
     public Response logout(@RequestHeader(value="accessToken") String accessToken,
                            @RequestHeader(value="refreshToken") String refreshToken,
@@ -81,16 +102,21 @@ public class MemberController {
         try{
             System.out.println("accessToken = " + accessToken);
             System.out.println("refreshToken = " + refreshToken);
-            Cookie accessTokenDelete = new Cookie("accessToken", null);
-            Cookie refreshTokenDelete = new Cookie("refreshToken", null);
-            accessTokenDelete.setMaxAge(0);
-            refreshTokenDelete.setMaxAge(0);
+            Cookie accessTokenDelete = cookieUtil.createCookie(JwtUtil.ACCESS_TOKEN_NAME, null, 0);
+            Cookie refreshTokenDelete = cookieUtil.createCookie(JwtUtil.REFRESH_TOKEN_NAME, null, 0);
+            System.out.println("accessTokenDelete = " + accessTokenDelete);
+            System.out.println("refreshTokenDelete = " + refreshTokenDelete);
             String userId = jwtUtil.getUserId(accessToken);
+            System.out.println("userId = " + userId);
             redisUtil.deleteData(refreshToken);
+            System.out.println("3");
             redisUtil.setDataExpire(accessToken, userId, JwtUtil.TOKEN_VALIDATION_SECOND); //블랙리스트로 access 토큰 추가
+            System.out.println("4");
             res.addCookie(accessTokenDelete);
+            System.out.println("5");
             res.addCookie(refreshTokenDelete);
-            return new Response("success", "로그아웃에 성공했습니다", userId);
+            System.out.println("6");
+           return new Response("success", "로그아웃에 성공했습니다", userId);
         } catch (Exception e) {
             return new Response("error", "로그아웃에 실패했습니다.", e.getMessage());
         }

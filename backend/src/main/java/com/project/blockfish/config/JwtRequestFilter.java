@@ -81,7 +81,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                     member.setUserId(refreshUserId);
                     String newToken =jwtUtil.generateToken(member);
 
-                    Cookie newAccessToken = cookieUtil.createCookie(JwtUtil.ACCESS_TOKEN_NAME,newToken);
+                    Cookie newAccessToken = cookieUtil.createCookie(JwtUtil.ACCESS_TOKEN_NAME, newToken, JwtUtil.TOKEN_VALIDATION_SECOND);
                     response.addCookie(newAccessToken);
                 }
             }
