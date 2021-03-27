@@ -33,8 +33,6 @@ dependencies {
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: '2.3.9.RELEASE'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
-    implementation group: 'javax.mail', name: 'javax.mail-api', version: '1.6.2'
-    implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
 }
 
 

@@ -1,11 +1,11 @@
 package com.project.blockfish.controller;
 
 import com.project.blockfish.model.Member;
-import com.project.blockfish.exception.Message;
-import com.project.blockfish.model.RequestLoginUser;
+import com.project.blockfish.model.request.RequestLoginUser;
 import com.project.blockfish.model.Response;
+import com.project.blockfish.model.request.RequestVerifyEmail;
 import com.project.blockfish.service.*;
-import com.project.blockfish.service.impl.EmailServiceImpl;
+import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +44,31 @@ public class MemberController {
         return response;
     }
 
+    @PostMapping("/verify")
+    public Response verify(@RequestBody RequestVerifyEmail requestVerifyEmail, HttpServletRequest req, HttpServletResponse res) throws NotFoundException {
+        Response response;
+        try {
+            Member member = authService.findByUserId(requestVerifyEmail.getUserId());
+            authService.sendVerificationMail(member);
+            response = new Response("success", "성공적으로 인증메일을 보냈습니다.", null);
+        } catch (Exception exception) {
+            response = new Response("error", "인증메일을 보내는데 문제가 발생했습니다.", exception);
+        }
+        return response;
+    }
+
+    @GetMapping("/verify/{key}")
+    public Response getVerify(@PathVariable String key) {
+        Response response;
+        try {
+            authService.verifyEmail(key);
+            response = new Response("success", "성공적으로 인증메일을 확인했습니다.", null);
+
+        } catch (Exception e) {
+            response = new Response("error", "인증메일을 확인하는데 실패했습니다.", null);
+        }
+        return response;
+    }
 
 
     @PostMapping("/login")
@@ -74,26 +99,6 @@ public class MemberController {
     }
 
 
-    @PostMapping("/mail")
-    public void emailConfirm(@RequestBody String email)throws Exception{
-        logger.info("post emailConfirm");
-        System.out.println("전달 받은 이메일 : "+ email);
-        emailService.sendSimpleMessage(email);
-    }
-
-    @PostMapping("/verifyCode")
-    public int verifyCode(String code) {
-        logger.info("Post verifyCode");
-
-        int result = 0;
-        System.out.println("code : "+code);
-        System.out.println("code match : "+ EmailServiceImpl.ePw.equals(code));
-        if(EmailServiceImpl.ePw.equals(code)) {
-            result =1;
-        }
-
-        return result;
-    }
 
     @PostMapping("/logout")
     public Response logout(@RequestHeader(value="accessToken") String accessToken,
