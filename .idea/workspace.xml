@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26e171d7-3cc5-44c0-b352-2d909a3e7c1b" name="Default Changelist" comment="add gitignore">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
-    </list>
+    <list default="true" id="26e171d7-3cc5-44c0-b352-2d909a3e7c1b" name="Default Changelist" comment="add gitignore" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -92,7 +88,7 @@
       <updated>1616482977557</updated>
       <workItem from="1616482979472" duration="2194000" />
       <workItem from="1616513968984" duration="246000" />
-      <workItem from="1617784649704" duration="2035000" />
+      <workItem from="1617784649704" duration="2358000" />
     </task>
     <task id="LOCAL-00001" summary="??">
       <created>1616484779698</created>
@@ -101,7 +97,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616484779698</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add gitignore">
+      <created>1617786705926</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1617786705926</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
