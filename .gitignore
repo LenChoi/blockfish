@@ -1,4 +1,5 @@
 HELP.md
+.idea
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
@@ -18,13 +19,14 @@ bin/
 !**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
-.idea
+.idea/workspace.xml
 *.iws
 *.iml
 *.ipr
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+!**/src/main/resources/application.yml
 
 ### NetBeans ###
 /nbproject/private/
