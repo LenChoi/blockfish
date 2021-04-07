@@ -16,7 +16,7 @@ import java.util.Date;
 
 @Component
 public class JwtUtil {
-    public final static long TOKEN_VALIDATION_SECOND = 1000L * 10;
+    public final static long TOKEN_VALIDATION_SECOND = 1000L * 10 * 3; //포스트맨은 gmt로 인식하여 만료시간 오류 나중에 뒤에 3지우면 됨
     public final static long REFRESH_TOKEN_VALIDATION_SECOND = 1000L * 60 * 24 * 2;
 
     final static public String ACCESS_TOKEN_NAME = "accessToken";
@@ -44,7 +44,11 @@ public class JwtUtil {
         return jwt;
     }
 
-    public String generateRefreshToken(Member member) {
+    public String generateToken(Member member) { //Access Token 생성
+        return doGenerateToken(member.getUserId(), TOKEN_VALIDATION_SECOND);
+    }
+
+    public String generateRefreshToken(Member member) { //refresh token 생성
         return doGenerateToken(member.getUserId(), REFRESH_TOKEN_VALIDATION_SECOND);
     }
 
@@ -57,21 +61,20 @@ public class JwtUtil {
     }
 
     public String getUserId(String token) { // 추출한 Payload부터 userId를 가져온다.
+        System.out.println("token!! = " + token);
+        System.out.println("extractAllClaims(token)" + extractAllClaims(token).get("username", String.class));
         return extractAllClaims(token).get("username", String.class);
     }
 
     public Boolean isTokenExpired(String token) { //토큰이 만료되었는지 확인
-        final Date expiration = extractAllClaims(token).getExpiration();
+        final Date expiration = extractAllClaims(token).getExpiration(); //getExpiration은 JWT claims에서 지원해준다
         return expiration.before(new Date());
     }
 
-    public String generateToken(Member member) { //Access/Refresh Token을 형성
-        return doGenerateToken(member.getUserId(), TOKEN_VALIDATION_SECOND);
-    }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
-        final String username = getUsername(token);
+        final String username = getUserId(token);
 
-        return (username.equals(userDetails.getUsername()) && ! isTokenExpired(token));
+        return (username.equals(userDetails.getUsername()) && ! isTokenExpired(token)); //
     }
 }

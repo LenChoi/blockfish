@@ -11,6 +11,24 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
+  cache:
+    type: redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+  mail:
+    host: smtp.gmail.com
+    username: blockfish3
+    password: 123abc123!
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
 
   # JWT Secret key
   jwt:
