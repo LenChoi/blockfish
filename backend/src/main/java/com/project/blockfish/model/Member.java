@@ -1,5 +1,6 @@
 package com.project.blockfish.model;
 
+import com.project.blockfish.config.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -32,7 +33,7 @@ public class Member {
     @NotBlank
     private String email;
 
-    private Boolean lock = false;
+    private boolean userLock; //check the boolean value in mysql
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)

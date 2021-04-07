@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 @Service
 public class CookieUtil {
 
-    public Cookie createCookie(String cookieName, String value) {
+    public Cookie createCookie(String cookieName, String value, long tokenValidationSecond) {
         Cookie token = new Cookie(cookieName, value);
         token.setHttpOnly(true);
-        token.setMaxAge((int)JwtUtil.TOKEN_VALIDATION_SECOND);
+        token.setMaxAge((int)tokenValidationSecond);
         token.setPath("/");
         return token;
     }
