@@ -43,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/login").permitAll()
                 .antMatchers("/user/logout").permitAll()
                 .antMatchers("/user/verify/**").permitAll()
+                .antMatchers("/user/upload").permitAll()
                 .antMatchers("/oauth/**").permitAll() //이 윗 부븐들은 모두 허용
                 .antMatchers("/test/user").hasRole("USER") //아래 두개는 권한이 필요
                 .antMatchers("/test/admin").hasRole("ADMIN")
