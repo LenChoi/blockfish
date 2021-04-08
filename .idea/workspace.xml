@@ -65,8 +65,8 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RunManager">
     <configuration name="BlockfishApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
@@ -89,6 +89,7 @@
       <workItem from="1616513968984" duration="246000" />
       <workItem from="1617784649704" duration="7102000" />
       <workItem from="1617881484141" duration="525000" />
+      <workItem from="1617882226325" duration="261000" />
     </task>
     <task id="LOCAL-00001" summary="??">
       <created>1616484779698</created>
