@@ -16,7 +16,7 @@ import java.util.Date;
 
 @Component
 public class JwtUtil {
-    public final static long TOKEN_VALIDATION_SECOND = 1000L * 10 * 4; //포스트맨은 gmt로 인식하여 만료시간 오류 나중에 뒤에 3지우면 됨
+    public final static long TOKEN_VALIDATION_SECOND = 1000L * 10 * 100; //포스트맨은 gmt로 인식하여 만료시간 오류 나중에 뒤에 3지우면 됨
     public final static long REFRESH_TOKEN_VALIDATION_SECOND = 1000L * 60 * 24 * 2;
 
     final static public String ACCESS_TOKEN_NAME = "accessToken";

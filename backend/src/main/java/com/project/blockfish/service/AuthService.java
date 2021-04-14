@@ -11,4 +11,5 @@ public interface AuthService {
     void verifyEmail(String key) throws NotFoundException;
     void sendVerificationMail(Member member) throws NotFoundException;
     void modifyUserRole(Member member, UserRole userRole);
+    void checkExpirationToken(String accessToken, String refreshToken);
 }

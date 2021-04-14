@@ -19,6 +19,8 @@ import com.klaytn.caver.wallet.keyring.AbstractKeyring;
 import com.klaytn.caver.wallet.keyring.KeyStore;
 import com.klaytn.caver.wallet.keyring.KeyringFactory;
 import com.klaytn.caver.wallet.keyring.SingleKeyring;
+import com.project.blockfish.model.KlayDto;
+import org.springframework.stereotype.Service;
 import org.web3j.abi.datatypes.Type;
 import org.web3j.crypto.CipherException;
 import org.web3j.protocol.exceptions.TransactionException;
@@ -31,6 +33,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 
+@Service
 public class KlayService {
     public static String MAINNET_URL = "https://api.cypress.klaytn.net:8651";
     public static String BAOBAB_URL = "https://api.baobab.klaytn.net:8651";
@@ -85,7 +88,7 @@ public class KlayService {
             "\t}\n" +
             "]";
 
-    public String sendingKLAY() throws IOException, CipherException {
+    private String sendingKLAY() throws IOException, CipherException {
         Caver caver = new Caver(BAOBAB_URL);
 //        File file = new File("/Users/minho/Downloads/keystore.json");
 //
@@ -118,7 +121,7 @@ public class KlayService {
         return rlpEncoded;
     }
 
-    public String sendRawTransaction(String rlpEncoded) {
+    private String sendRawTransaction(String rlpEncoded) {
         Caver caver = new Caver(BAOBAB_URL);
 
         String txHash = null;
@@ -138,7 +141,7 @@ public class KlayService {
 
    }
 
-    public void loadContract(String contractAddress) {
+    private void loadContract(String contractAddress) {
         Caver caver = new Caver(BAOBAB_URL);
         try {
             Contract contract = new Contract(caver, ABIJson, contractAddress);
@@ -153,7 +156,7 @@ public class KlayService {
         }
     }
 
-    public String deployContract() {
+    private String deployContract() {
         Caver caver = new Caver(BAOBAB_URL);
         SingleKeyring deployer = KeyringFactory.createFromPrivateKey("0x5d6342b9903f624d1d34eb81c21b44f87e97a70b7e3ed41de0ffa06c3b22db41");
         caver.wallet.add(deployer);
@@ -174,44 +177,58 @@ public class KlayService {
 
     }
 
-    public void executeContractWithFeeDelegation(String contractAddress) {
+    private void executeContractWithFeeDelegation(String contractAddress, String userId, String fileHash) {
         Caver caver = new Caver(BAOBAB_URL);
         SingleKeyring executor = KeyringFactory.createFromPrivateKey("0x5d6342b9903f624d1d34eb81c21b44f87e97a70b7e3ed41de0ffa06c3b22db41");
         caver.wallet.add(executor);
 
         try {
             Contract contract = new Contract(caver, ABIJson, contractAddress);
-
-            String encodedParams = contract.encodeABI("setHash", "clilc", "testValue");
             SendOptions sendOptions = new SendOptions();
             sendOptions.setFrom(executor.getAddress());
             sendOptions.setGas(BigInteger.valueOf(4000000));
 
-            TransactionReceipt.TransactionReceiptData receipt = contract.send(sendOptions, "setHash", "test", "testValue");
+            TransactionReceipt.TransactionReceiptData receipt = contract.send(sendOptions, "setHash",  fileHash, userId);
         } catch (IOException | TransactionException | ClassNotFoundException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
             //handle exception..
         }
     }
 
-    public void callContractFunction(String contractAddress) {
+    private KlayDto callContractFunction(String contractAddress) {
         Caver caver = new Caver(BAOBAB_URL);
+        KlayDto klayDto = new KlayDto();
 
         try {
             Contract contract = new Contract(caver, ABIJson, contractAddress);
-            List<Type> result = contract.call("getUserId");
-            System.out.println("@@@@@@@@@@@@@@@");
-            System.out.println((String) result.get(0).getValue());
+            List<Type> userId = contract.call("getUserId");
+            List<Type> hash = contract.call("getHash");
+            System.out.println((String) userId.get(0).getValue());
+            System.out.println((String) hash.get(0).getValue());
+            klayDto.setUserId((String) userId.get(0).getValue());
+            klayDto.setHash((String) hash.get(0).getValue());
+            klayDto.setContractAddress(contractAddress);
         } catch (IOException | ClassNotFoundException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
             //handle exception..
         }
+        return klayDto;
     }
 
-
-    public static void main(String[] args) throws IOException, CipherException {
+    public KlayDto sendHashToKlay(String fileHash, String userId) {
         KlayService klayService = new KlayService();
         String contractAddress = klayService.deployContract();
         klayService.loadContract(contractAddress);
-        klayService.executeContractWithFeeDelegation(contractAddress);
-        klayService.callContractFunction(contractAddress);
+        klayService.executeContractWithFeeDelegation(contractAddress, fileHash, userId);
+        KlayDto klayDto = klayService.callContractFunction(contractAddress);
+        return klayDto;
     }
+
+
+
+//    public static void main(String[] args) throws IOException, CipherException {
+//        KlayService klayService = new KlayService();
+//        String contractAddress = klayService.deployContract();
+//        klayService.loadContract(contractAddress);
+//        klayService.executeContractWithFeeDelegation(contractAddress);
+//        klayService.callContractFunction(contractAddress);
+//    }
 }
