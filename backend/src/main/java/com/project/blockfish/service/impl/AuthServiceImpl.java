@@ -70,4 +70,9 @@ public class AuthServiceImpl implements AuthService {
         redisUtil.setDataExpire(uuid.toString(), member.getUserId(), 60 * 30L);
         emailService.sendMail(member.getEmail(),"회원가입 인증메일입니다.",VERIFICATION_LINK+uuid.toString());
     }
+
+    @Override
+    public void checkExpirationToken(String accessToken, String refreshToken) {
+
+    }
 }

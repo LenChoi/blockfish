@@ -23,7 +23,8 @@ public class FileController {
     private final FileService fileService;
     private final KlayService klayService;
     private final JwtUtil jwtUtil;
-    private static final String UPLOAD_DIRECTORY = "/Users/minho/Downloads/upload/";
+    private static final String UPLOAD_DIRECTORY = "/Users/j/Downloads/upload/";
+//    "/Users/minho/Downloads/upload/"
 
 
     @PostMapping("/upload")
