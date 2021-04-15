@@ -1,4 +1,4 @@
-package com.project.blockfish.model.entity;
+package com.project.blockfish.domain;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +20,7 @@ public class File {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "FILE_ID")
     private Long id;
 
     @NotBlank
@@ -29,15 +30,21 @@ public class File {
     @NotBlank
     private String info;
 
+    @OneToMany(mappedBy = "fileInfo")
     private List<FileInfo> fileInfos = new ArrayList<>();
 
     private int count;
 
     private String blockChainAddress;
 
+    @OneToMany(mappedBy = "comment")
     private List<Comment> comments = new ArrayList<>();
 
     private Boolean lock;
+
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp

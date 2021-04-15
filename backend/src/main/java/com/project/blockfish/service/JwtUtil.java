@@ -1,6 +1,6 @@
 package com.project.blockfish.service;
 
-import com.project.blockfish.model.entity.Member;
+import com.project.blockfish.domain.Member;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

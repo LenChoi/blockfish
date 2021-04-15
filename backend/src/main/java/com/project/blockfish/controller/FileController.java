@@ -1,6 +1,6 @@
 package com.project.blockfish.controller;
 
-import com.project.blockfish.model.dto.KlayDto;
+import com.project.blockfish.dto.KlayDto;
 import com.project.blockfish.service.FileService;
 import com.project.blockfish.service.JwtUtil;
 import com.project.blockfish.service.klay.KlayService;

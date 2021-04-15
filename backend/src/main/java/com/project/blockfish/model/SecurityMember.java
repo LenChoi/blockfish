@@ -1,6 +1,6 @@
 package com.project.blockfish.model;
 
-import com.project.blockfish.model.entity.Member;
+import com.project.blockfish.domain.Member;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 

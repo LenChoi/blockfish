@@ -1,4 +1,4 @@
-package com.project.blockfish.model.entity;
+package com.project.blockfish.domain;
 
 import javax.persistence.*;
 
@@ -7,6 +7,7 @@ public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "COMMENT_ID")
     private Long id;
 
 
@@ -15,6 +16,10 @@ public class Comment {
     private String comment;
 
     private int starRank;
+
+    @ManyToOne
+    @JoinColumn(name = "FILE_ID")
+    private File file;
 
 
 

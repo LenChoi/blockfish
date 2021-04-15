@@ -1,6 +1,6 @@
 package com.project.blockfish.service;
 
-import com.project.blockfish.model.entity.Member;
+import com.project.blockfish.domain.Member;
 import com.project.blockfish.model.SecurityMember;
 import com.project.blockfish.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;

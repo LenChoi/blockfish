@@ -1,4 +1,4 @@
-package com.project.blockfish.model.entity;
+package com.project.blockfish.domain;
 
 import com.project.blockfish.config.UserRole;
 import lombok.Getter;
@@ -8,7 +8,9 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,6 +20,7 @@ import java.util.Date;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "MEMBER_ID")
     private Long id;
 
     @Column(unique = true)
@@ -47,6 +50,9 @@ public class Member {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateAt;
 
-    //fileList
-    //downloadList
+    @OneToMany(mappedBy = "file")
+    private List<File> fileList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "download")
+    private List<Download> downloadList = new ArrayList<>();
 }

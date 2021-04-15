@@ -1,6 +1,5 @@
-package com.project.blockfish.model;
+package com.project.blockfish.domain.response;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

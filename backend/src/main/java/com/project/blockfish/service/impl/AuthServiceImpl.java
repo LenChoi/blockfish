@@ -1,7 +1,7 @@
 package com.project.blockfish.service.impl;
 
 import com.project.blockfish.config.UserRole;
-import com.project.blockfish.model.entity.Member;
+import com.project.blockfish.domain.Member;
 import com.project.blockfish.repository.MemberRepository;
 import com.project.blockfish.service.AuthService;
 import com.project.blockfish.service.EmailService;

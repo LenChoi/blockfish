@@ -1,6 +1,6 @@
 package com.project.blockfish.config;
 
-import com.project.blockfish.model.entity.Member;
+import com.project.blockfish.domain.Member;
 import com.project.blockfish.service.CookieUtil;
 import com.project.blockfish.service.JwtUtil;
 import com.project.blockfish.service.MyUserDetailsService;

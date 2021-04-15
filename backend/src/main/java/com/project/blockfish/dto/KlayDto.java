@@ -1,4 +1,4 @@
-package com.project.blockfish.model.dto;
+package com.project.blockfish.dto;
 
 import lombok.Getter;
 import lombok.Setter;

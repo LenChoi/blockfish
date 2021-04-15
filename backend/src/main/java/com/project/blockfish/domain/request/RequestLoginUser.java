@@ -1,4 +1,4 @@
-package com.project.blockfish.model.request;
+package com.project.blockfish.domain.request;
 
 import lombok.Getter;
 import lombok.Setter;

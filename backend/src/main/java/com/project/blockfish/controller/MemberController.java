@@ -1,9 +1,9 @@
 package com.project.blockfish.controller;
 
-import com.project.blockfish.model.entity.Member;
-import com.project.blockfish.model.Response;
-import com.project.blockfish.model.request.RequestLoginUser;
-import com.project.blockfish.model.request.RequestVerifyEmail;
+import com.project.blockfish.domain.Member;
+import com.project.blockfish.domain.response.Response;
+import com.project.blockfish.domain.request.RequestLoginUser;
+import com.project.blockfish.domain.request.RequestVerifyEmail;
 import com.project.blockfish.service.*;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
