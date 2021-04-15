@@ -1,8 +1,6 @@
 package com.project.blockfish.service.impl;
 
-import com.project.blockfish.model.Member;
 import com.project.blockfish.service.EmailService;
-import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

@@ -1,6 +1,6 @@
 package com.project.blockfish.config;
 
-import com.project.blockfish.model.Member;
+import com.project.blockfish.model.entity.Member;
 import com.project.blockfish.service.CookieUtil;
 import com.project.blockfish.service.JwtUtil;
 import com.project.blockfish.service.MyUserDetailsService;
@@ -8,7 +8,6 @@ import com.project.blockfish.service.RedisUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lombok.extern.slf4j.XSlf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

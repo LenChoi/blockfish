@@ -1,11 +1,10 @@
 package com.project.blockfish.controller;
 
-import com.project.blockfish.model.KlayDto;
+import com.project.blockfish.model.dto.KlayDto;
 import com.project.blockfish.service.FileService;
 import com.project.blockfish.service.JwtUtil;
 import com.project.blockfish.service.klay.KlayService;
 import lombok.RequiredArgsConstructor;
-import okhttp3.OkHttpClient;
 import org.apache.commons.io.FileUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,8 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigInteger;
-import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/file")

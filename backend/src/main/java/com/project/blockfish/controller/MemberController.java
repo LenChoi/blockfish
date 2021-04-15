@@ -1,28 +1,20 @@
 package com.project.blockfish.controller;
 
-import com.project.blockfish.model.Member;
+import com.project.blockfish.model.entity.Member;
 import com.project.blockfish.model.Response;
 import com.project.blockfish.model.request.RequestLoginUser;
 import com.project.blockfish.model.request.RequestVerifyEmail;
 import com.project.blockfish.service.*;
-import com.project.blockfish.service.impl.FileUploadService;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.filechooser.FileSystemView;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.security.NoSuchAlgorithmException;
 
 @RestController
 @RequestMapping("/user")

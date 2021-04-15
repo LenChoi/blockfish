@@ -1,7 +1,7 @@
 package com.project.blockfish.service;
 
 import com.project.blockfish.config.UserRole;
-import com.project.blockfish.model.Member;
+import com.project.blockfish.model.entity.Member;
 import javassist.NotFoundException;
 
 public interface AuthService {

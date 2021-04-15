@@ -1,7 +1,5 @@
 package com.project.blockfish.service;
 
-import com.project.blockfish.model.Member;
-import javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service

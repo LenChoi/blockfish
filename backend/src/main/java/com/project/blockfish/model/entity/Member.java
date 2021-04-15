@@ -1,4 +1,4 @@
-package com.project.blockfish.model;
+package com.project.blockfish.model.entity;
 
 import com.project.blockfish.config.UserRole;
 import lombok.Getter;
