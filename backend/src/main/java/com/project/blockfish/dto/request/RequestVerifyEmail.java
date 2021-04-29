@@ -1,4 +1,4 @@
-package com.project.blockfish.domain.request;
+package com.project.blockfish.dto.request;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

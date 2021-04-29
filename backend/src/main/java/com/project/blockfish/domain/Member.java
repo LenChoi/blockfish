@@ -20,7 +20,6 @@ import java.util.List;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "MEMBER_ID")
     private Long id;
 
     @Column(unique = true)
@@ -50,9 +49,9 @@ public class Member {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateAt;
 
-    @OneToMany(mappedBy = "file")
-    private List<File> fileList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "download")
-    private List<Download> downloadList = new ArrayList<>();
+//    @OneToMany(mappedBy = "file")
+//    private List<File> fileList = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "download")
+//    private List<Download> downloadList = new ArrayList<>();
 }

@@ -2,8 +2,7 @@ spring:
   # mysql connection
   datasource:
     url: jdbc:mysql://localhost:3306/blockfish
-    password: 96117vb@
-#    alsgh3144
+    password: alsgh3144
     username: root
   jpa:
     show-sql: true
