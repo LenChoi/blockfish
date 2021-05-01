@@ -1,4 +1,4 @@
-package com.project.blockfish.dto.response;
+package com.project.blockfish.model.response;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
