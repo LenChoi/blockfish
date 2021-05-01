@@ -8,21 +8,21 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
-@ToString
 @Entity
-@Table(name = "Members")
+@Table(name = "members")
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_id")
     private Long id;
 
-    @Column(unique = true)
     @NotBlank
     private String userId;
 
@@ -35,23 +35,21 @@ public class Member {
     @NotBlank
     private String email;
 
-    private boolean userLock; //check the boolean value in mysql
+    private boolean userLock = false; //check the boolean value in mysql
 
-    @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private UserRole role = UserRole.ROLE_NOT_PERMITTED;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreationTimestamp
-    private Date createAt;
+    private LocalDateTime createAt;
 
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updateAt;
+    private LocalDateTime updateAt;
 
-//    @OneToMany(mappedBy = "file")
-//    private List<File> fileList = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "download")
-//    private List<Download> downloadList = new ArrayList<>();
+    @OneToOne
+    @JoinColumn(name = "download_id")
+    private Download download;
+
+    public void setDownload(Download download) {
+        this.download = download;
+        download.setMember(this);
+    }
 }

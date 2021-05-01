@@ -9,7 +9,7 @@ import com.klaytn.caver.methods.response.TransactionReceipt;
 import com.klaytn.caver.transaction.type.ValueTransfer;
 import com.klaytn.caver.wallet.keyring.KeyringFactory;
 import com.klaytn.caver.wallet.keyring.SingleKeyring;
-import com.project.blockfish.dto.KlayDto;
+import com.project.blockfish.model.KlayDto;
 import org.springframework.stereotype.Service;
 import org.web3j.abi.datatypes.Type;
 import org.web3j.crypto.CipherException;
