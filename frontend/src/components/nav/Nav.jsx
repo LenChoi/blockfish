@@ -14,7 +14,7 @@ const Nav = () => (
     <NavContainer>
       <NavWrapper>
         <div>
-          <Link to="/upload">
+          <Link to="/blockfish/upload">
             <TextDefault size="30px" color="#000" weight="700">
               Logo
             </TextDefault>
@@ -22,7 +22,7 @@ const Nav = () => (
         </div>
         <NavItems>
           <NavItem>
-            <Link to="/upload">
+            <Link to="/blockfish/upload">
               <TextDefault size="15px" color="#000">
                 업로드
               </TextDefault>
@@ -50,35 +50,35 @@ const Nav = () => (
       <NavWrapper background="#000">
         <NavItems>
           <CategoryItem>
-            <Link to="/download">
+            <Link to="/blockfish/download">
               <TextDefault size="15px" color="#fff">
                 카테고리
               </TextDefault>
             </Link>
           </CategoryItem>
           <CategoryItem>
-            <Link to="/download/windows">
+            <Link to="/blockfish/download/windows">
               <TextDefault size="15px" color="#fff">
                 Windows
               </TextDefault>
             </Link>
           </CategoryItem>
           <CategoryItem>
-            <Link to="/download/mac">
+            <Link to="/blockfish/download/mac">
               <TextDefault size="15px" color="#fff">
                 Mac
               </TextDefault>
             </Link>
           </CategoryItem>
           <CategoryItem>
-            <Link to="/download/android">
+            <Link to="/blockfish/download/android">
               <TextDefault size="15px" color="#fff">
                 Android
               </TextDefault>
             </Link>
           </CategoryItem>
           <CategoryItem>
-            <Link to="/download/ios">
+            <Link to="/blockfish/download/ios">
               <TextDefault size="15px" color="#fff">
                 iOS
               </TextDefault>

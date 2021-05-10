@@ -54,5 +54,5 @@ export const FooterBottom = styled.div`
 `;
 export const MainConent = styled.section`
   width: 100%;
-  min-height: 300px;
+  min-height: 450px;
 `;
