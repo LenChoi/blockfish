@@ -13,6 +13,11 @@ import {
 import useChecked from '../../hooks/useChecked';
 import Checkbox from '../../components/ui/CheckboxDefault';
 
+/**
+ * @function Join
+ * @author Min ByeongChan
+ * @description 회원가입 선택 화면
+ */
 const Join = () => {
   const history = useHistory();
   const [checked, onChangeChecked] = useChecked(false);
