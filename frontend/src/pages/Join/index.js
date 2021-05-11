@@ -15,7 +15,7 @@ import Checkbox from '../../components/ui/CheckboxDefault';
 
 /**
  * @function Join
- * @author Min ByeongChan
+ * @author MinByeongChan
  * @description 회원가입 선택 화면
  */
 const Join = () => {
