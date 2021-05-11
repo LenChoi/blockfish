@@ -3,6 +3,7 @@ import { RightLayout } from '../../styles/Download';
 import { isEmpty } from '../../utils/utils';
 import ListCardTemplate from '../cards/ListCardTemplate';
 import TextDefault from '../ui/TextDefault';
+import SortingBar from './SortingBar';
 
 const DownloadRight = () => {
   const [fileList, setFileList] = useState([]);
@@ -33,6 +34,8 @@ const DownloadRight = () => {
       <TextDefault size="20px" weight="700">
         추천
       </TextDefault>
+
+      <SortingBar />
       {!isEmpty(fileList) &&
         fileList.map((data) => <ListCardTemplate key={data.id} content={data} />)}
     </RightLayout>

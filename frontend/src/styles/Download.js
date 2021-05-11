@@ -4,10 +4,10 @@ import { Button } from '@material-ui/core';
 export const DownloadContainer = styled.div`
   display: grid;
   grid-template-columns: 250px auto;
-  grid-column-gap: 20px;
+  grid-column-gap: 40px;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 42px 20px 30px 20px;
+  padding: 42px 20px 100px 20px;
 `;
 export const LeftLayout = styled.div`
   max-width: 250px;
@@ -25,7 +25,6 @@ export const CheckboxItems = styled.ul`
 export const CheckboxItem = styled.li`
   display: flex;
 `;
-
 export const RefreshButton = styled(Button)({
   background: 'none',
   border: 0,
@@ -36,3 +35,33 @@ export const RefreshButton = styled(Button)({
     justifyContent: 'space-between',
   },
 });
+export const SortItems = styled.ul`
+  display: flex;
+  margin: 10px 0;
+`;
+export const SortItemWrapper = styled.span`
+  cursor: pointer;
+  transition: 0.1s linear;
+  padding-bottom: 2px;
+  &:hover {
+    opacity: 0.5;
+    border-bottom: 1px solid #808080;
+  }
+`;
+export const ButtonWrapper = styled.span`
+  cursor: pointer;
+  margin-left: 7px;
+  transition: 0.1s linear;
+  &:hover {
+    opacity: 0.5;
+  }
+`;
+export const MenuBarWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+export const SortItem = styled.ul`
+  padding: 0 5px;
+`;
