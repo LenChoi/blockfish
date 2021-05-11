@@ -14,7 +14,7 @@ const Nav = () => (
     <NavContainer>
       <NavWrapper>
         <div>
-          <Link to="/blockfish/upload">
+          <Link to="/blockfish">
             <TextDefault size="30px" color="#000" weight="700">
               Logo
             </TextDefault>
@@ -22,7 +22,7 @@ const Nav = () => (
         </div>
         <NavItems>
           <NavItem>
-            <Link to="/blockfish/upload">
+            <Link to="/upload">
               <TextDefault size="15px" color="#000">
                 업로드
               </TextDefault>
