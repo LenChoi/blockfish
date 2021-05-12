@@ -18,3 +18,27 @@ export const ListCardContentBottom = styled.div`
   display: flex;
   align-items: center;
 `;
+
+export const SlideCardLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 250px;
+  border-radius: 5px;
+`;
+export const ContentImageLayout = styled.div`
+  height: 100%;
+  max-height: 150px;
+  background-color: #ececec;
+  background-image: url('/images/card/empty.png');
+  background-size: contain;
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  margin-bottom: 15px;
+`;
+export const SliderCardContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+`;

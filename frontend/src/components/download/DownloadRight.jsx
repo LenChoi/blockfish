@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { RightLayout } from '../../styles/Download';
+import { RightLayout, SliderContainer } from '../../styles/Download';
 import { isEmpty } from '../../utils/utils';
 import ListCardTemplate from '../cards/ListCardTemplate';
+import SlideCardTemplate from '../cards/SlideCardTemplate';
 import TextDefault from '../ui/TextDefault';
 
 const DownloadRight = () => {
@@ -33,6 +34,11 @@ const DownloadRight = () => {
       <TextDefault size="20px" weight="700">
         추천
       </TextDefault>
+      <SliderContainer>
+        <SlideCardTemplate />
+        <SlideCardTemplate />
+        <SlideCardTemplate />
+      </SliderContainer>
       {!isEmpty(fileList) &&
         fileList.map((data) => <ListCardTemplate key={data.id} content={data} />)}
     </RightLayout>

@@ -36,3 +36,9 @@ export const RefreshButton = styled(Button)({
     justifyContent: 'space-between',
   },
 });
+
+export const SliderContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 30px;
+`;
