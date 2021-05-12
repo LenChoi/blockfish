@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { RightLayout } from '../../styles/Download';
+import { RightLayout, SliderContainer } from '../../styles/Download';
 import { isEmpty } from '../../utils/utils';
 import ListCardTemplate from '../cards/ListCardTemplate';
+import SlideCardTemplate from '../cards/SlideCardTemplate';
 import TextDefault from '../ui/TextDefault';
 import SortingBar from './SortingBar';
 
@@ -36,6 +37,11 @@ const DownloadRight = () => {
       </TextDefault>
 
       <SortingBar />
+      <SliderContainer>
+        <SlideCardTemplate />
+        <SlideCardTemplate />
+        <SlideCardTemplate />
+      </SliderContainer>
       {!isEmpty(fileList) &&
         fileList.map((data) => <ListCardTemplate key={data.id} content={data} />)}
     </RightLayout>

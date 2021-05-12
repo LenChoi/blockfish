@@ -36,7 +36,7 @@ export const RefreshButton = styled(Button)({
   },
 });
 export const SortItems = styled.ul`
-  display: flex;
+  display: flex;z
   margin: 10px 0;
 `;
 export const SortItemWrapper = styled.span`
@@ -64,4 +64,10 @@ export const MenuBarWrapper = styled.div`
 `;
 export const SortItem = styled.ul`
   padding: 0 5px;
+`;
+
+export const SliderContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 30px;
 `;
