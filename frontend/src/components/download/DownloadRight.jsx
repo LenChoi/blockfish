@@ -3,6 +3,7 @@ import { RightLayout, SliderContainer } from '../../styles/Download';
 import { isEmpty } from '../../utils/utils';
 import ListCardTemplate from '../cards/ListCardTemplate';
 import SlideCardTemplate from '../cards/SlideCardTemplate';
+import SlickSlider from '../slider/SlickSlider';
 import TextDefault from '../ui/TextDefault';
 import SortingBar from './SortingBar';
 
@@ -36,12 +37,16 @@ const DownloadRight = () => {
         추천
       </TextDefault>
 
-      <SortingBar />
       <SliderContainer>
         <SlideCardTemplate />
         <SlideCardTemplate />
         <SlideCardTemplate />
       </SliderContainer>
+
+      <SlickSlider />
+
+      <SortingBar />
+
       {!isEmpty(fileList) &&
         fileList.map((data) => <ListCardTemplate key={data.id} content={data} />)}
     </RightLayout>
