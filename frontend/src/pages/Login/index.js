@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import {
   Checkbox,
   InputAdornment,
@@ -22,12 +23,34 @@ import { LoginContainer, LoginWrapper } from '../../styles/Login';
  * @description 로그인 화면
  */
 const Login = () => {
-  const loginText = '로그인';
+  const [userId, setUserId] = useState('');
+  const [cookies, setCookie, removeCookie] = useCookies(['rememberUserId']);
+
+  useEffect(() => {
+    if (cookies.rememberUserId !== undefined) {
+      setUserId(cookies.rememberUserId);
+    }
+  }, [cookies.rememberUserId]);
+  const handleUserId = (e) => {
+    console.log(e.target.value);
+    if (e.target.value) {
+      setUserId(e.target.value);
+    }
+  };
+  const handleOnChange = (e) => {
+    console.log(e.target.checked);
+    if (e.target.checked) {
+      setCookie('rememberUserId', userId, { maxAge: 2000 });
+    } else {
+      removeCookie('rememberUserId');
+    }
+  };
+
   return (
     <DefaultLayout>
       <LoginContainer>
         <TextDefault size="30px" weight="700">
-          {loginText}
+          로그인
         </TextDefault>
         <LoginWrapper>
           <TextField
@@ -41,6 +64,8 @@ const Login = () => {
               ),
             }}
             style={{ marginTop: '10px' }}
+            onChange={handleUserId}
+            value={`${userId}`}
           />
           <TextField
             label="비밀번호"
@@ -55,7 +80,11 @@ const Login = () => {
             style={{ marginTop: '10px' }}
           />
           <FormGroup row>
-            <FormControlLabel control={<Checkbox />} label="아이디 저장" />
+            <FormControlLabel
+              control={<Checkbox checked={`${userId} ? true : false`} />}
+              label="아이디 저장"
+              onChange={handleOnChange}
+            />
             <span style={{ alignSelf: 'center' }}>
               <Link href="/#">아이디 찾기</Link> | <Link href="/#">비밀번호 찾기</Link>
             </span>
