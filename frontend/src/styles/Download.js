@@ -61,6 +61,7 @@ export const MenuBarWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 10px;
 `;
 export const SortItem = styled.ul`
   padding: 0 5px;
