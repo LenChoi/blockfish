@@ -8,8 +8,18 @@ import SortingBar from './SortingBar';
 
 const DownloadRight = () => {
   const [fileList, setFileList] = useState([]);
+  const [viewState, setViewState] = useState(false);
+
+  const onToggleView = (s) => {
+    if (s) {
+      setViewState(true);
+    } else {
+      setViewState(false);
+    }
+  };
 
   useEffect(() => {
+    setViewState(false);
     setFileList([
       {
         id: 1,
@@ -30,6 +40,8 @@ const DownloadRight = () => {
     ]);
   }, []);
 
+  console.log('viewState', viewState);
+
   return (
     <RightLayout>
       <TextDefault size="20px" weight="700">
@@ -43,10 +55,14 @@ const DownloadRight = () => {
 
       <SlickSlider />
 
-      <SortingBar />
+      <SortingBar onToggleView={onToggleView} />
 
       {!isEmpty(fileList) &&
-        fileList.map((data) => <ListCardTemplate key={data.id} content={data} />)}
+        (!viewState ? (
+          fileList.map((data) => <ListCardTemplate key={data.id} content={data} />)
+        ) : (
+          <div>Hello</div>
+        ))}
     </RightLayout>
   );
 };
