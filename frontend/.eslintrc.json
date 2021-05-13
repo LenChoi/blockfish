@@ -32,6 +32,8 @@
     "no-alert": "off",
     "import/order": "off",
     "import/no-unresolved": "off",
-    "react/prefer-stateless-function": "off"
+    "react/prefer-stateless-function": "off",
+    "prefer-template": "off",
+    "no-unneeded-ternary": "off"
   }
 }
