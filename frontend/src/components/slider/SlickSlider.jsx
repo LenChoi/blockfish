@@ -1,47 +1,77 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Slider from 'react-slick';
 
-export default class SlickSlider extends Component {
-  render() {
-    const settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 3,
-      slidesToScroll: 3,
-    };
-    return (
-      <div style={{ width: 500, height: 200, backgroundColor: '#ececec', padding: '0 50px' }}>
-        <Slider {...settings}>
-          <div>
-            <h3>1</h3>
-          </div>
-          <div>
-            <h3>2</h3>
-          </div>
-          <div>
-            <h3>3</h3>
-          </div>
-          <div>
-            <h3>4</h3>
-          </div>
-          <div>
-            <h3>5</h3>
-          </div>
-          <div>
-            <h3>6</h3>
-          </div>
-          <div>
-            <h3>7</h3>
-          </div>
-          <div>
-            <h3>8</h3>
-          </div>
-          <div>
-            <h3>9</h3>
-          </div>
-        </Slider>
-      </div>
-    );
-  }
-}
+import SlideCardTemplate from '../cards/SlideCardTemplate';
+import { ReactComponent as ArrowSvg } from '../../assets/arrow.svg';
+
+const SlickSlider = () => {
+  const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
+    <div
+      {...props}
+      className={'slick-prev slick-arrow' + (currentSlide === 0 ? ' slick-disabled' : '')}
+      aria-hidden="true"
+      aria-disabled={currentSlide === 0 ? true : false}
+    >
+      <ArrowSvg
+        className={`${'slick-arrow slick-left-arrow-svg'}`}
+        width="20"
+        height="20"
+        fill="#808080"
+      />
+    </div>
+  );
+  const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
+    <div
+      {...props}
+      className={
+        'slick-next slick-arrow' + (currentSlide === slideCount - 1 ? ' slick-disabled' : '')
+      }
+      aria-hidden="true"
+      aria-disabled={currentSlide === slideCount - 1 ? true : false}
+    >
+      <ArrowSvg
+        className={`${'slick-arrow slick-right-arrow-svg'}`}
+        width="20"
+        height="20"
+        fill="#808080"
+      />
+    </div>
+  );
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 300,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    prevArrow: <SlickArrowLeft />,
+    nextArrow: <SlickArrowRight />,
+  };
+
+  return (
+    <div
+      style={{
+        width: 800,
+        height: 300,
+        padding: '20px 50px',
+        margin: '0 auto',
+      }}
+    >
+      <Slider {...settings}>
+        <SlideCardTemplate />
+        <SlideCardTemplate />
+        <SlideCardTemplate />
+
+        <SlideCardTemplate />
+        <SlideCardTemplate />
+        <SlideCardTemplate />
+
+        <SlideCardTemplate />
+        <SlideCardTemplate />
+        <SlideCardTemplate />
+      </Slider>
+    </div>
+  );
+};
+
+export default SlickSlider;

@@ -20,3 +20,46 @@ a {
   color: inherit; /* blue colors for links too */
   text-decoration: inherit; /* no underline */
 }
+
+.slick-arrow {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  text-indent: -9999px;
+  background-repeat: no-repeat;
+
+  img {
+    left: 0;
+    background-color: bisque;
+    z-index: 9999;
+  }
+
+  // Slick CSS
+  &.slick-prev {
+    transform: translateX(50%) translateX(-30px);
+    z-index: 2;
+    &:after {
+      transform: translateX(-50%) translateX(-2px) translateY(-50%);
+      border-width: 9px 12px 9px 0;
+    }
+  }
+  &.slick-next {
+    transform: translateX(-50%) translateX(30px);
+    z-index: 1;
+    &:after {
+      transform: translateX(-50%) translateX(2px) translateY(-50%);
+      border-width: 9px 0 9px 12px;
+      border-color: transparent transparent transparent #fff;
+    }
+  }
+  &.slick-left-arrow-svg {
+    position: absolute;
+    left: 0;
+    transform: rotate(180deg);
+  }
+  &.slick-right-arrow-svg {
+    position: absolute;
+    right: 0;
+  }
+}

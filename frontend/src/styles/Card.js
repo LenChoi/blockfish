@@ -24,6 +24,7 @@ export const SlideCardLayout = styled.div`
   flex-direction: column;
   height: 250px;
   border-radius: 5px;
+  padding: 0 15px;
 `;
 export const ContentImageLayout = styled.div`
   height: 100%;
