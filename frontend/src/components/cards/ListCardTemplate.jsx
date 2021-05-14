@@ -3,20 +3,20 @@ import { ListCardContainer, ListCardContentBottom, ListCardLayout } from '../../
 import HalfRating from '../ui/HalfRating';
 import TextDefault from '../ui/TextDefault';
 
-const ListCardTemplate = (props) => {
-  const { content } = props;
+const ListCardTemplate = () => {
+  const { content } = 'test';
 
   return (
     <ListCardLayout>
       <ListCardContainer>
         {/* Content 이미지 */}
-        <img alt="" src={content.imgSrc} height="70" />
+        <img alt="" height="70" />
         {/* Content - 시작 */}
         <div>
           {/* Content 타이틀 - 시작 */}
           <div>
             <TextDefault size="18px" lineHeight="25px">
-              {content.title}
+              title {content}
             </TextDefault>
           </div>
           {/* Content 타이틀 - 끝 */}
@@ -24,20 +24,20 @@ const ListCardTemplate = (props) => {
           {/* Content 설명 - 시작 */}
           <div>
             <TextDefault size="14px" lineHeight="25px" color="#808080">
-              {content.descption}
+              콘텐츠 설명
             </TextDefault>
           </div>
           {/* Content 설명 - 끝 */}
 
           {/* Content Bottom - 시작 */}
           <ListCardContentBottom>
-            <HalfRating value={content.rating} />
+            <HalfRating />
             <div style={{ marginLeft: 5 }}>
               <TextDefault size="14px" color="#808080">
                 (
               </TextDefault>
               <TextDefault size="14px" color="#808080">
-                {content.commentNum}
+                commentNum
               </TextDefault>
               <TextDefault size="14px" color="#808080">
                 )
