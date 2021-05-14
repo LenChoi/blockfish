@@ -43,3 +43,8 @@ export const SliderCardContentWrapper = styled.div`
   align-items: center;
   padding: 0 20px;
 `;
+export const ImageSliderLayout = styled.div`
+  display: grid;
+  position: relative;
+  padding: 15px;
+`;
