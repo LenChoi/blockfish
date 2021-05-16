@@ -5,9 +5,9 @@ export const DownloadContainer = styled.div`
   display: grid;
   grid-template-columns: 250px auto;
   grid-column-gap: 40px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 42px 20px 100px 20px;
+  // max-width: 1200px;
+  // margin: 0 auto;
+  // padding: 42px 20px 100px 20px;
 `;
 export const LeftLayout = styled.div`
   max-width: 250px;
