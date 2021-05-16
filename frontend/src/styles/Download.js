@@ -72,3 +72,8 @@ export const SliderContainer = styled.div`
   grid-template-columns: repeat(3, 1fr);
   grid-column-gap: 30px;
 `;
+export const GridLayoutWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+`;
