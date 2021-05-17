@@ -104,11 +104,6 @@ const DownloadRight = () => {
       <TextDefault size="20px" weight="700">
         추천
       </TextDefault>
-      {/* <SliderContainer>
-        <SlideCardTemplate />
-        <SlideCardTemplate />
-        <SlideCardTemplate />
-      </SliderContainer> */}
 
       <SlickSlider />
 
