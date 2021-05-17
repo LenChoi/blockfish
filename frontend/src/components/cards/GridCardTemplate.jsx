@@ -2,12 +2,18 @@ import React from 'react';
 import { GridCardContainer, GridCardWrapper, CardRatingBarWrapper } from '../../styles/Card';
 import TextDefault from '../ui/TextDefault';
 import HalfRating from '../ui/HalfRating';
+import { useHistory } from 'react-router';
 
 const GridCardTemplate = (props) => {
   const { content } = props;
+  const history = useHistory();
+
+  const onClickCard = (id) => {
+    history.push(`/blockfish/download/detail/${id}`);
+  };
 
   return (
-    <GridCardContainer>
+    <GridCardContainer onClick={() => onClickCard(content.id)}>
       <GridCardWrapper>
         <div style={{ textAlign: 'center' }}>
           <img alt="" width="80" height="80" src={content.imgSrc} />
