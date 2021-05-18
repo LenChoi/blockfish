@@ -16,7 +16,7 @@ const DownloadDetailLeft = () => {
 
   useEffect(() => {
     console.log(viewState);
-    setViewState([false, false, false]);
+    setViewState([true, false, false]);
   }, []);
 
   const onClickDescBar = (id) => {
@@ -83,7 +83,7 @@ const DownloadDetailLeft = () => {
 
       {/* 컨텐츠 Wrapper - 시작 */}
       <DetailContentWrapper>
-        <TextDefault size="18px" color="#222222">
+        <TextDefault size="16px" color="#222222">
           P2P파일 공유, 멀티 다운로드가 가능하며, 작은 시스템 점유율과 파일 앱, 다운시 빠른 재설정
           등을 활용할 수 있는 프로그램입니다.
         </TextDefault>
