@@ -80,3 +80,33 @@ export const GridCardWrapper = styled.div`
   justify-content: space-between;
   padding: 20px;
 `;
+
+// CommentCard (댓글 카드)
+export const CommentCardContainer = styled.div`
+  display: flex;
+  border-bottom: 3px solid #999999;
+  grid-column-gap: 20px;
+  margin-top: 20px;
+  padding-bottom: 20px;
+`;
+export const CommentLeftWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  grid-gap: 10px;
+`;
+export const CommentRightWrapper = styled.div`
+  width: 100%;
+  padding: 15px;
+  background-color: #f5f5f5;
+  border-radius: 12px;
+`;
+
+// VersionCard (버전 카드 레이아웃)
+export const VersionCardContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #222;
+  border-radius: 15px;
+  padding: 15px;
+`;

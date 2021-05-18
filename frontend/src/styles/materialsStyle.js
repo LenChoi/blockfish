@@ -11,4 +11,7 @@ export const useStyles = makeStyles({
     fontSize: '20px',
     fontWeight: '700',
   },
+  commRating: {
+    fontSize: '20px',
+  },
 });

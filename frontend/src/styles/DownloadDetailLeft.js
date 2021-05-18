@@ -25,3 +25,22 @@ export const DetailDescBarItem = styled.li`
     opacity: 0.5;
   }
 `;
+export const ReviewContainer = styled.div`
+  margin-top: 15px;
+  margin-bottom: 40px;
+`;
+export const ReviewPreviewWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 3px;
+  padding: 35px;
+`;
+
+export const VersionContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  margin-top: 30px;
+`;
