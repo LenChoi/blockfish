@@ -64,3 +64,29 @@ export const MainConentContainer = styled.section`
 export const MainConentWrapper = styled.div`
   padding: 50px 20px 80px 20px;
 `;
+
+// MyPage Layout
+export const MyPageListContainer = styled.div`
+  max-width: 1080px;
+  border-radius: 10px;
+  border: 1px solid #808080;
+  box-shadow: 0px 4px 4px 2px rgb(192, 192, 192, 0.15);
+  margin: 0 auto;
+`;
+export const MyPageListItems = styled.ul`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 40px;
+`;
+export const MyPageListItem = styled.li`
+  color: ${(props) => (props.viewState ? '#4169e1' : '#808080')};
+  transition: 0.1s linear;
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+export const MyPageContentContainer = styled.article`
+  max-width: 1080px;
+  margin: 70px auto 0 auto;
+`;

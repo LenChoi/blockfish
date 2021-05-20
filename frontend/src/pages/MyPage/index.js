@@ -3,7 +3,7 @@ import TextDefault from '../../components/ui/TextDefault';
 import DefaultLayout from '../../layouts/DefaultLayout';
 import { MyPageCardContainer, MyPageCardWrapper, MyPageContainer } from '../../styles/MyPage';
 
-const index = () => {
+const MyPage = () => {
   console.log('hello');
   return (
     <DefaultLayout>
@@ -66,4 +66,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default MyPage;
