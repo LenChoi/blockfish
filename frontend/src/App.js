@@ -8,6 +8,9 @@ import Login from './pages/Login';
 import Join from './pages/Join';
 import Download from './pages/Download';
 import DownloadDetail from './pages/DownloadDetail';
+import MyPage from './pages/MyPage';
+import UserInfo from './pages/UserInfo';
+import DownloadList from './pages/DownloadList';
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
         <Route path="/blockfish/download/detail/:id" component={DownloadDetail} />
         <Route path="/login" component={Login} />
         <Route path="/join" component={Join} />
+        <Route exact path="/my-page" component={MyPage} />
+        <Route path="/my-page/userinfo" component={UserInfo} />
+        <Route path="/my-page/download-list" component={DownloadList} />
       </Router>
     </Provider>
   );

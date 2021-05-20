@@ -2,7 +2,7 @@ import React from 'react';
 import TextDefault from '../../components/ui/TextDefault';
 import DefaultLayout from '../../layouts/DefaultLayout';
 
-const index = () => {
+const MyPage = () => {
   console.log('hello');
   return (
     <DefaultLayout>
@@ -13,4 +13,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default MyPage;

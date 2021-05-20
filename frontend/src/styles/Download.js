@@ -77,3 +77,10 @@ export const GridLayoutWrapper = styled.div`
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
 `;
+export const ListGubunBarWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 10px;
+`;
