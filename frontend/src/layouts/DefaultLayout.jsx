@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Footer from '../components/footer/Footer';
 import Nav from '../components/nav/Nav';
-import { MainConent, MainConentContainer } from '../styles/DefaultLayout';
+import { MainConent, MainConentContainer, MainConentWrapper } from '../styles/DefaultLayout';
 
 const DefaultLayout = (props) => {
   const { children } = props;
@@ -12,7 +12,9 @@ const DefaultLayout = (props) => {
     <div>
       <Nav />
       <MainConent>
-        <MainConentContainer>{children}</MainConentContainer>
+        <MainConentContainer>
+          <MainConentWrapper>{children}</MainConentWrapper>
+        </MainConentContainer>
       </MainConent>
       <Footer />
     </div>

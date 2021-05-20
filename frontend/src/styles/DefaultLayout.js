@@ -60,5 +60,7 @@ export const MainConentContainer = styled.section`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+`;
+export const MainConentWrapper = styled.div`
   padding: 50px 20px 80px 20px;
 `;
