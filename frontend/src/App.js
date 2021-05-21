@@ -10,7 +10,8 @@ import MyPage from './pages/MyPage';
 import Download from './pages/Download';
 import DownloadDetail from './pages/DownloadDetail';
 import UserInfo from './pages/UserInfo';
-import DownloadList from './pages/DownloadList';
+import DownloadHistory from './pages/DownloadHistory';
+import UploadHistory from './pages/UploadHistory';
 
 function App() {
   return (
@@ -23,7 +24,11 @@ function App() {
         <Route path="/join" component={Join} />
         <Route exact path="/my-page" component={MyPage} />
         <Route path="/my-page/userinfo" component={UserInfo} />
-        <Route path="/my-page/download-list" component={DownloadList} />
+        <Route path="/my-page/review" component={UserInfo} />
+        <Route path="/my-page/withdrawal" component={UserInfo} />
+        <Route exact path="/my-page/history/download" component={DownloadHistory} />
+        <Route exact path="/my-page/history/upload" component={UploadHistory} />
+        <Route exact path="/my-page/upload" component={DownloadHistory} />
       </Router>
     </Provider>
   );

@@ -1,28 +1,41 @@
+import { Button, FormControlLabel, FormGroup } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import GridCardTemplate from '../../components/cards/GridCardTemplate';
-import ListCardTemplate from '../../components/cards/ListCardTemplate';
-import ListGubunBar from '../../components/download/ListGubunBar';
+import CheckedListCardTemplate from '../../components/cards/CheckedListCardTemplate';
 import PagingContainer from '../../components/pagination/PagingContainer';
+import CheckboxDefault from '../../components/ui/CheckboxDefault';
 import useInput from '../../hooks/useInput';
 import DefaultLayout from '../../layouts/DefaultLayout';
 import MyPageLayout from '../../layouts/MyPageLayout';
-import { GridLayoutWrapper } from '../../styles/Download';
 import { isEmpty } from '../../utils/utils';
+import { useStyles } from '../../styles/materialsStyle';
+import { useHistory } from 'react-router';
 
-const DownloadList = () => {
+const UploadHistory = () => {
+  const classes = useStyles();
+  const history = useHistory();
   const [fileList, setFileList] = useState([]);
-  const [viewState, setViewState] = useState(false);
   const [page, onhandleChangePage] = useInput(1);
-  const onToggleView = (s) => {
-    if (s) {
-      setViewState(true);
-    } else {
-      setViewState(false);
-    }
+  const [wholeChecked, setWholeChecked] = useState(false);
+
+  const onChangeWholeChecked = () => {
+    const isChecked = !wholeChecked;
+    const list = fileList.map((data) => ({ ...data, checked: isChecked }));
+    setFileList(list);
+    setWholeChecked(isChecked);
+  };
+
+  const onChangeChecked = (id) => {
+    if (isEmpty(id)) return;
+    const list = fileList.map((data) => {
+      if (id === data.id) {
+        return { ...data, checked: !data.checked };
+      }
+      return { ...data };
+    });
+    setFileList(list);
   };
 
   useEffect(() => {
-    setViewState(false);
     setFileList([
       {
         id: 1,
@@ -31,6 +44,7 @@ const DownloadList = () => {
         rating: 4.5,
         commentNum: 40,
         imgSrc: '/images/card/empty.png',
+        checked: false,
       },
       {
         id: 2,
@@ -39,6 +53,7 @@ const DownloadList = () => {
         rating: 3.5,
         commentNum: 30,
         imgSrc: '/images/card/empty.png',
+        checked: false,
       },
       {
         id: 3,
@@ -47,6 +62,7 @@ const DownloadList = () => {
         rating: 2.5,
         commentNum: 30,
         imgSrc: '/images/card/empty.png',
+        checked: false,
       },
       {
         id: 4,
@@ -55,6 +71,7 @@ const DownloadList = () => {
         rating: 4.5,
         commentNum: 40,
         imgSrc: '/images/card/empty.png',
+        checked: false,
       },
       {
         id: 5,
@@ -63,6 +80,7 @@ const DownloadList = () => {
         rating: 3.5,
         commentNum: 30,
         imgSrc: '/images/card/empty.png',
+        checked: false,
       },
       {
         id: 6,
@@ -71,6 +89,7 @@ const DownloadList = () => {
         rating: 2.5,
         commentNum: 30,
         imgSrc: '/images/card/empty.png',
+        checked: false,
       },
       {
         id: 7,
@@ -79,6 +98,7 @@ const DownloadList = () => {
         rating: 4.5,
         commentNum: 40,
         imgSrc: '/images/card/empty.png',
+        checked: false,
       },
       {
         id: 8,
@@ -87,6 +107,7 @@ const DownloadList = () => {
         rating: 3.5,
         commentNum: 30,
         imgSrc: '/images/card/empty.png',
+        checked: false,
       },
       {
         id: 9,
@@ -95,25 +116,43 @@ const DownloadList = () => {
         rating: 2.5,
         commentNum: 30,
         imgSrc: '/images/card/empty.png',
+        checked: false,
       },
     ]);
   }, []);
 
   return (
     <DefaultLayout>
-      <MyPageLayout title="다운로드 내역" viewState={3}>
-        <ListGubunBar onToggleView={onToggleView} />
+      <MyPageLayout title="업로드 내역" viewState={4}>
         <div style={{ marginTop: 20 }}>
+          <div style={{ marginLeft: 25 }}>
+            <FormGroup row>
+              <FormControlLabel
+                control={<CheckboxDefault checked={wholeChecked} onChange={onChangeWholeChecked} />}
+                label={wholeChecked ? '전체 해제' : '전체 선택'}
+              />
+            </FormGroup>
+          </div>
+
           {!isEmpty(fileList) &&
-            (viewState ? (
-              fileList.map((data) => <ListCardTemplate key={data.id} content={data} />)
-            ) : (
-              <GridLayoutWrapper>
-                {fileList.map((data) => (
-                  <GridCardTemplate key={data.id} content={data} />
-                ))}
-              </GridLayoutWrapper>
+            fileList.map((data) => (
+              <CheckedListCardTemplate
+                key={data.id}
+                content={data}
+                onChangeChecked={onChangeChecked}
+              />
             ))}
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 20 }}>
+          <Button
+            className={`${classes.uploadBtn}`}
+            onClick={() => {
+              history.push('/my-page/upload');
+            }}
+          >
+            업로드
+          </Button>
         </div>
 
         {/* 페이징 - 시작 */}
@@ -124,4 +163,4 @@ const DownloadList = () => {
   );
 };
 
-export default DownloadList;
+export default UploadHistory;

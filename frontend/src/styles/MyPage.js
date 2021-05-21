@@ -20,7 +20,7 @@ export const MyPageCardContainer = styled.div`
 `;
 export const MyPageCardWrapper = styled.div`
   text-align: center;
-  padding: 20px 0;
+  padding: 30px 0;
 `;
 // UserInfo
 export const UserInfoFieldWrapper = styled.div`
@@ -35,7 +35,7 @@ export const UserInfoBottomWrapper = styled.div`
 `;
 export const UserInfoInput = styled.input(() => ({
   minWidth: '400px',
-  fontSize: '20px',
+  fontSize: '16px',
   marginLeft: 60,
   borderRadius: 5,
   border: '2px solid rgb(205,205,205)',
