@@ -1,10 +1,10 @@
 package com.project.blockfish.config;
 
-import com.project.blockfish.domain.Member;
-import com.project.blockfish.service.CookieUtil;
-import com.project.blockfish.service.JwtUtil;
-import com.project.blockfish.service.MyUserDetailsService;
-import com.project.blockfish.service.RedisUtil;
+import com.project.blockfish.businesslogic.domain.Member;
+import com.project.blockfish.businesslogic.service.CookieUtil;
+import com.project.blockfish.businesslogic.service.JwtUtil;
+import com.project.blockfish.businesslogic.service.MyUserDetailsService;
+import com.project.blockfish.businesslogic.service.RedisUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

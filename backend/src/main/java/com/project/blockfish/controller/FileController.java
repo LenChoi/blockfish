@@ -1,9 +1,9 @@
 package com.project.blockfish.controller;
 
-import com.project.blockfish.model.KlayDto;
-import com.project.blockfish.service.FileService;
-import com.project.blockfish.service.JwtUtil;
-import com.project.blockfish.service.klay.KlayService;
+import com.project.blockfish.domainmodel.KlayDto;
+import com.project.blockfish.businesslogic.service.FileService;
+import com.project.blockfish.businesslogic.service.JwtUtil;
+import com.project.blockfish.businesslogic.service.klay.KlayService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
 import org.springframework.web.bind.annotation.*;

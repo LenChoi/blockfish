@@ -1,8 +1,7 @@
 package com.project.blockfish.config;
 
-import com.project.blockfish.service.MyUserDetailsService;
+import com.project.blockfish.businesslogic.service.MyUserDetailsService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
