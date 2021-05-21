@@ -20,5 +20,30 @@ export const MyPageCardContainer = styled.div`
 `;
 export const MyPageCardWrapper = styled.div`
   text-align: center;
-  padding: 20px 0;
+  padding: 30px 0;
 `;
+// UserInfo
+export const UserInfoFieldWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+`;
+export const UserInfoBottomWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 80px auto;
+`;
+export const UserInfoInput = styled.input(() => ({
+  minWidth: '400px',
+  fontSize: '16px',
+  marginLeft: 60,
+  borderRadius: 5,
+  border: '2px solid rgb(205,205,205)',
+  padding: '12px 20px',
+  transition: '0.1s linear',
+  '&:focus': {
+    outline: 'none',
+    boxShadow: '2px 2px 1px 1px rgb(40, 40, 40, 0.15)',
+    borderColor: '#4169e1',
+  },
+}));

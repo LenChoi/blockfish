@@ -36,7 +36,7 @@ export const RefreshButton = styled(Button)({
   },
 });
 export const SortItems = styled.ul`
-  display: flex;
+  display: flex;z
   margin: 10px 0;
 `;
 export const SortItemWrapper = styled.span`
@@ -65,4 +65,22 @@ export const MenuBarWrapper = styled.div`
 `;
 export const SortItem = styled.ul`
   padding: 0 5px;
+`;
+
+export const SliderContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 30px;
+`;
+export const GridLayoutWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+`;
+export const ListGubunBarWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 10px;
 `;
