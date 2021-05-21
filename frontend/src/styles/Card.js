@@ -110,3 +110,23 @@ export const VersionCardContainer = styled.div`
   border-radius: 15px;
   padding: 15px;
 `;
+
+export const CheckedListCardLayout = styled.div`
+  width: 100%;
+  margin-top: 20px;
+  background-color: #f5f5f5;
+  border-radius: 3px;
+  box-shadow: 2px 2px 4px 1px rgba(40, 40, 40, 0.3);
+  cursor: pointer;
+  transition: 0.1s linear;
+  &:hover {
+    opacity: 0.8;
+    box-shadow: 5px 5px 5px 1px rgba(40, 40, 40, 0.3);
+  }
+`;
+export const CheckedListCardContainer = styled.div`
+  display: grid;
+  grid-template-columns: 50px 90px auto 120px;
+  position: relative;
+  padding: 15px;
+`;

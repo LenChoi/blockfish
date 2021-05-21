@@ -68,9 +68,10 @@ export const MainConentWrapper = styled.div`
 // MyPage Layout
 export const MyPageListContainer = styled.div`
   max-width: 1080px;
-  border-radius: 10px;
-  border: 1px solid #808080;
-  box-shadow: 0px 4px 4px 2px rgb(192, 192, 192, 0.15);
+  min-width: 1080px;
+  border: 1px solid #ececec;
+  border-radius: 12px;
+  box-shadow: 2px 2px 4px 1px rgba(40, 40, 40, 0.3);
   margin: 0 auto;
 `;
 export const MyPageListItems = styled.ul`
@@ -80,6 +81,7 @@ export const MyPageListItems = styled.ul`
   padding: 40px;
 `;
 export const MyPageListItem = styled.li`
+  text-align: center;
   color: ${(props) => (props.viewState ? '#4169e1' : '#808080')};
   transition: 0.1s linear;
   &:hover {
@@ -88,5 +90,6 @@ export const MyPageListItem = styled.li`
 `;
 export const MyPageContentContainer = styled.article`
   max-width: 1080px;
+  min-width: 1080px;
   margin: 70px auto 0 auto;
 `;

@@ -21,7 +21,7 @@ const UserInfo = () => {
           <form style={{ marginTop: 40 }} noValidate autoComplete="off">
             <UserInfoFieldWrapper>
               <span style={{ width: 200 }}>
-                <TextDefault size="20px" color="#000000">
+                <TextDefault size="16px" color="#000000">
                   아이디(이메일)
                 </TextDefault>
               </span>
@@ -35,7 +35,7 @@ const UserInfo = () => {
 
             <UserInfoFieldWrapper>
               <span style={{ width: 200 }}>
-                <TextDefault size="20px" color="#000000">
+                <TextDefault size="16px" color="#000000">
                   이름
                 </TextDefault>
               </span>
@@ -48,7 +48,7 @@ const UserInfo = () => {
 
             <UserInfoFieldWrapper>
               <span style={{ width: 200 }}>
-                <TextDefault size="20px" color="#000000">
+                <TextDefault size="16px" color="#000000">
                   비밀번호
                 </TextDefault>
               </span>
@@ -59,7 +59,7 @@ const UserInfo = () => {
                 onChange={handlePwd}
               />
               <span style={{ marginLeft: 15 }}>
-                <TextDefault size="16px" color="#808080">
+                <TextDefault size="14px" color="#808080">
                   영문, 숫자, 특수문자 조합의 8~20자리 입니다.
                 </TextDefault>
               </span>
@@ -67,7 +67,7 @@ const UserInfo = () => {
 
             <UserInfoFieldWrapper>
               <span style={{ width: 200 }}>
-                <TextDefault size="20px" color="#000000">
+                <TextDefault size="16px" color="#000000">
                   비밀번호 확인
                 </TextDefault>
               </span>
@@ -79,7 +79,7 @@ const UserInfo = () => {
               />
 
               <span style={{ marginLeft: 15 }}>
-                <TextDefault size="16px" color="#808080">
+                <TextDefault size="14px" color="#808080">
                   확인을 위해 한번 더 입력해주세요.
                 </TextDefault>
               </span>
