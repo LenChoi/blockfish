@@ -1,19 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextDefault from '../../components/ui/TextDefault';
 import { Button } from '@material-ui/core';
 import DefaultLayout from '../../layouts/DefaultLayout';
 import { UserInfoFieldWrapper, UserInfoBottomWrapper, UserInfoInput } from '../../styles/MyPage';
-import useTextinput from '../../hooks/useTextinput';
+import useTextInput from '../../hooks/useTextInput';
 import { useStyles } from '../../styles/materialsStyle';
 import MyPageLayout from '../../layouts/MyPageLayout';
+import { regExpPwd } from '../../utils/utils';
 
 const UserInfo = () => {
   const classes = useStyles();
-  const [id, handleId] = useTextinput('');
-  const [name, handleName] = useTextinput('');
-  const [pwd, handlePwd] = useTextinput('');
-  const [pwdCheck, handlePwdCheck] = useTextinput('');
+  const [id, handleId] = useTextInput('');
+  const [name, handleName] = useTextInput('');
+  // const [pwd, handlePwd] = useTextInput('');
+  const [pwd, setPwd] = useState('');
+  const [pwdCheck, handlePwdCheck] = useTextInput('');
+  const [pwdState, setPwdState] = useState(false);
 
+  const onChangePwd = (e) => {
+    if (e.target.value.length > 20) {
+      alert('길이가 너무 깁니다.');
+      return;
+    }
+    if (regExpPwd(e.target.value)) {
+      setPwdState(true);
+    }
+
+    setPwd(e.target.value);
+  };
+  console.log('pwdState', pwdState);
   return (
     <DefaultLayout>
       <MyPageLayout title="개인정보" viewState={0}>
@@ -56,11 +71,11 @@ const UserInfo = () => {
                 type="password"
                 className={`${classes.userInfoInput}`}
                 value={pwd}
-                onChange={handlePwd}
+                onChange={onChangePwd}
               />
               <span style={{ marginLeft: 15 }}>
                 <TextDefault size="14px" color="#808080">
-                  영문, 숫자, 특수문자 조합의 8~20자리 입니다.
+                  {setPwdState ? '적합합니다.' : '영문, 숫자, 특수문자 조합의 8~20자리 입니다.'}
                 </TextDefault>
               </span>
             </UserInfoFieldWrapper>

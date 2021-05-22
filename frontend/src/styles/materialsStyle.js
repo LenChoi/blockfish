@@ -35,7 +35,7 @@ export const useStyles = makeStyles({
     border: '2px solid #0000cd',
     backgroundColor: '#4169e1',
     color: 'white',
-    padding: '10px 0',
+    padding: '7px 0',
   },
   userInfoCancelBtn: {
     width: '200px',
@@ -45,7 +45,7 @@ export const useStyles = makeStyles({
     border: '2px solid #222222',
     backgroundColor: '#505050',
     color: 'white',
-    padding: '5px 0',
+    padding: '7px 0',
   },
   uploadBtn: {
     width: `150px`,
@@ -63,5 +63,26 @@ export const useStyles = makeStyles({
     backgroundColor: '#808080',
     color: 'white',
     padding: '5px 0',
+  },
+  fileSelctionBtn: {
+    width: `100px`,
+    borderRadius: '3px',
+    border: '2px solid #808080',
+    backgroundColor: '#808080',
+    color: 'white',
+    padding: '10px 0',
+  },
+  uploadSelectForm: {
+    minWidth: 150,
+    marginRight: 16,
+  },
+  uploadSelect: {
+    fontSize: '16px',
+    borderRadius: 5,
+    border: '2px solid rgb(205,205,205)',
+    padding: '6px 12px',
+  },
+  chkboxGr: {
+    minWidth: 100,
   },
 });

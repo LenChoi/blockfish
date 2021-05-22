@@ -50,7 +50,7 @@ const CheckedListCardTemplate = ({ content, onChangeChecked }) => {
 
           {/* Content Bottom - 시작 */}
           <ListCardContentBottom>
-            <HalfRating />
+            <HalfRating value={content.rating} />
             <div style={{ marginLeft: 5 }}>
               <TextDefault size="14px" color="#808080">
                 (

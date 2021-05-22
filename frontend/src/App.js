@@ -12,6 +12,7 @@ import DownloadDetail from './pages/DownloadDetail';
 import UserInfo from './pages/UserInfo';
 import DownloadHistory from './pages/DownloadHistory';
 import UploadHistory from './pages/UploadHistory';
+import Upload from './pages/Upload';
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
         <Route path="/my-page/withdrawal" component={UserInfo} />
         <Route exact path="/my-page/history/download" component={DownloadHistory} />
         <Route exact path="/my-page/history/upload" component={UploadHistory} />
-        <Route exact path="/my-page/upload" component={DownloadHistory} />
+        <Route exact path="/my-page/upload" component={Upload} />
       </Router>
     </Provider>
   );

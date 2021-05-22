@@ -13,4 +13,17 @@ export const isEmpty = (value) => {
   return false;
 };
 
-export const tmp = () => {};
+// 패스워드 검증
+export const regExpPwd = (str) => {
+  const regExp1 = /[a-z|A-Z]/;
+  const regExp2 = /[0-9]/;
+  const regExp3 = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/;
+
+  if (str.length < 8 || str.length > 20) {
+    return false;
+  }
+  if (regExp1.test(str) && regExp2.test(str) && regExp3.test(str)) {
+    return true;
+  }
+  return false;
+};

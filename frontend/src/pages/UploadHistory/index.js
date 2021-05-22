@@ -40,7 +40,7 @@ const UploadHistory = () => {
       {
         id: 1,
         title: 'Zoom Cloud Meetings',
-        descption: '수많은 기능을 이용해 영상 통화와 미팅을 해보세요',
+        description: '수많은 기능을 이용해 영상 통화와 미팅을 해보세요',
         rating: 4.5,
         commentNum: 40,
         imgSrc: '/images/card/empty.png',
@@ -49,7 +49,7 @@ const UploadHistory = () => {
       {
         id: 2,
         title: 'Zoom Cloud Meetings',
-        descption: '메롱',
+        description: '메롱',
         rating: 3.5,
         commentNum: 30,
         imgSrc: '/images/card/empty.png',
@@ -58,7 +58,7 @@ const UploadHistory = () => {
       {
         id: 3,
         title: 'Zoom Cloud Meetings',
-        descption: '메롱',
+        description: '메롱',
         rating: 2.5,
         commentNum: 30,
         imgSrc: '/images/card/empty.png',
@@ -67,7 +67,7 @@ const UploadHistory = () => {
       {
         id: 4,
         title: 'Zoom Cloud Meetings',
-        descption: '수많은 기능을 이용해 영상 통화와 미팅을 해보세요',
+        description: '수많은 기능을 이용해 영상 통화와 미팅을 해보세요',
         rating: 4.5,
         commentNum: 40,
         imgSrc: '/images/card/empty.png',
@@ -76,7 +76,7 @@ const UploadHistory = () => {
       {
         id: 5,
         title: 'Zoom Cloud Meetings',
-        descption: '메롱',
+        description: '메롱',
         rating: 3.5,
         commentNum: 30,
         imgSrc: '/images/card/empty.png',
@@ -85,7 +85,7 @@ const UploadHistory = () => {
       {
         id: 6,
         title: 'Zoom Cloud Meetings',
-        descption: '메롱',
+        description: '메롱',
         rating: 2.5,
         commentNum: 30,
         imgSrc: '/images/card/empty.png',
@@ -94,7 +94,7 @@ const UploadHistory = () => {
       {
         id: 7,
         title: 'Zoom Cloud Meetings',
-        descption: '수많은 기능을 이용해 영상 통화와 미팅을 해보세요',
+        description: '수많은 기능을 이용해 영상 통화와 미팅을 해보세요',
         rating: 4.5,
         commentNum: 40,
         imgSrc: '/images/card/empty.png',
@@ -103,7 +103,7 @@ const UploadHistory = () => {
       {
         id: 8,
         title: 'Zoom Cloud Meetings',
-        descption: '메롱',
+        description: '메롱',
         rating: 3.5,
         commentNum: 30,
         imgSrc: '/images/card/empty.png',
@@ -112,7 +112,7 @@ const UploadHistory = () => {
       {
         id: 9,
         title: 'Zoom Cloud Meetings',
-        descption: '메롱',
+        description: '메롱',
         rating: 2.5,
         commentNum: 30,
         imgSrc: '/images/card/empty.png',
