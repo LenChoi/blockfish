@@ -128,4 +128,19 @@ public class MemberController {
         }
 
     }
+
+    @PostMapping("/duplicate")
+    public Response duplicate(@RequestBody Member member) {
+        Response response = new Response();
+        try{
+            Member selectMember = authService.findByUserId(member.getUserId());
+            response.setResponse("fail");
+        } catch(Exception e){
+            response.setResponse("success");
+        }
+        return response;
+    }
+
+
+
 }
