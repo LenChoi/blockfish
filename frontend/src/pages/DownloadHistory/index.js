@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import GridCardTemplate from '../../components/cards/GridCardTemplate';
 import ListCardTemplate from '../../components/cards/ListCardTemplate';
 import ListGubunBar from '../../components/download/ListGubunBar';
@@ -6,6 +7,7 @@ import PagingContainer from '../../components/pagination/PagingContainer';
 import useInput from '../../hooks/useInput';
 import DefaultLayout from '../../layouts/DefaultLayout';
 import MyPageLayout from '../../layouts/MyPageLayout';
+import { getListStart } from '../../modules/actions/list';
 import { GridLayoutWrapper } from '../../styles/Download';
 import { isEmpty } from '../../utils/utils';
 
@@ -13,6 +15,10 @@ const DownloadHistory = () => {
   const [fileList, setFileList] = useState([]);
   const [viewState, setViewState] = useState(false);
   const [page, onhandleChangePage] = useInput(1);
+  const { list } = useSelector((state) => ({
+    list: state.fetchData.list,
+  }));
+  const dispatch = useDispatch();
   const onToggleView = (s) => {
     if (s) {
       setViewState(true);
@@ -97,7 +103,12 @@ const DownloadHistory = () => {
         imgSrc: '/images/card/empty.png',
       },
     ]);
+
+    // api 호출 시작
+    dispatch(getListStart());
   }, []);
+
+  console.log('list', list);
 
   return (
     <DefaultLayout>
