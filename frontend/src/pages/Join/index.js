@@ -1,5 +1,4 @@
 import React from 'react';
-import { useHistory } from 'react-router';
 import { FormControlLabel, FormGroup } from '@material-ui/core';
 
 import DefaultLayout from '../../layouts/DefaultLayout';
@@ -12,6 +11,7 @@ import {
 } from '../../styles/Join';
 import useChecked from '../../hooks/useChecked';
 import Checkbox from '../../components/ui/CheckboxDefault';
+import { Link } from 'react-router-dom';
 
 /**
  * @function Join
@@ -19,16 +19,12 @@ import Checkbox from '../../components/ui/CheckboxDefault';
  * @description 회원가입 선택 화면
  */
 const Join = () => {
-  const history = useHistory();
   const [checked, onChangeChecked] = useChecked(false);
 
-  const onClickJoin = (url) => {
+  const onClickJoin = () => {
     if (!checked) {
       alert('약관에 동의해주세요.');
-      return;
     }
-
-    history.push(`/join/${url}`);
   };
 
   return (
@@ -52,7 +48,7 @@ const Join = () => {
             startIcon={<img src="/images/join/email_white.png" alt="" width="30" />}
             onClick={() => onClickJoin('email')}
           >
-            이메일 회원가입
+            {checked ? <Link to="/join-form">이메일 회원가입</Link> : '이메일 회원가입'}
           </JoinButton>
         </JoinContentWrapper>
       </JoinContainer>

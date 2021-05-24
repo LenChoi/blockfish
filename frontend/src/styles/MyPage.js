@@ -32,6 +32,7 @@ export const UserInfoBottomWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin: 80px auto;
+  padding-left: 50px;
 `;
 export const UserInfoInput = styled.input(() => ({
   minWidth: '400px',

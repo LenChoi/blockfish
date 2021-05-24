@@ -13,7 +13,7 @@ import {
   UploadTextarea,
   UploadBottomWrapper,
 } from '../../styles/MyPage';
-import useTextInput from '../../hooks/useTextInput';
+import useTextInput from '../../hooks/useTextinput';
 import { useStyles } from '../../styles/materialsStyle';
 import SelectDefault from '../../components/ui/SelectDefault';
 import CheckboxWithLabel from '../../components/ui/CheckboxWithLabel';
@@ -21,7 +21,7 @@ import CheckboxWithLabel from '../../components/ui/CheckboxWithLabel';
 const Upload = () => {
   const classes = useStyles();
   const history = useHistory();
-  const [filename, onChangeFilename] = useTextInput();
+  const [filename, onChangeFilename] = useTextInput('');
   const [checked, setChecked] = useState({
     window: false,
     mac: false,

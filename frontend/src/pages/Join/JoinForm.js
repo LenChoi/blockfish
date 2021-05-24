@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import TextDefault from '../../components/ui/TextDefault';
+import { JoinContainer } from '../../styles/Join';
 import { Button } from '@material-ui/core';
 import DefaultLayout from '../../layouts/DefaultLayout';
 import { UserInfoFieldWrapper, UserInfoBottomWrapper, UserInfoInput } from '../../styles/MyPage';
 import useTextInput from '../../hooks/useTextinput';
 import { useStyles } from '../../styles/materialsStyle';
-import MyPageLayout from '../../layouts/MyPageLayout';
 import { regExpPwd } from '../../utils/utils';
 
-const UserInfo = () => {
+const JoinForm = () => {
   const classes = useStyles();
   const [id, handleId] = useTextInput('');
   const [name, handleName] = useTextInput('');
@@ -31,13 +31,24 @@ const UserInfo = () => {
   console.log('pwdState', pwdState);
   return (
     <DefaultLayout>
-      <MyPageLayout title="개인정보" viewState={0}>
+      <JoinContainer>
+        <TextDefault size="30px" weight="700">
+          회원가입
+        </TextDefault>
+        <span style={{ marginRight: 60, alignSelf: 'flex-end' }}>
+          <TextDefault size="14px" color="#FF0000">
+            *필수입력사항입니다.
+          </TextDefault>
+        </span>
         <div>
           <form style={{ marginTop: 40 }} noValidate autoComplete="off">
             <UserInfoFieldWrapper>
               <span style={{ width: 200 }}>
                 <TextDefault size="16px" color="#000000">
                   아이디(이메일)
+                </TextDefault>
+                <TextDefault size="16px" color="#FF0000">
+                  *
                 </TextDefault>
               </span>
               <UserInfoInput
@@ -46,12 +57,18 @@ const UserInfo = () => {
                 value={id}
                 onChange={handleId}
               />
+              <span style={{ marginLeft: 15 }}>
+                <Button className={`${classes.emailChkBtn}`}>중복확인</Button>
+              </span>
             </UserInfoFieldWrapper>
 
             <UserInfoFieldWrapper>
               <span style={{ width: 200 }}>
                 <TextDefault size="16px" color="#000000">
                   이름
+                </TextDefault>
+                <TextDefault size="16px" color="#FF0000">
+                  *
                 </TextDefault>
               </span>
               <UserInfoInput
@@ -65,6 +82,9 @@ const UserInfo = () => {
               <span style={{ width: 200 }}>
                 <TextDefault size="16px" color="#000000">
                   비밀번호
+                </TextDefault>
+                <TextDefault size="16px" color="#FF0000">
+                  *
                 </TextDefault>
               </span>
               <UserInfoInput
@@ -85,6 +105,9 @@ const UserInfo = () => {
                 <TextDefault size="16px" color="#000000">
                   비밀번호 확인
                 </TextDefault>
+                <TextDefault size="16px" color="#FF0000">
+                  *
+                </TextDefault>
               </span>
               <UserInfoInput
                 type="password"
@@ -92,7 +115,6 @@ const UserInfo = () => {
                 value={pwdCheck}
                 onChange={handlePwdCheck}
               />
-
               <span style={{ marginLeft: 15 }}>
                 <TextDefault size="14px" color="#808080">
                   확인을 위해 한번 더 입력해주세요.
@@ -103,12 +125,11 @@ const UserInfo = () => {
         </div>
 
         <UserInfoBottomWrapper>
-          <Button className={`${classes.userInfoUpdateBtn}`}>수정</Button>
-          <Button className={`${classes.userInfoCancelBtn}`}>취소</Button>
+          <Button className={`${classes.joinFormBtn}`}>가입하기</Button>
         </UserInfoBottomWrapper>
-      </MyPageLayout>
+      </JoinContainer>
     </DefaultLayout>
   );
 };
 
-export default UserInfo;
+export default JoinForm;

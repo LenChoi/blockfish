@@ -6,6 +6,7 @@ import reduxStore from './modules/configureStore';
 import Main from './pages/Main';
 import Login from './pages/Login';
 import Join from './pages/Join';
+import JoinForm from './pages/Join/JoinForm';
 import MyPage from './pages/MyPage';
 import Download from './pages/Download';
 import DownloadDetail from './pages/DownloadDetail';
@@ -23,6 +24,7 @@ function App() {
         <Route path="/blockfish/download/detail/:id" component={DownloadDetail} />
         <Route path="/login" component={Login} />
         <Route path="/join" component={Join} />
+        <Route path="/join-form" component={JoinForm} />
         <Route exact path="/my-page" component={MyPage} />
         <Route path="/my-page/userinfo" component={UserInfo} />
         <Route path="/my-page/review" component={UserInfo} />

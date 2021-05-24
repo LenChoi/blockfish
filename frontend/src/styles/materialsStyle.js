@@ -85,4 +85,19 @@ export const useStyles = makeStyles({
   chkboxGr: {
     minWidth: 100,
   },
+  emailChkBtn: {
+    minWidth: '64px',
+    color: 'white',
+    background: 'darkgray',
+  },
+  joinFormBtn: {
+    height: '40px',
+    fontWeight: '500',
+    fontSize: '20px',
+    color: '#fff !important',
+    border: '0px',
+    borderRadius: '3px',
+    width: '423px',
+    background: '#1e90ff',
+  },
 });
