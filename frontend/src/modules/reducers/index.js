@@ -1,6 +1,6 @@
 import { all } from '@redux-saga/core/effects';
 import { combineReducers } from 'redux';
-import fetchData, { fetchSaga } from '../saga';
+import fetchData, { fetchSaga } from '../sagas';
 import list from '../actions/list';
 
 const rootReducer = combineReducers({

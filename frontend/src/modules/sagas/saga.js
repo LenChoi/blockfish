@@ -1,6 +1,6 @@
 import { takeEvery } from '@redux-saga/core/effects';
 import { createPromiseSaga, handleAsyncActions, reducerUtils } from '../utils/asyncUtils';
-import { getList, GET_LIST, GET_LIST_ERROR, GET_LIST_SUCCESS } from './actions/list';
+import { getList, GET_LIST, GET_LIST_ERROR, GET_LIST_SUCCESS } from '../actions/list';
 
 const getListSaga = createPromiseSaga(GET_LIST, getList);
 
