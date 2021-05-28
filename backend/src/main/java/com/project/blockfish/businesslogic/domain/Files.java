@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "files")
-public class File {
+public class Files {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "file_id")
@@ -53,7 +53,7 @@ public class File {
     private Boolean fileLock = false;
 
     @Builder
-    public File( String name, String imageAddress, String fileAddress, String info, String osType, int downCount, String blockChainAddress, int starRank, LocalDateTime createAt, LocalDateTime updateAt, Boolean fileLock) {
+    public Files(String name, String imageAddress, String fileAddress, String info, String osType, int downCount, String blockChainAddress, int starRank, LocalDateTime createAt, LocalDateTime updateAt, Boolean fileLock) {
         this.name = name;
         this.imageAddress = imageAddress;
         this.fileAddress = fileAddress;

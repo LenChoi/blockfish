@@ -1,12 +1,12 @@
 package com.project.blockfish.businesslogic.service.searchstrategy;
 
-import com.project.blockfish.businesslogic.domain.File;
+import com.project.blockfish.businesslogic.domain.Files;
 
 import java.util.List;
 
 public class SearchByRankingStrategy implements SearchStrategy{
     @Override
-    public List<File> search(String searchType) {
+    public List<Files> search(String searchType) {
         return null;
     }
 }
