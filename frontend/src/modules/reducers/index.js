@@ -1,15 +1,27 @@
-import { all } from '@redux-saga/core/effects';
+import { all, fork } from '@redux-saga/core/effects';
 import { combineReducers } from 'redux';
-import fetchData, { fetchSaga } from '../sagas';
+import { fetchUserSaga } from '../sagas/user';
+import user from '../actions/user';
 import list from '../actions/list';
+import { fetchSaga } from '../sagas/saga';
+import HYDRATE from 'next-redux-wrapper';
 
 const rootReducer = combineReducers({
-  fetchData,
+  index: (state = {}, action) => {
+    switch (action.type) {
+      case HYDRATE:
+        console.log('HYDRATE', action);
+        return { ...state, ...action.payload };
+      default:
+        return state;
+    }
+  },
   list,
+  user,
 });
 
 export function* rootSaga() {
-  yield all([fetchSaga()]); // all 은 배열 안의 여러 사가를 동시에 실행시켜줍니다.
+  yield all([fork(fetchSaga), fork(fetchUserSaga)]); // all 은 배열 안의 여러 사가를 동시에 실행시켜줍니다.
 }
 
 export default rootReducer;

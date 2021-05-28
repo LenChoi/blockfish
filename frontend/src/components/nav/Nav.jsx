@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import {
@@ -9,13 +9,10 @@ import {
   NavWrapper,
 } from '../../styles/DefaultLayout';
 import TextDefault from '../ui/TextDefault';
+import { useSelector } from 'react-redux';
 
 const Nav = () => {
-  const [login, setLogin] = useState(false);
-
-  const onClickLogin = () => {
-    setLogin(!login);
-  };
+  const { me } = useSelector((state) => state.user);
 
   return (
     <nav>
@@ -37,20 +34,20 @@ const Nav = () => {
               </Link>
             </NavItem>
             <NavItem>
-              {!login ? (
-                // <Link to="/login">
-                <Button onClick={onClickLogin}>로그인</Button>
-              ) : (
-                // </Link>
+              {me ? (
                 <Link to="/login">
                   <TextDefault size="15px" color="#000">
                     로그아웃
                   </TextDefault>
                 </Link>
+              ) : (
+                <Link to="/login">
+                  <Button>로그인</Button>
+                </Link>
               )}
             </NavItem>
             <NavItem>
-              {!login ? (
+              {!me ? (
                 <Link to="/join">
                   <TextDefault size="15px" color="#000">
                     회원가입

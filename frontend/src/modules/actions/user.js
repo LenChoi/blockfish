@@ -1,13 +1,12 @@
-import produce from 'immer';
-
 export const initState = {
-  logInLoading: false, //로그인 시도중
+  logInLoading: false,
   logInDone: false,
   logInError: null,
-  logOutLoading: false, //로그아웃 시도중
+  logOutLoading: false,
   logOutDone: false,
   logOutError: null,
   me: null,
+  loginData: {},
 };
 
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
@@ -19,13 +18,18 @@ export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
 export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE';
 
 // 액션 함수 정의
-export const loginRequestAction = () => ({
+export const loginRequestAction = (data) => ({
   type: LOG_IN_REQUEST,
-  payload: header,
+  data,
 });
 export const logoutRequestAction = () => ({
   type: LOG_OUT_REQUEST,
-  payload: header,
+});
+
+const dummyUser = (data) => ({
+  ...data,
+  nickname: 'seorim',
+  id: 1,
 });
 
 /**
@@ -34,27 +38,11 @@ export const logoutRequestAction = () => ({
  */
 // user Reducer
 const user = (state = initState, action) => {
-  return produce(state, (draft) => {
-    switch (action.type) {
-      case LOG_IN_REQUEST:
-        draft.logInLoading = true;
-        draft.logInError = null;
-        draft.logInDone = false;
-        break;
-      case LOG_IN_SUCCESS:
-        draft.logInLoading = false;
-        draft.me = action.data;
-        draft.logInDone = true;
-        break;
-      case LOG_IN_FAILURE:
-        draft.logInLoading = false;
-        draft.logInError = action.error;
-        break;
-      default:
-        break;
-      }
-  });
+  switch (action.type) {
+    case LOG_IN_REQUEST:
+      return dummyUser.data;
+    default:
+      return state;
+  }
 };
-  
 export default user;
-  

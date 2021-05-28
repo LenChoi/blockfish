@@ -1,16 +1,5 @@
-import { put } from '@redux-saga/core/effects';
-import { 
-  LOG_IN_REQUEST,
-  LOG_IN_SUCCESS,
-  LOG_IN_FAILURE,
-  LOG_OUT_REQUEST,
-  LOG_OUT_SUCCESS,
-  LOG_OUT_FAILURE, 
-} from '../actions/user';
-
-function logInAPI(data) {
-  return axios.post('/api/login', data);
-}
+import { fork, delay, put, takeLatest } from 'redux-saga/effects';
+import { LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE } from '../actions/user';
 
 function* logIn(action) {
   try {
@@ -32,4 +21,9 @@ function* logIn(action) {
 
 function* watchLogIn() {
   yield takeLatest(LOG_IN_REQUEST, logIn);
+}
+
+// API 호출 SAGA
+export function* fetchUserSaga() {
+  yield fork(watchLogIn);
 }

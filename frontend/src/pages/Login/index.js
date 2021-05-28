@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
+import React, { useCallback } from 'react';
 import {
   Checkbox,
   InputAdornment,
@@ -17,34 +16,26 @@ import DefaultLayout from '../../layouts/DefaultLayout';
 import TextDefault from '../../components/ui/TextDefault';
 import { LoginContainer, LoginWrapper } from '../../styles/Login';
 
+import { useDispatch } from 'react-redux';
+import { LOG_IN_REQUEST } from '../../modules/actions/user';
+import useInput from '../../hooks/useInput';
 /**
  * @function Login
  * @author Seorim
  * @description 로그인 화면
  */
 const Login = () => {
-  const [userId, setUserId] = useState('');
-  const [cookies, setCookie, removeCookie] = useCookies(['rememberUserId']);
+  const dispatch = useDispatch();
+  const [email, onChangeEmail] = useInput('');
+  const [password, onChangePassword] = useInput('');
 
-  useEffect(() => {
-    if (cookies.rememberUserId !== undefined) {
-      setUserId(cookies.rememberUserId);
-    }
-  }, [cookies.rememberUserId]);
-  const handleUserId = (e) => {
-    console.log(e.target.value);
-    if (e.target.value) {
-      setUserId(e.target.value);
-    }
-  };
-  const handleOnChange = (e) => {
-    console.log(e.target.checked);
-    if (e.target.checked) {
-      setCookie('rememberUserId', userId, { maxAge: 2000 });
-    } else {
-      removeCookie('rememberUserId');
-    }
-  };
+  const onSubmitForm = useCallback(() => {
+    console.log(email, password);
+    dispatch({
+      type: LOG_IN_REQUEST,
+      data: { email, password },
+    });
+  }, [email, password]);
 
   return (
     <DefaultLayout>
@@ -52,9 +43,10 @@ const Login = () => {
         <TextDefault size="30px" weight="700">
           로그인
         </TextDefault>
-        <LoginWrapper>
+        <LoginWrapper onFinish={onSubmitForm}>
           <TextField
-            label="아이디(이메일)"
+            label="이메일"
+            type="email"
             variant="outlined"
             InputProps={{
               startAdornment: (
@@ -64,11 +56,12 @@ const Login = () => {
               ),
             }}
             style={{ marginTop: '10px' }}
-            onChange={handleUserId}
-            value={`${userId}`}
+            value={email}
+            onChange={onChangeEmail}
           />
           <TextField
             label="비밀번호"
+            type="password"
             variant="outlined"
             InputProps={{
               startAdornment: (
@@ -78,18 +71,24 @@ const Login = () => {
               ),
             }}
             style={{ marginTop: '10px' }}
+            value={password}
+            onChange={onChangePassword}
           />
           <FormGroup row>
             <FormControlLabel
-              control={<Checkbox checked={`${userId} ? true : false`} />}
+              control={<Checkbox checked={`${email} ? true : false`} />}
               label="아이디 저장"
-              onChange={handleOnChange}
             />
             <span style={{ alignSelf: 'center' }}>
               <Link href="/#">아이디 찾기</Link> | <Link href="/#">비밀번호 찾기</Link>
             </span>
           </FormGroup>
-          <Button variant="contained" color="primary" style={{ marginBottom: '10px' }}>
+          <Button
+            htmlType="submit"
+            variant="contained"
+            color="primary"
+            style={{ marginBottom: '10px' }}
+          >
             로그인
           </Button>
           <Button variant="outlined" color="primary">
