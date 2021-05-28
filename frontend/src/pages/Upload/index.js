@@ -17,6 +17,7 @@ import useTextInput from '../../hooks/useTextinput';
 import { useStyles } from '../../styles/materialsStyle';
 import SelectDefault from '../../components/ui/SelectDefault';
 import CheckboxWithLabel from '../../components/ui/CheckboxWithLabel';
+import EditorComponent from '../../components/editor/EditorComponent';
 
 const Upload = () => {
   const classes = useStyles();
@@ -177,6 +178,15 @@ const Upload = () => {
                 설명
               </TextDefault>
               <UploadTextarea type="text" value={filename} onChange={onChangeFilename} />
+            </UploadContentItem>
+            {/* 설명 - 끝 */}
+
+            {/* 설명 - 시작 */}
+            <UploadContentItem>
+              <TextDefault size="16px" color="#000" width="150px">
+                설명
+              </TextDefault>
+              <EditorComponent />
             </UploadContentItem>
             {/* 설명 - 끝 */}
           </UploadContentItems>
