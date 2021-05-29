@@ -10,19 +10,18 @@ import {
   UploadContentItems,
   UploadContentItem,
   UploadInput,
-  UploadTextarea,
   UploadBottomWrapper,
 } from '../../styles/MyPage';
-import useTextInput from '../../hooks/useTextinput';
+import useTextinput from '../../hooks/useTextinput';
 import { useStyles } from '../../styles/materialsStyle';
 import SelectDefault from '../../components/ui/SelectDefault';
 import CheckboxWithLabel from '../../components/ui/CheckboxWithLabel';
-import EditorComponent from '../../components/editor/EditorComponent';
+import QuillEditor from '../../components/editor/QuillEditor';
 
 const Upload = () => {
   const classes = useStyles();
   const history = useHistory();
-  const [filename, onChangeFilename] = useTextInput('');
+  const [filename, onChangeFilename] = useTextinput('');
   const [checked, setChecked] = useState({
     window: false,
     mac: false,
@@ -33,6 +32,9 @@ const Upload = () => {
   });
   const [largeMenu, setLargeMenu] = useState('');
   const [smallMenu, setSmallMenu] = useState('');
+
+  const defaultString = 'Hello, This is CKEditor~~';
+  const [content, setContent] = useState(defaultString);
 
   // 더미데이터
   const largeMenuList = [
@@ -173,23 +175,26 @@ const Upload = () => {
             {/* 가격 - 끝 */}
 
             {/* 설명 - 시작 */}
-            <UploadContentItem>
+            {/* <UploadContentItem>
               <TextDefault size="16px" color="#000" width="150px">
                 설명
               </TextDefault>
               <UploadTextarea type="text" value={filename} onChange={onChangeFilename} />
-            </UploadContentItem>
-            {/* 설명 - 끝 */}
-
-            {/* 설명 - 시작 */}
-            <UploadContentItem>
-              <TextDefault size="16px" color="#000" width="150px">
-                설명
-              </TextDefault>
-              <EditorComponent />
-            </UploadContentItem>
+            </UploadContentItem> */}
             {/* 설명 - 끝 */}
           </UploadContentItems>
+
+          <div style={{ marginBottom: 15 }}>
+            <TextDefault size="16px" color="#000" width="150px">
+              설명
+            </TextDefault>
+          </div>
+          <QuillEditor
+            value={content}
+            onChange={(value) => {
+              setContent(value);
+            }}
+          />
 
           {/* 하단 버튼 Wrapper - 시작 */}
           <UploadBottomWrapper>

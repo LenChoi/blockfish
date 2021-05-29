@@ -4,17 +4,17 @@ import { JoinContainer } from '../../styles/Join';
 import { Button } from '@material-ui/core';
 import DefaultLayout from '../../layouts/DefaultLayout';
 import { UserInfoFieldWrapper, UserInfoBottomWrapper, UserInfoInput } from '../../styles/MyPage';
-import useTextInput from '../../hooks/useTextinput';
+import useTextinput from '../../hooks/useTextinput';
 import { useStyles } from '../../styles/materialsStyle';
 import { regExpPwd } from '../../utils/utils';
 
 const JoinForm = () => {
   const classes = useStyles();
-  const [id, handleId] = useTextInput('');
-  const [name, handleName] = useTextInput('');
-  // const [pwd, handlePwd] = useTextInput('');
+  const [id, handleId] = useTextinput('');
+  const [name, handleName] = useTextinput('');
+  // const [pwd, handlePwd] = useTextinput('');
   const [pwd, setPwd] = useState('');
-  const [pwdCheck, handlePwdCheck] = useTextInput('');
+  const [pwdCheck, handlePwdCheck] = useTextinput('');
   const [pwdState, setPwdState] = useState(false);
 
   const onChangePwd = (e) => {
