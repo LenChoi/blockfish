@@ -42,6 +42,8 @@ dependencies {
     implementation group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: '4.9.1'
     implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.1'
 
+
+    implementation 'com.jcraft:jsch:0.1.55'
 }
 
 
