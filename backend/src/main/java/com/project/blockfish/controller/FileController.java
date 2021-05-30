@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 
 @RestController
@@ -84,7 +85,7 @@ public class FileController {
     //    로컬에 파일이 업로드 되는지 테스트
     @PostMapping("/uploadLocalTest")
     public Response uploadLocalTest(@RequestParam(value = "files") MultipartFile file,
-                                    @RequestParam(value = "FileInformationDto")String  fileInformationString) throws JsonProcessingException {
+                                    @RequestParam(value = "FileInformationDto")String  fileInformationString) throws IOException, NoSuchAlgorithmException {
         System.out.println("----upload test-----");
 
         String absolutePath = System.getProperty("user.dir");
@@ -100,10 +101,15 @@ public class FileController {
             FileUtils.deleteQuietly(targetFile);
             e.printStackTrace();
         }
-
+    // LocalDateTime 생성
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime ldt = LocalDateTime.of(now.getYear(),
                 now.getMonth(), now.getDayOfMonth(), now.getHour(),  now.getMinute(), 0);
+    // klayDto생성
+        System.out.println("klay test");
+        String fileHash = fileService.getHash(savedPath);
+        KlayDto klayDto = klayService.sendHashToKlay(fileHash, "test");
+
 
         FileInformationDto fileInformationDto = new ObjectMapper().readValue(fileInformationString,FileInformationDto.class);
         FileInformation fileInformation = new FileInformation(
@@ -113,7 +119,9 @@ public class FileController {
                 fileInformationDto.getInfo(),
                 fileInformationDto.getOsType(),
                 0,
-                "blockChainAddress",
+//                클레이튼 컨트랙트 생성시 발생하는 가스 비용때문에 임시 주소 입력
+//                klayDto.getContractAddress(),
+                "클레이튼 임시주소",
                 0,
                 ldt);
         Response response = new Response();
@@ -128,8 +136,7 @@ public class FileController {
             response.setData(e.toString());
         }
 
-        String filePath = absolutePath + "/backend/src/main/java/testuploads/" + file.getOriginalFilename();
-        System.out.println("파일이 저장된 위치/ 파일명 = " + filePath);
+        System.out.println("파일이 저장된 위치/ 파일명 = " + savedPath);
 
         return response;
     }
