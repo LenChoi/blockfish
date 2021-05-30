@@ -41,6 +41,7 @@ dependencies {
     implementation 'com.klaytn.caver:core:1.5.7'
     implementation group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: '4.9.1'
     implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.1'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
 }
 
