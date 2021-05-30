@@ -14,7 +14,7 @@ public class FileUploadService {
     // 따라서 workspace가 C드라이브에 있다면 C드라이브에 upload 폴더를 생성해 놓아야 한다.
     private static final String SAVE_PATH = "http://sonjuhy.iptime.org/home/disk1/blockfish/uploads";
     private static final String PREFIX_URL = "http://sonjuhy.iptime.org/home/disk1/blockfish/uploads";
-
+    
     public String restore(MultipartFile multipartFile) {
         String url = null;
 

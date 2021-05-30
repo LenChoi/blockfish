@@ -43,6 +43,8 @@ dependencies {
     implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.1'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
+
+    implementation 'com.jcraft:jsch:0.1.55'
 }
 
 

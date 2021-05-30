@@ -5,7 +5,7 @@ import com.project.blockfish.businesslogic.domain.Member;
 import javassist.NotFoundException;
 
 public interface AuthService {
-    void signUpUser(Member membner);
+    void signUpUser(Member member);
     Member loginUser(String id, String password) throws Exception;
     Member findByUserId(String userid) throws NotFoundException;
     void verifyEmail(String key) throws NotFoundException;

@@ -20,15 +20,13 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class MemberController {
+    private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
     private final AuthService authService;
     private final JwtUtil jwtUtil;
     private final CookieUtil cookieUtil;
     private final RedisUtil redisUtil;
     private final EmailService emailService;
-
-    private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-
 
     @PostMapping("/signup")
     public Response signUpUser(@RequestBody Member member) {

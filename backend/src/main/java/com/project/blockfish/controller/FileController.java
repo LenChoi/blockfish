@@ -20,12 +20,12 @@ import java.io.InputStream;
 @RequestMapping("/file")
 @RequiredArgsConstructor
 public class FileController {
+    private static final String UPLOAD_DIRECTORY = "http://sonjuhy.iptime.org/home/disk1/blockfish/uploads";
+
     private final FileService fileService;
     private final KlayService klayService;
     private final FileUploadService fileUploadService;
     private final JwtUtil jwtUtil;
-    private static final String UPLOAD_DIRECTORY = "http://sonjuhy.iptime.org/home/disk1/blockfish/uploads";
-//    "/Users/minho/Downloads/upload/"
 
     @PostMapping("/upload")
     public KlayDto uploadSingle(@RequestParam("files") MultipartFile file, @RequestHeader(value = "accessToken") String accessToken,
@@ -63,5 +63,4 @@ public class FileController {
         System.out.println("uploadUrl = " + uploadUrl);
         return uploadUrl;
     }
-
 }
