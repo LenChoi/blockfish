@@ -1,8 +1,8 @@
 package com.project.blockfish.businesslogic.service.impl;
 
-import com.project.blockfish.businesslogic.domain.Files;
-import com.project.blockfish.businesslogic.domain.FileRepository;
-import com.project.blockfish.businesslogic.service.FileService;
+import com.project.blockfish.businesslogic.domain.FileInformation;
+import com.project.blockfish.businesslogic.domain.FileInformationRepository;
+import com.project.blockfish.businesslogic.service.FileInformationService;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,8 +14,14 @@ import java.security.NoSuchAlgorithmException;
 
 @Service
 @RequiredArgsConstructor
-public class FileServiceImpl implements FileService {
-    private final FileRepository fileRepository;
+public class FileInformationServiceImpl implements FileInformationService {
+    private final FileInformationRepository fileRepository;
+
+    @Override
+    public void saveFileInfo(FileInformation files) {
+        System.out.println("files = " + files);
+        fileRepository.save(files);
+    }
 
     @Override
     public String getHash(String path) throws IOException, NoSuchAlgorithmException {
@@ -35,8 +41,8 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public Files findByFileId(Long fileId) throws NotFoundException {
-        Files file = fileRepository.getOne(fileId);
+    public FileInformation findByFileId(Long fileId) throws NotFoundException {
+        FileInformation file = fileRepository.getOne(fileId);
         if (file == null) throw new NotFoundException("파일이 존재 하지않음");
         return file;
     }
