@@ -1,12 +1,16 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import {
-  CategoryItem,
+  NavMainLi,
   NavContainer,
-  NavItem,
-  NavItems,
-  NavWrapper,
+  NavMainUl,
+  NavTopBar,
+  NavTopBarUl,
+  NavTopBarLi,
+  NavMainWrapper,
+  NavTopBarUnderLine,
+  NavMainUnderLine,
+  NavMainContainer,
 } from '../../styles/DefaultLayout';
 import TextDefault from '../ui/TextDefault';
 import { useSelector } from 'react-redux';
@@ -17,95 +21,77 @@ const Nav = () => {
   return (
     <nav>
       <NavContainer>
-        <NavWrapper>
-          <div>
-            <Link to="/blockfish">
-              <TextDefault size="30px" color="#000" weight="700">
-                Logo
-              </TextDefault>
-            </Link>
-          </div>
-          <NavItems>
-            <NavItem>
-              <Link to="/upload">
-                <TextDefault size="15px" color="#000">
-                  업로드
-                </TextDefault>
-              </Link>
-            </NavItem>
-            <NavItem>
+        <NavTopBar>
+          <NavTopBarUl>
+            <NavTopBarLi>
               {me ? (
                 <Link to="/login">
-                  <TextDefault size="15px" color="#000">
+                  <TextDefault size="15px" color="#eee" lineHeight="35px">
                     로그아웃
                   </TextDefault>
+                  <NavTopBarUnderLine />
                 </Link>
               ) : (
                 <Link to="/login">
-                  <Button>로그인</Button>
+                  <TextDefault size="15px" color="#eee" lineHeight="35px">
+                    로그인
+                  </TextDefault>
+                  <NavTopBarUnderLine />
                 </Link>
               )}
-            </NavItem>
-            <NavItem>
+            </NavTopBarLi>
+            <NavTopBarLi>
               {!me ? (
                 <Link to="/join">
-                  <TextDefault size="15px" color="#000">
+                  <TextDefault size="15px" color="#eee" lineHeight="35px">
                     회원가입
                   </TextDefault>
+                  <NavTopBarUnderLine />
                 </Link>
               ) : (
                 <Link to="/my-page">
-                  <TextDefault size="15px" color="#000">
+                  <TextDefault size="15px" color="#eee" lineHeight="35px">
                     마이페이지
                   </TextDefault>
+                  <NavTopBarUnderLine />
                 </Link>
               )}
-            </NavItem>
-          </NavItems>
-        </NavWrapper>
+            </NavTopBarLi>
+          </NavTopBarUl>
+        </NavTopBar>
       </NavContainer>
 
       <NavContainer>
-        <NavWrapper background="#000">
-          <NavItems>
-            <CategoryItem>
-              <Link to="/blockfish/download">
-                <TextDefault size="15px" color="#fff">
-                  카테고리
+        <NavMainContainer>
+          <NavMainWrapper>
+            <div>
+              <Link to="/blockfish">
+                <TextDefault size="30px" color="#000" weight="700">
+                  BlockFish
                 </TextDefault>
               </Link>
-            </CategoryItem>
-            <CategoryItem>
-              <Link to="/blockfish/download/windows">
-                <TextDefault size="15px" color="#fff">
-                  Windows
-                </TextDefault>
-              </Link>
-            </CategoryItem>
-            <CategoryItem>
-              <Link to="/blockfish/download/mac">
-                <TextDefault size="15px" color="#fff">
-                  Mac
-                </TextDefault>
-              </Link>
-            </CategoryItem>
-            <CategoryItem>
-              <Link to="/blockfish/download/android">
-                <TextDefault size="15px" color="#fff">
-                  Android
-                </TextDefault>
-              </Link>
-            </CategoryItem>
-            <CategoryItem>
-              <Link to="/blockfish/download/ios">
-                <TextDefault size="15px" color="#fff">
-                  iOS
-                </TextDefault>
-              </Link>
-            </CategoryItem>
-          </NavItems>
-          <div style={{ color: 'white' }}>Search</div>
-        </NavWrapper>
+            </div>
+            <NavMainUl>
+              <NavMainLi>
+                <Link to="/blockfish/download">
+                  <TextDefault size="15px" color="#282828" lineHeight="35px">
+                    카테고리
+                  </TextDefault>
+                  <NavMainUnderLine />
+                </Link>
+              </NavMainLi>
+              <NavMainLi>
+                <Link to="/blockfish/download">
+                  <TextDefault size="15px" color="#282828" lineHeight="35px">
+                    업로드
+                  </TextDefault>
+                  <NavMainUnderLine />
+                </Link>
+              </NavMainLi>
+            </NavMainUl>
+          </NavMainWrapper>
+          <div style={{ color: 'black' }}>Search</div>
+        </NavMainContainer>
       </NavContainer>
     </nav>
   );

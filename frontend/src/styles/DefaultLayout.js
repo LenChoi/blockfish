@@ -1,31 +1,81 @@
 import styled from '@emotion/styled';
 
+export const NavTopBar = styled.div`
+  width: 100%;
+  height: 40px;
+  background-color: #282828;
+  color: #eeeeee;
+`;
+export const NavTopBarUl = styled.ul`
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: #eeeeee;
+  padding: 0 40px;
+`;
+export const NavTopBarLi = styled.li`
+  height: 100%;
+  margin-left: 20px;
+  cursor: pointer;
+  line-height: 35px;
+  transition: 0.2s ease-in-out;
+  &:hover {
+    a{
+      opacity: 0.7;
+    }
+    div {
+      width: 100%;
+    }
+  }
+}
+`;
+export const NavTopBarUnderLine = styled.div`
+  height: 2px;
+  width: 0;
+  background-color: #fff;
+  transition: 0.2s ease-in-out;
+`;
 export const NavContainer = styled.div`
   width: 100%;
 `;
-export const NavWrapper = styled.div`
+export const NavMainContainer = styled.div`
   display: flex;
-  height: 60px;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px;
-  background-color: ${(props) => (props.background ? props.background : 'white')};
+  padding: 0 30px;
+  background-color: #f8f5f3;
 `;
-export const NavItems = styled.ul`
+export const NavMainWrapper = styled.div`
   display: flex;
+  height: 90px;
+  width: 100%;
   align-items: center;
 `;
-export const NavItem = styled.li`
-  margin-left: 8px;
-  cursor: pointer;
+export const NavMainUl = styled.ul`
+  display: flex;
+  align-items: center;
+  margin-left: 60px;
 `;
-export const CategoryItem = styled.li`
+export const NavMainLi = styled.li`
   cursor: pointer;
-  padding: 10px 15px;
-  transition: 0.2s linear;
+  padding: 10px 0;
+  margin-right: 20px;
+  transition: 0.2s ease-in-out;
   &:hover {
-    opacity: 0.5;
+    a {
+      opacity: 0.7;
+    }
+    div {
+      width: 100%;
+    }
   }
+`;
+export const NavMainUnderLine = styled.div`
+  height: 2px;
+  width: 0;
+  background-color: #282828;
+  transition: 0.2s ease-in-out;
 `;
 
 export const FooterContainer = styled.footer`
