@@ -77,7 +77,13 @@ export const NavMainUnderLine = styled.div`
   background-color: #282828;
   transition: 0.2s ease-in-out;
 `;
-
+export const NavImgWrapper = styled.div`
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  &:hover {
+    opacity: 0.5;
+  }
+`;
 export const FooterContainer = styled.footer`
   width: 100%;
   background-color: black;

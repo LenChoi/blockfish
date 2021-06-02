@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   NavMainLi,
@@ -11,15 +11,27 @@ import {
   NavTopBarUnderLine,
   NavMainUnderLine,
   NavMainContainer,
+  NavImgWrapper,
 } from '../../styles/DefaultLayout';
 import TextDefault from '../ui/TextDefault';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { ReactComponent as SearchSvg } from '../../assets/search-black.svg';
+import { openModal } from '../../modules/actions/modal';
 
 const Nav = () => {
   const { me } = useSelector((state) => state.user);
-
+  const [showSearch, setShowSearch] = useState(false);
+  const dispatch = useDispatch();
+  const handleOpen = () => {
+    setShowSearch(true);
+    dispatch(openModal('SEARCH_MODAL', {}));
+  };
+  const handleClose = () => {
+    setShowSearch(false);
+  };
   return (
     <nav>
+      <showSearch showSearch={showSearch} handleClose={handleClose} />
       <NavContainer>
         <NavTopBar>
           <NavTopBarUl>
@@ -71,10 +83,11 @@ const Nav = () => {
                 </TextDefault>
               </Link>
             </div>
+
             <NavMainUl>
               <NavMainLi>
                 <Link to="/blockfish/download">
-                  <TextDefault size="15px" color="#282828" lineHeight="35px">
+                  <TextDefault size="18px" color="#282828" weight="700" lineHeight="35px">
                     카테고리
                   </TextDefault>
                   <NavMainUnderLine />
@@ -82,7 +95,7 @@ const Nav = () => {
               </NavMainLi>
               <NavMainLi>
                 <Link to="/blockfish/download">
-                  <TextDefault size="15px" color="#282828" lineHeight="35px">
+                  <TextDefault size="18px" color="#282828" weight="700" lineHeight="35px">
                     업로드
                   </TextDefault>
                   <NavMainUnderLine />
@@ -90,7 +103,10 @@ const Nav = () => {
               </NavMainLi>
             </NavMainUl>
           </NavMainWrapper>
-          <div style={{ color: 'black' }}>Search</div>
+
+          <NavImgWrapper onClick={handleOpen}>
+            <SearchSvg width="30px" height="30px" color="#282828" />
+          </NavImgWrapper>
         </NavMainContainer>
       </NavContainer>
     </nav>

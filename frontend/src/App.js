@@ -2,6 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
+import ModalProvider from './modalProvider/modalProvider';
 import reduxStore from './modules/configureStore';
 import Main from './pages/Main';
 import Login from './pages/Login';
@@ -18,6 +19,7 @@ import Upload from './pages/Upload';
 function App() {
   return (
     <Provider store={reduxStore}>
+      <ModalProvider />
       <Router>
         <Route exact path="/blockfish" component={Main} />
         <Route exact path="/blockfish/download" component={Download} />

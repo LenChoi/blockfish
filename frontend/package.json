@@ -28,6 +28,7 @@
     "react-scripts": "4.0.3",
     "react-simple-image-slider": "^2.1.0",
     "react-slick": "^0.28.1",
+    "react-spring": "^9.2.1",
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",

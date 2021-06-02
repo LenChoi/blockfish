@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import { fetchUserSaga } from '../sagas/user';
 import user from '../actions/user';
 import list from '../actions/list';
+import modal from './modal';
 import { fetchSaga } from '../sagas/saga';
 import HYDRATE from 'next-redux-wrapper';
 
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   },
   list,
   user,
+  modal,
 });
 
 export function* rootSaga() {
