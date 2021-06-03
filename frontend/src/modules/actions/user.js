@@ -26,12 +26,6 @@ export const logoutRequestAction = () => ({
   type: LOG_OUT_REQUEST,
 });
 
-const dummyUser = (data) => ({
-  ...data,
-  nickname: 'seorim',
-  id: 1,
-});
-
 /**
  * @function user
  * @description user Reducer
@@ -40,7 +34,7 @@ const dummyUser = (data) => ({
 const user = (state = initState, action) => {
   switch (action.type) {
     case LOG_IN_REQUEST:
-      return dummyUser.data;
+      return action.data;
     default:
       return state;
   }

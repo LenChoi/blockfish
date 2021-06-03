@@ -59,20 +59,9 @@ const ImageSlider = () => {
         alignItems: 'center',
       }}
     >
-      <div style={{ paddingRight: '20px' }}>
+      <div style={{ paddingRight: '20px', display: 'flex' }}>
         <SimpleImageSlider
-          width="400px"
-          height="300px"
-          images={dummy}
-          showNavs="true"
-          showBullets="true"
-        />
-        <ImageInfoCardBottom />
-      </div>
-      <br />
-      <div>
-        <SimpleImageSlider
-          width="400px"
+          width="auto"
           height="300px"
           images={dummy}
           showNavs="true"

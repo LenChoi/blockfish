@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import {
   Checkbox,
   InputAdornment,
@@ -17,8 +17,8 @@ import TextDefault from '../../components/ui/TextDefault';
 import { LoginContainer, LoginWrapper } from '../../styles/Login';
 
 import { useDispatch } from 'react-redux';
-import { LOG_IN_REQUEST } from '../../modules/actions/user';
-import useInput from '../../hooks/useInput';
+import { loginRequestAction } from '../../modules/actions/user';
+import useTextInput from '../../hooks/useTextinput';
 /**
  * @function Login
  * @author Seorim
@@ -26,16 +26,15 @@ import useInput from '../../hooks/useInput';
  */
 const Login = () => {
   const dispatch = useDispatch();
-  const [email, onChangeEmail] = useInput('');
-  const [password, onChangePassword] = useInput('');
+  const [email, onChangeEmail] = useTextInput('');
+  const [password, onChangePassword] = useTextInput('');
 
-  const onSubmitForm = useCallback(() => {
-    console.log(email, password);
-    dispatch({
-      type: LOG_IN_REQUEST,
-      data: { email, password },
-    });
-  }, [email, password]);
+  const onSubmitForm = (event) => {
+    event.preventDefault();
+    console.log('email', email);
+    console.log('password', password);
+    dispatch(loginRequestAction({ email, password }));
+  };
 
   return (
     <DefaultLayout>
@@ -43,7 +42,7 @@ const Login = () => {
         <TextDefault size="30px" weight="700">
           로그인
         </TextDefault>
-        <LoginWrapper onFinish={onSubmitForm}>
+        <LoginWrapper onSubmit={onSubmitForm}>
           <TextField
             label="이메일"
             type="email"
@@ -56,7 +55,6 @@ const Login = () => {
               ),
             }}
             style={{ marginTop: '10px' }}
-            value={email}
             onChange={onChangeEmail}
           />
           <TextField
@@ -71,20 +69,16 @@ const Login = () => {
               ),
             }}
             style={{ marginTop: '10px' }}
-            value={password}
             onChange={onChangePassword}
           />
           <FormGroup row>
-            <FormControlLabel
-              control={<Checkbox checked={`${email} ? true : false`} />}
-              label="아이디 저장"
-            />
+            <FormControlLabel control={<Checkbox checked={false} />} label="아이디 저장" />
             <span style={{ alignSelf: 'center' }}>
               <Link href="/#">아이디 찾기</Link> | <Link href="/#">비밀번호 찾기</Link>
             </span>
           </FormGroup>
           <Button
-            htmlType="submit"
+            type="submit"
             variant="contained"
             color="primary"
             style={{ marginBottom: '10px' }}
