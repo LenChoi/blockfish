@@ -2,7 +2,9 @@ package com.project.blockfish.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jcraft.jsch.JSchException;
 import com.project.blockfish.businesslogic.response.Response;
+import com.project.blockfish.businesslogic.service.SFTPSender;
 import com.project.blockfish.businesslogic.service.impl.FileUploadService;
 import com.project.blockfish.domainmodel.FileInformationDto;
 import com.project.blockfish.domainmodel.KlayDto;
@@ -31,8 +33,13 @@ public class FileController {
 
     private final FileInformationService fileService;
     private final KlayService klayService;
-    private final FileUploadService fileUploadService;
     private final JwtUtil jwtUtil;
+    private final SFTPSender sftpSender;
+
+    @GetMapping("/sftpConnect")
+    public void sftpConnectTest() throws JSchException {
+        sftpSender.sftpConnect();
+    }
 
     @PostMapping("/upload")
     public KlayDto uploadSingle(@RequestParam("files") MultipartFile file, @RequestHeader(value = "accessToken") String accessToken,
@@ -63,7 +70,7 @@ public class FileController {
 
         return file.getName();
     }
-/*//    서버에 파일이 업로드 되는지 테스트
+//    서버에 파일이 업로드 되는지 테스트
     @PostMapping("/uploadTest")
     public String uploadTest(@RequestParam("files") MultipartFile file) {
         String path = System.getProperty("user.dir");
@@ -80,7 +87,7 @@ public class FileController {
         System.out.println("upload test");
         String filePath = UPLOAD_DIRECTORY2 + file.getOriginalFilename();
         return filePath;
-    }*/
+    }
 
     //    로컬에 파일이 업로드 되는지 테스트
     @PostMapping("/uploadLocalTest")
