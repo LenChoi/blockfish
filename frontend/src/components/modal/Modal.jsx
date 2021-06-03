@@ -1,20 +1,21 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+// import { useSpring, animated } from 'react-spring';
+
 import { isEmpty } from '../../utils/utils';
 import { closeModal } from '../../modules/actions/modal';
-import { useSpring, animated } from 'react-spring';
-import { ModalOverlay, ModalWrapper } from '../../styles/Modal';
+import { ModalOverlay } from '../../styles/Modal';
 
 const Modal = (props) => {
   const { children } = props;
   const dispatch = useDispatch();
 
-  const animProps = useSpring({
-    config: { duration: 200 },
+  // const animProps = useSpring({
+  //   config: { duration: 300 },
 
-    from: { opacity: 0, transform: 'scale(0.7)' },
-    to: { opacity: 1, transform: 'scale(1)' },
-  });
+  //   from: { opacity: 0 },
+  //   to: { opacity: 1 },
+  // });
   const onClickBackground = (e) => {
     e.preventDefault();
     const accessKey = e.target.dataset.key;
@@ -24,12 +25,11 @@ const Modal = (props) => {
   };
 
   return (
-    <animated.div props={animProps}>
-      {/* <ModalOverlay className="overlay" onClick={(e) => onClickBackground(e, props.bgClickdisable)}> */}
+    <>
       <ModalOverlay data-key="overlay" onClick={onClickBackground}>
-        <ModalWrapper>{children}</ModalWrapper>
+        {children}
       </ModalOverlay>
-    </animated.div>
+    </>
   );
 };
 
