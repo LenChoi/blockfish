@@ -7,7 +7,7 @@ export const LoginContainer = styled.section`
   align-items: center;
   padding: 80px 50px 30px 50px;
 `;
-export const LoginWrapper = styled.div`
+export const LoginWrapper = styled.form`
   margin-top: 15px;
   margin-left: 10px;
   display: inline-grid;
