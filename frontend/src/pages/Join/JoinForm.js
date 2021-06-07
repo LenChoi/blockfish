@@ -6,28 +6,38 @@ import DefaultLayout from '../../layouts/DefaultLayout';
 import { UserInfoFieldWrapper, UserInfoBottomWrapper, UserInfoInput } from '../../styles/MyPage';
 import useInput from '../../hooks/useInput';
 import { useStyles } from '../../styles/materialsStyle';
-import { regExpPwd } from '../../utils/utils';
+import { regExpPwd, debounce } from '../../utils/utils';
+import { useDispatch } from 'react-redux';
+import { signupRequestAction } from '../../modules/actions/user';
 
 const JoinForm = () => {
   const classes = useStyles();
-  const [id, handleId] = useInput('');
-  const [name, handleName] = useInput('');
+  const dispatch = useDispatch();
+  const [email, onChangeEmail] = useInput('');
+  const [name, onChangeName] = useInput('');
   const [pwd, setPwd] = useState('');
   const [pwdCheck, handlePwdCheck] = useInput('');
   const [pwdState, setPwdState] = useState(false);
 
   const onChangePwd = (e) => {
-    if (e.target.value.length > 20) {
-      alert('길이가 너무 깁니다.');
-      return;
-    }
-    if (regExpPwd(e.target.value)) {
-      setPwdState(true);
-    }
-
+    debounce(() => {
+      if (e.target.value.length < 8 || e.target.value.length > 20) {
+        alert('영문, 숫자, 특수문자 조합의 8~20자리 입니다.');
+        return;
+      }
+      if (regExpPwd(e.target.value)) {
+        setPwdState(true);
+      }
+    }, 1000);
     setPwd(e.target.value);
   };
   console.log('pwdState', pwdState);
+  const onSignup = (e) => {
+    alert('dd');
+    e.preventDefault();
+    dispatch(signupRequestAction({ email, name, pwd }));
+  };
+
   return (
     <DefaultLayout>
       <JoinContainer>
@@ -40,7 +50,7 @@ const JoinForm = () => {
           </TextDefault>
         </span>
         <div>
-          <form style={{ marginTop: 40 }} noValidate autoComplete="off">
+          <form style={{ marginTop: 40 }} noValidate autoComplete="off" onSubmit={onSignup}>
             <UserInfoFieldWrapper>
               <span style={{ width: 200 }}>
                 <TextDefault size="16px" color="#000000">
@@ -53,8 +63,7 @@ const JoinForm = () => {
               <UserInfoInput
                 type="email"
                 className={`${classes.userInfoInput}`}
-                value={id}
-                onChange={handleId}
+                onChange={onChangeEmail}
               />
               <span style={{ marginLeft: 15 }}>
                 <Button className={`${classes.emailChkBtn}`}>중복확인</Button>
@@ -70,11 +79,7 @@ const JoinForm = () => {
                   *
                 </TextDefault>
               </span>
-              <UserInfoInput
-                className={`${classes.userInfoInput}`}
-                value={name}
-                onChange={handleName}
-              />
+              <UserInfoInput className={`${classes.userInfoInput}`} onChange={onChangeName} />
             </UserInfoFieldWrapper>
 
             <UserInfoFieldWrapper>
@@ -89,14 +94,8 @@ const JoinForm = () => {
               <UserInfoInput
                 type="password"
                 className={`${classes.userInfoInput}`}
-                value={pwd}
                 onChange={onChangePwd}
               />
-              <span style={{ marginLeft: 15 }}>
-                <TextDefault size="14px" color="#808080">
-                  {setPwdState ? '적합합니다.' : '영문, 숫자, 특수문자 조합의 8~20자리 입니다.'}
-                </TextDefault>
-              </span>
             </UserInfoFieldWrapper>
 
             <UserInfoFieldWrapper>
@@ -120,12 +119,13 @@ const JoinForm = () => {
                 </TextDefault>
               </span>
             </UserInfoFieldWrapper>
+            <UserInfoBottomWrapper>
+              <Button type="submit" className={`${classes.joinFormBtn}`}>
+                가입하기
+              </Button>
+            </UserInfoBottomWrapper>
           </form>
         </div>
-
-        <UserInfoBottomWrapper>
-          <Button className={`${classes.joinFormBtn}`}>가입하기</Button>
-        </UserInfoBottomWrapper>
       </JoinContainer>
     </DefaultLayout>
   );
