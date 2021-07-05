@@ -13,9 +13,9 @@ public class FileInformationServiceImpl implements FileInformationService {
     private final FileInformationRepository fileInformationRepository;
 
     @Override
-    public void saveFileInfo(FileInformation files) {
-        System.out.println("files = " + files);
-        fileInformationRepository.save(files);
+    public void saveFileInfo(FileInformation fileInformation) {
+        System.out.println("files = " + fileInformation);
+        fileInformationRepository.save(fileInformation);
     }
 
     @Override
