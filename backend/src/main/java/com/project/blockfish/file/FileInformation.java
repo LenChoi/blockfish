@@ -1,19 +1,17 @@
-package com.project.blockfish.businesslogic.domain;
+package com.project.blockfish.file;
 
 import lombok.*;
-import org.apache.tomcat.jni.FileInfo;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "files")
+@Table(name = "fileInformations")
 public class FileInformation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,16 +32,23 @@ public class FileInformation {
     @NotBlank
     private String osType;
 
+    @NotBlank
+    private String categoryCode;
+
     private int downCount;
 
     @NotBlank
     private String blockChainAddress;
 
-    private int StarRank;
+    private int starRankAverage;
 
-    //List<Comment> comments
+    private int starRankSum;
 
-    //List<Category> category;
+    private int starRankCount;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "comment_id")
+    private List<Comment> comments = new ArrayList<>();
 
     private LocalDateTime createAt;
 
@@ -52,15 +57,28 @@ public class FileInformation {
     private Boolean fileLock = false;
 
     @Builder
-    public FileInformation(String name, String imageAddress, String fileAddress, String info, String osType, Integer downCount, String blockChainAddress, Integer starRank, LocalDateTime createAt) {
+    public FileInformation(String name, String imageAddress, String fileAddress, String info, String osType, String categoryCode, int downCount, String blockChainAddress, LocalDateTime createAt) {
         this.name = name;
         this.imageAddress = imageAddress;
         this.fileAddress = fileAddress;
         this.info = info;
         this.osType = osType;
+        this.categoryCode = categoryCode;
         this.downCount = downCount;
         this.blockChainAddress = blockChainAddress;
-        this.StarRank = starRank;
         this.createAt = createAt;
+        this.updateAt = createAt;
+    }
+
+    public int addStarRank(int starRank) {
+        this.starRankCount += 1;
+        this.starRankSum += starRank;
+        this.starRankAverage = this.getStarRankSum() / this.getStarRankAverage();
+
+        return this.starRankAverage;
+    }
+
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
     }
 }

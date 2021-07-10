@@ -1,7 +1,7 @@
 package com.project.blockfish.businesslogic.service.impl;
 
-import com.project.blockfish.businesslogic.domain.FileInformation;
-import com.project.blockfish.businesslogic.domain.FileInformationRepository;
+import com.project.blockfish.file.FileInformation;
+import com.project.blockfish.file.FileInformationRepository;
 import com.project.blockfish.businesslogic.service.FileInformationService;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
