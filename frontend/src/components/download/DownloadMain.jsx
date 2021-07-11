@@ -3,6 +3,14 @@ import { GridLayoutWrapper } from '../../styles/Download';
 import { isEmpty } from '../../utils/utils';
 import DownloadCard from '../cards/DownloadCard';
 import TextDefault from '../ui/TextDefault';
+import ListCardTemplate from '../cards/ListCardTemplate';
+import {
+  ListSelectUnderLine,
+  SelectionWrapper,
+  SelectionWrapperLi,
+  MainSection,
+  ListWrapper,
+} from '../../styles/Main';
 
 const DownloadMain = () => {
   const [fileList, setFileList] = useState([]);
@@ -15,6 +23,22 @@ const DownloadMain = () => {
   //     setViewState(false);
   //   }
   // };
+  const [selectItems, setSelectItems] = useState([
+    { id: 0, name: 'Windows', clicked: false },
+    { id: 1, name: 'Mac', clicked: false },
+    { id: 2, name: 'Android', clicked: false },
+    { id: 3, name: 'iOS', clicked: false },
+  ]);
+
+  const onClickListSelection = (e) => {
+    const name = e.target.dataset.name;
+    setSelectItems(
+      selectItems.map((data) => ({
+        ...data,
+        clicked: data.name === name ? true : false,
+      })),
+    );
+  };
 
   useEffect(() => {
     setFileList([
@@ -86,25 +110,37 @@ const DownloadMain = () => {
   }, []);
 
   return (
-    <>
-      <div>
+    <article>
+      <MainSection>
         <TextDefault size="25px" weight="700">
           최신
         </TextDefault>
 
-        {/* <SortingBarMain onToggleView={onToggleView} /> */}
-
-        <div style={{ marginTop: 20 }}>
-          {!isEmpty(fileList) && (
-            <GridLayoutWrapper>
-              {fileList.map((data) => (
-                <DownloadCard key={data.id} content={data} />
+        <div>
+          <SelectionWrapper>
+            {!isEmpty(selectItems) &&
+              selectItems.map((data) => (
+                <SelectionWrapperLi
+                  key={data.id}
+                  data-name={data.name}
+                  onClick={onClickListSelection}
+                >
+                  <TextDefault size="16px" lineHeight="35px">
+                    {data.name}
+                  </TextDefault>
+                  <ListSelectUnderLine clicked={data.clicked} />
+                </SelectionWrapperLi>
               ))}
-            </GridLayoutWrapper>
-          )}
+          </SelectionWrapper>
         </div>
-      </div>
-      <div style={{ marginTop: 80 }}>
+
+        <ListWrapper>
+          {!isEmpty(fileList) &&
+            fileList.map((data) => <ListCardTemplate key={data.id} content={data} />)}
+        </ListWrapper>
+      </MainSection>
+
+      <MainSection>
         <TextDefault size="25px" weight="700">
           인기
         </TextDefault>
@@ -117,8 +153,8 @@ const DownloadMain = () => {
             </GridLayoutWrapper>
           )}
         </div>
-      </div>
-    </>
+      </MainSection>
+    </article>
   );
 };
 
