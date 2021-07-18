@@ -29,7 +29,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalDateTime;
 
 import static com.project.blockfish.file.service.impl.FileInformationServiceImpl.UPLOAD_DIRECTORY2;
 
@@ -86,8 +85,8 @@ public class FileController {
     // 서버에 파일및 로컬에 이미지가 업로드 되는지 테스트
     @PostMapping("/uploadTest")
     public Response uploadTest(@RequestParam("files") MultipartFile file,
-                                        @RequestParam("image") MultipartFile imageFile,
-                                        @RequestParam(value = "fileUploadDto") String fileUploadString) throws IOException {
+                               @RequestParam("image") MultipartFile imageFile,
+                               @RequestParam(value = "fileUploadDto") String fileUploadString) throws IOException {
         Response response = new Response();
 
         String absolutePath = System.getProperty("user.dir");
