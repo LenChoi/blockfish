@@ -1,11 +1,8 @@
-package com.project.blockfish.businesslogic.domain;
+package com.project.blockfish.file;
 
 import com.jcraft.jsch.*;
-<<<<<<< HEAD
 import com.project.blockfish.util.Converter;
-=======
-import com.project.blockfish.businesslogic.util.Converter;
->>>>>>> feat: SFTPSender#download() 구현, SFTPSenderTest 구현
+
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,10 +25,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @TestPropertySource(locations = "classpath:SftpConnection_test.properties")
 @SpringBootTest
-<<<<<<< HEAD
-=======
-
->>>>>>> feat: SFTPSender#download() 구현, SFTPSenderTest 구현
 public class SFTPSenderTest {
 
     public String makeMD5Hash(File file) throws IOException, NoSuchAlgorithmException {

@@ -1,4 +1,4 @@
-package com.project.blockfish.service;
+package com.project.blockfish.file.service.impl;
 
 import com.project.blockfish.file.Category;
 import com.project.blockfish.file.FileInformation;
@@ -6,6 +6,7 @@ import com.project.blockfish.file.FileInformationRepository;
 import com.project.blockfish.file.service.impl.SearchServiceImpl;
 import com.project.blockfish.dto.SearchedFileDto;
 import org.junit.After;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -16,25 +17,27 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.mockito.Mockito.mock;
 
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SearchServiceTest {
+@Transactional
+public class SearchServiceImplTest {
+
     @Autowired
-    FileInformationRepository fileInformationRepository;
+    private FileInformationRepository fileInformationRepository;
 
     @Autowired
     private SearchServiceImpl searchService;
 
     @BeforeEach
-    void mockInfoListSetup() {
+    void repositorySetup() {
         String name = "테스트 파일";
         String imageAddress = "imageAddress";
         String fileAddress = "테스트주소";
@@ -44,7 +47,6 @@ public class SearchServiceTest {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime createAt = LocalDateTime.of(now.getYear(),
                 now.getMonth(), now.getDayOfMonth(), now.getHour(), now.getMinute(), 0);
-
         String osType = "MAC";
         String windowOsType = "WINDOW";
 
@@ -62,11 +64,6 @@ public class SearchServiceTest {
         fileInformationRepository.save(new FileInformation(name, imageAddress, fileAddress, info, windowOsType, vaccineCategoryCode, downCount, blockChainAddress, createAt));
         fileInformationRepository.save(new FileInformation(name, imageAddress, fileAddress, "여러가지 비디오들을 볼 수있는 프로그램", windowOsType, videoCategoryCode, downCount, blockChainAddress, createAt));
         fileInformationRepository.save(new FileInformation(name, imageAddress, fileAddress, "비디오 관련 파일입니다.", windowOsType, videoCategoryCode, downCount, blockChainAddress, createAt));
-    }
-
-    @After
-    public void cleanup() {
-        fileInformationRepository.deleteAll();
     }
 
     @DisplayName("모든 파일들 불러오기")

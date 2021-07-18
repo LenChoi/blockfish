@@ -2,11 +2,10 @@ package com.project.blockfish.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.project.blockfish.file.Category;
 import com.project.blockfish.response.Response;
 import com.project.blockfish.file.SFTPSender;
 import com.project.blockfish.file.service.SearchService;
-import com.project.blockfish.dto.FileInformationDto;
+import com.project.blockfish.dto.FileUploadDto;
 import com.project.blockfish.dto.KlayDto;
 import com.project.blockfish.file.service.FileInformationService;
 import com.project.blockfish.member.service.JwtUtil;
@@ -15,10 +14,11 @@ import com.project.blockfish.file.service.klay.KlayService;
 import com.project.blockfish.dto.SearchedFileDto;
 import com.project.blockfish.file.FileInformation;
 
-
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -31,12 +31,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 
+import static com.project.blockfish.file.service.impl.FileInformationServiceImpl.UPLOAD_DIRECTORY2;
+
 @RestController
 @RequestMapping("/file")
 @RequiredArgsConstructor
 public class FileController {
+    private static final Logger logger = LoggerFactory.getLogger(FileController.class);
     private static final String UPLOAD_DIRECTORY = "http://sonjuhy.iptime.org/home/disk1/blockfish/uploads/";
-    private static final String UPLOAD_DIRECTORY2 = "sonjuhy.iptime.org/websites/ssl/www/blockfish/uploads/";
 
     private final FileInformationService fileInformationService;
     private final KlayService klayService;
@@ -49,7 +51,8 @@ public class FileController {
                                 @RequestHeader(value = "refreshToken") String refreshToken) throws Exception {
         sftpSender.sftpConnect();
 
-        File targetFile = new File(UPLOAD_DIRECTORY + file.getOriginalFilename());
+        File targetFile = new File(UPLOAD_DIRECTORY2 + file.getOriginalFilename());
+        //acToken에서 아이디 값 가져오기
         String userId = jwtUtil.getUserId(accessToken);
         System.out.println("userId = " + userId);
         System.out.println("targetFile = " + targetFile);
@@ -71,7 +74,6 @@ public class FileController {
         return klayDto;
     }
 
-
     //    디비에서 파일 이름을 아이디로 불러오기
     @GetMapping("/getFile")
     public String getFile(@RequestBody Long fileId) throws NotFoundException {
@@ -81,53 +83,48 @@ public class FileController {
         return file.getName();
     }
 
-    //    서버에 파일이 업로드 되는지 테스트
+    // 서버에 파일및 로컬에 이미지가 업로드 되는지 테스트
     @PostMapping("/uploadTest")
-    public Response uploadTest(@RequestParam("files") MultipartFile file
-            , @RequestParam(value = "FileInformationDto") String fileInformationString) throws IOException {
-
-        sftpSender.sftpConnect();
-        sftpSender.upload(file);
-
-        // LocalDateTime 생성
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime ldt = LocalDateTime.of(now.getYear(),
-                now.getMonth(), now.getDayOfMonth(), now.getHour(), now.getMinute(), 0);
-        // klayDto생성
-        System.out.println("klay test");
-        String fileHash = sftpSender.getHash(file.getOriginalFilename());
-        System.out.println("업로드 fileHash = " + fileHash);
-//        KlayDto klayDto = klayService.sendHashToKlay(fileHash, "test");
-
-
-        FileInformationDto fileInformationDto = new ObjectMapper().readValue(fileInformationString, FileInformationDto.class);
-        FileInformation fileInformation = new FileInformation(
-                file.getOriginalFilename(),
-                fileInformationDto.getImageAddress(),
-                UPLOAD_DIRECTORY2,
-                fileInformationDto.getInfo(),
-                fileInformationDto.getOsType(),
-                Category.findCodeByName("기타"),
-                0,
-//                클레이튼 컨트랙트 생성시 발생하는 가스 비용때문에 임시 주소 입력
-//                klayDto.getContractAddress(),
-                "클레이튼 임시주소",
-                ldt);
+    public Response uploadTest(@RequestParam("files") MultipartFile file,
+                                        @RequestParam("image") MultipartFile imageFile,
+                                        @RequestParam(value = "fileUploadDto") String fileUploadString) throws IOException {
         Response response = new Response();
 
+        String absolutePath = System.getProperty("user.dir");
+        String imagePath = absolutePath + "/backend/src/main/resources/image/" + imageFile.getOriginalFilename();
+        File targetFile = new File(imagePath);
+
         try {
-            fileInformationService.saveFileInfo(fileInformation);
+            logger.debug("uploadFileImageTest API 시작");
+            //image 파일을 로컬 루트에 저장
+            InputStream imageFileInputStream = imageFile.getInputStream();
+            FileUtils.copyInputStreamToFile(imageFileInputStream, targetFile);
+            //실제 파일을 파일 서버에 업로드
+            sftpSender.sftpConnect();
+            sftpSender.upload(file);
+            String fileHash = sftpSender.getHash(file.getOriginalFilename());
+//            System.out.println("업로드 fileHash = " + fileHash);
+            KlayDto klayDto = klayService.sendHashToKlay(fileHash, "userId");
+
+            FileUploadDto fileUploadDto = new ObjectMapper().readValue(fileUploadString, FileUploadDto.class);
+            fileUploadDto.setName(file.getOriginalFilename());
+            fileUploadDto.setImageAddress(imagePath);
+            fileInformationService.saveFileInfo(fileUploadDto, klayDto);
+            sftpSender.sftpDisconnect();
+
             response.setResponse("success");
             response.setMessage("파일 업로드가 성공적으로 완료했습니다.");
+            System.out.println("파일이 저장된 위치/ 파일명 = " + UPLOAD_DIRECTORY2 + file.getOriginalFilename());
+            logger.debug("파일이 저장된 위치/ 파일명 = " + UPLOAD_DIRECTORY2 + file.getOriginalFilename());
         } catch (Exception e) {
+            logger.debug("uploadTest API 실행중 오류가 발생했습니다.");
+            FileUtils.deleteQuietly(targetFile);
+            e.printStackTrace();
+
             response.setResponse("fail");
             response.setMessage("파일 업로드 중 오류가 발생했습니다.");
             response.setData(e.toString());
         }
-
-        System.out.println("파일이 저장된 위치/ 파일명 = " + UPLOAD_DIRECTORY2 + file.getOriginalFilename());
-
-        sftpSender.sftpDisconnect();
 
         return response;
     }
@@ -147,7 +144,7 @@ public class FileController {
     //    로컬에 파일이 업로드 되는지 테스트
     @PostMapping("/uploadLocalTest")
     public Response uploadLocalTest(@RequestParam(value = "files") MultipartFile file,
-                                    @RequestParam(value = "FileInformationDto") String fileInformationString) throws IOException {
+                                    @RequestParam(value = "fileUploadDto") String fileUploadString) throws IOException {
         System.out.println("----upload test-----");
 
         String absolutePath = System.getProperty("user.dir");
@@ -163,33 +160,18 @@ public class FileController {
             FileUtils.deleteQuietly(targetFile);
             e.printStackTrace();
         }
-        // LocalDateTime 생성
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime ldt = LocalDateTime.of(now.getYear(),
-                now.getMonth(), now.getDayOfMonth(), now.getHour(), now.getMinute(), 0);
         // klayDto생성
         System.out.println("klay test");
-//        String fileHash = sftpSender.getHash(file.getOriginalFilename());
-//        KlayDto klayDto = klayService.sendHashToKlay(fileHash, "test");
+        String fileHash = sftpSender.getHash(file.getOriginalFilename());
+        KlayDto klayDto = klayService.sendHashToKlay(fileHash, "test");
 
+        FileUploadDto fileUploadDto = new ObjectMapper().readValue(fileUploadString, FileUploadDto.class);
+        fileUploadDto.setName(file.getOriginalFilename());
 
-        FileInformationDto fileInformationDto = new ObjectMapper().readValue(fileInformationString, FileInformationDto.class);
-        FileInformation fileInformation = new FileInformation(
-                fileInformationDto.getName(),
-                fileInformationDto.getImageAddress(),
-                savedPath,
-                fileInformationDto.getInfo(),
-                fileInformationDto.getOsType(),
-                Category.findCodeByName("기타"),
-                0,
-//                클레이튼 컨트랙트 생성시 발생하는 가스 비용때문에 임시 주소 입력
-//                klayDto.getContractAddress(),
-                "클레이튼 임시주소",
-                ldt);
         Response response = new Response();
 
         try {
-            fileInformationService.saveFileInfo(fileInformation);
+            fileInformationService.saveFileInfo(fileUploadDto, klayDto);
             response.setResponse("success");
             response.setMessage("파일 업로드가 성공적으로 완료했습니다.");
         } catch (Exception e) {

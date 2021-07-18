@@ -32,7 +32,6 @@ public class MemberController {
     public Response signUpUser(@RequestBody Member member) {
         Response response = new Response();
         System.out.println(member);
-        Logger logger = LoggerFactory.getLogger(this.getClass());
         logger.debug("Select Start");
         try{
             authService.signUpUser(member);
@@ -81,7 +80,7 @@ public class MemberController {
             final Member member = authService.loginUser(user.getUserId(), user.getPassword());
             System.out.println(member);
             final String token = jwtUtil.generateToken(member); //access token 발급
-            System.out.println("token = " + token);
+            logger.debug("token = " + token);
             final String refreshJwt = jwtUtil.generateRefreshToken(member); //refresh token 발급
             System.out.println("refreshJwt = " + refreshJwt);
             Cookie accessToken = cookieUtil.createCookie(JwtUtil.ACCESS_TOKEN_NAME, token, JwtUtil.TOKEN_VALIDATION_SECOND);

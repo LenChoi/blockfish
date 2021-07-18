@@ -1,4 +1,4 @@
-package com.project.blockfish.businesslogic.domain;
+package com.project.blockfish.file;
 
 import com.project.blockfish.file.Category;
 import com.project.blockfish.file.FileInformation;
