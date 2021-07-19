@@ -34,7 +34,7 @@ const DownloadControll = () => {
   ];
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+    <div style={{ display: 'inline-block', alignItems: 'center', justifyContent: 'space-between' }}>
       <SelectDefault value={os} menuItems={osList} selectName="OS" onChangeMenu={onChangeOs} />
       <SelectDefault
         value={category}
