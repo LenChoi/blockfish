@@ -1,5 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects';
-import postApi from '../../api/postApi';
+import { postApi } from '../../api/postApi';
 import { isEmpty } from '../../utils/utils';
 import { reqFileUploadError, reqFileUploadSuccess, REQ_FILE_UPLOAD } from '../actions/fileUpload';
 
