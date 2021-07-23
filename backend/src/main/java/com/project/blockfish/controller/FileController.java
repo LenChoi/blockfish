@@ -90,7 +90,7 @@ public class FileController {
         Response response = new Response();
 
         String absolutePath = System.getProperty("user.dir");
-        String imagePath = absolutePath + "/backend/src/main/resources/image/" + imageFile.getOriginalFilename();
+        String imagePath = /*absolutePath + */"backend/src/main/resources/static/image/" + imageFile.getOriginalFilename();
         File targetFile = new File(imagePath);
 
         try {
@@ -107,7 +107,7 @@ public class FileController {
 
             FileUploadDto fileUploadDto = new ObjectMapper().readValue(fileUploadString, FileUploadDto.class);
             fileUploadDto.setName(file.getOriginalFilename());
-            fileUploadDto.setImageAddress(imagePath);
+            fileUploadDto.setImageAddress("/image/"+imageFile.getOriginalFilename());
             fileInformationService.saveFileInfo(fileUploadDto, klayDto);
             sftpSender.sftpDisconnect();
 

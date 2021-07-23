@@ -32,7 +32,7 @@ public class MemberController {
     public Response signUpUser(@RequestBody Member member) {
         Response response = new Response();
         System.out.println(member);
-        logger.debug("Select Start");
+        logger.debug("signUp Start");
         try{
             authService.signUpUser(member);
             response.setResponse("success");

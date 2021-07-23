@@ -27,4 +27,3 @@ public interface FileInformationRepository extends JpaRepository<FileInformation
     )
     Page<FileInformation> findByCategory(String osType, String category, Pageable pageable);
 }
-
