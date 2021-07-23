@@ -2,6 +2,14 @@ import { FormControl, MenuItem, Select } from '@material-ui/core';
 import React from 'react';
 import { useStyles } from '../../styles/materialsStyle';
 import { isEmpty } from '../../utils/utils';
+import { styled } from '@material-ui/core/styles';
+
+const MySelect = styled(MenuItem)({
+  color: 'black',
+  div: {
+    top: '257px',
+  },
+});
 
 const SelectDefault = ({ value, menuItems, selectName, onChangeMenu }) => {
   const classes = useStyles();
@@ -18,12 +26,14 @@ const SelectDefault = ({ value, menuItems, selectName, onChangeMenu }) => {
         <MenuItem value="" disabled>
           {selectName}
         </MenuItem>
-        {!isEmpty(menuItems) &&
-          menuItems.map((data) => (
-            <MenuItem value={data.name} key={data.id}>
-              {data.name}
-            </MenuItem>
-          ))}
+        <MySelect>
+          {!isEmpty(menuItems) &&
+            menuItems.map((data) => (
+              <MenuItem value={data.name} key={data.id}>
+                {data.name}
+              </MenuItem>
+            ))}
+        </MySelect>
       </Select>
     </FormControl>
   );

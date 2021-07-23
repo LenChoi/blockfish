@@ -16,6 +16,8 @@ import { ReactComponent as WindowSvg } from '../../assets/windows-logo.svg';
 const DownloadCard = (props) => {
   const { content } = props;
 
+  console.log('content', content);
+
   return (
     <DownloadCardContainer>
       <Link to={`/blockfish/download/detail/${content.id}`}>
@@ -35,15 +37,19 @@ const DownloadCard = (props) => {
         <DownloadTagWrapper>
           <Link to={`/blockfish/download/detail/${content.id}`}>{content.category}</Link>
 
-          {(content.os === 'android' && <AndroidSvg width="25px" height="25px" fill="#3bd580" />) ||
-            (content.os === 'ios' && <IphoneSvg width="25px" height="25px" fill="#666666" />) ||
-            (content.os === 'mac' && <MacSvg width="25px" height="25px" fill="#666666" />) ||
-            (content.os === 'window' && <WindowSvg width="25px" height="25px" fill="#00a8e8" />)}
+          {(content.osType === 'android' && (
+            <AndroidSvg width="25px" height="25px" fill="#3bd580" />
+          )) ||
+            (content.osType === 'ios' && <IphoneSvg width="25px" height="25px" fill="#666666" />) ||
+            (content.osType === 'Mac' && <MacSvg width="25px" height="25px" fill="#666666" />) ||
+            (content.osType === 'window' && (
+              <WindowSvg width="25px" height="25px" fill="#00a8e8" />
+            ))}
         </DownloadTagWrapper>
 
         <div style={{ marginBottom: 10 }}>
           <TextDefault size="14px" lineHeight="14px" color="#808080">
-            {content.descption}
+            {content.info}
           </TextDefault>
         </div>
       </div>

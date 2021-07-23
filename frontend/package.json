@@ -83,5 +83,5 @@
       "enzyme-to-json/serializer"
     ]
   },
-  "proxy": "http://3.34.4.0:8080"
+  "proxy": "http://3.141.28.160:8080"
 }
