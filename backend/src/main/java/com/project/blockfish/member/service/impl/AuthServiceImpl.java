@@ -1,6 +1,7 @@
 package com.project.blockfish.member.service.impl;
 
 import com.project.blockfish.config.UserRole;
+import com.project.blockfish.controller.FileController;
 import com.project.blockfish.member.Member;
 import com.project.blockfish.member.MemberRepository;
 import com.project.blockfish.member.service.AuthService;
@@ -8,6 +9,8 @@ import com.project.blockfish.member.service.EmailService;
 import com.project.blockfish.member.service.RedisUtil;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -15,7 +18,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
-
+    private static final Logger logger = LoggerFactory.getLogger(AuthServiceImpl.class);
     private final MemberRepository memberRepository;
     private final RedisUtil redisUtil;
     private final EmailService emailService;
@@ -23,10 +26,18 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public void signUpUser(Member member) {
         System.out.println(member);
+        existValidate(member.getUserId());
         String password = member.getPassword();
         //암호 해쉬화 하기
         member.setPassword(password);
         memberRepository.save(member);
+    }
+    private void existValidate(String userId){
+        Member existMember = memberRepository.findByUserId(userId);
+        if (existMember != null) {
+            logger.debug(userId + " 는 이미 가입된 아이디 입니다.");
+            throw new IllegalArgumentException("이미 가입된 아이디입니다.");
+        }
     }
 
     @Override
@@ -72,6 +83,5 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public void checkExpirationToken(String accessToken, String refreshToken) {
-
     }
 }
