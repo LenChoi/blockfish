@@ -87,7 +87,7 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public Page<SearchedFileDto> searchByCategory(String osType, String category, Pageable pageable) {
-        Page<FileInformation> fileInformationByOs = fileInformationRepository.findByCategory(osType, category, pageable);
+        Page<FileInformation> fileInformationByOs = fileInformationRepository.findByCategory(osType, Category.findCodeByName(category), pageable);
 
         Page<SearchedFileDto> searchedFilesDto =
                 fileInformationByOs.map(

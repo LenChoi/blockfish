@@ -195,7 +195,7 @@ public class FileController {
     // Os로 파일 검색하기
     @GetMapping("/searchByOs")
     public ResponseEntity searchFileInfoByOs(final Pageable pageable,
-                                             @RequestBody String osType) {
+                                             @RequestParam(value = "osType") String osType) {
         Page<SearchedFileDto> searchedFileDtos = searchService.searchByOs(osType, pageable);
 
         return new ResponseEntity<>(searchedFileDtos, HttpStatus.OK);
@@ -204,7 +204,7 @@ public class FileController {
     // Keyword로 파일 검색하기
     @GetMapping("/searchByKeyword")
     public ResponseEntity searchFileInfoByKeyword(final Pageable pageable,
-                                                  @RequestBody String keyword) {
+                                                  @RequestParam(value = "keyword") String keyword) {
         Page<SearchedFileDto> searchedFileDtos = searchService.searchByKeyWord(keyword, pageable);
 
         return new ResponseEntity<>(searchedFileDtos, HttpStatus.OK);
@@ -213,8 +213,8 @@ public class FileController {
     // category로 파일 검색하기
     @GetMapping("/searchByCategory")
     public ResponseEntity searchFileInfoByCategory(final Pageable pageable,
-                                                   @RequestBody String osType,
-                                                   @RequestBody String category) {
+                                                   @RequestParam(value = "osType") String osType,
+                                                   @RequestParam(value = "category") String category) {
         Page<SearchedFileDto> searchedFileDtos = searchService.searchByCategory(osType, category, pageable);
 
         return new ResponseEntity<>(searchedFileDtos, HttpStatus.OK);
