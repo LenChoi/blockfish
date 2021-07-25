@@ -11,6 +11,7 @@ import {
 } from '../../styles/Main';
 import { useDispatch, useSelector } from 'react-redux';
 import { getListStart } from '../../modules/actions/list';
+import { Link } from 'react-router-dom';
 
 const DownloadMain = () => {
   const dispatch = useDispatch();
@@ -19,15 +20,7 @@ const DownloadMain = () => {
     loading: state.list.loading,
     list: state.list.success,
   }));
-  // const [viewState, setViewState] = useState(false);
 
-  // const onToggleView = (s) => {
-  //   if (s) {
-  //     setViewState(true);
-  //   } else {
-  //     setViewState(false);
-  //   }
-  // };
   const [selectItems, setSelectItems] = useState([
     { id: 0, name: 'Windows', clicked: false },
     { id: 1, name: 'Mac', clicked: false },
@@ -84,7 +77,13 @@ const DownloadMain = () => {
 
         <ListWrapper>
           {!isEmpty(fileList) &&
-            fileList.map((data) => <ListCardTemplate key={data.id} content={data} />)}
+            fileList.map((data) => (
+              <li key={data.id}>
+                <Link to={`/blockfish/download/detail/${data.id}`}>
+                  <ListCardTemplate content={data} />
+                </Link>
+              </li>
+            ))}
         </ListWrapper>
       </MainSection>
 
@@ -113,18 +112,14 @@ const DownloadMain = () => {
 
         <ListWrapper>
           {!isEmpty(fileList) &&
-            fileList.map((data) => <ListCardTemplate key={data.id} content={data} />)}
+            fileList.map((data) => (
+              <li key={data.id}>
+                <Link to={`/blockfish/download/detail/${data.id}`}>
+                  <ListCardTemplate content={data} />
+                </Link>
+              </li>
+            ))}
         </ListWrapper>
-
-        {/* <div style={{ marginTop: 20 }}>
-          {!isEmpty(fileList) && (
-            <GridLayoutWrapper>
-              {fileList.map((data) => (
-                <DownloadCard key={data.id} content={data} />
-              ))}
-            </GridLayoutWrapper>
-          )}
-        </div> */}
       </MainSection>
     </article>
   );

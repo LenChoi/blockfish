@@ -21,8 +21,8 @@ import DefaultLayout from './layouts/DefaultLayout';
 function App() {
   return (
     <Provider store={reduxStore}>
-      <ModalProvider />
       <Router>
+        <ModalProvider />
         <DefaultLayout>
           {/* <AuthRoute exact path="/blockfish" type="private">
         <Main />

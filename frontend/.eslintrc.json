@@ -41,6 +41,7 @@
     "prefer-template": "off",
     "no-unneeded-ternary": "off",
     "no-useless-escape": "off",
-    "prefer-destructuring": "off"
+    "prefer-destructuring": "off",
+    "no-unused-vars": "off"
   }
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import useInputPage from '../../hooks/useInputPage';
 import { getListStart } from '../../modules/actions/list';
@@ -19,15 +20,7 @@ const DownloadRight = () => {
     loading: state.list.loading,
     list: state.list.success,
   }));
-  // const [viewState, setViewState] = useState(false);
   const [page, onhandleChangePage] = useInputPage(1);
-  // const onToggleView = (s) => {
-  //   if (s) {
-  //     setViewState(true);
-  //   } else {
-  //     setViewState(false);
-  //   }
-  // };
 
   // api 호출 시작
   useEffect(() => {
@@ -55,29 +48,17 @@ const DownloadRight = () => {
 
       <SortingBar />
 
-      {/* <SortingBar onToggleView={onToggleView} /> */}
       <div style={{ marginTop: 20 }}>
-        {/* {!isEmpty(fileList) &&
-          (viewState ? (
-            fileList.map((data) => <ListCardTemplate key={data.id} content={data} />)
-          ) : (
-            <GridLayoutWrapper>
-              {fileList.map((data) => (
-                <GridCardTemplate key={data.id} content={data} />
-              ))}
-            </GridLayoutWrapper>
-          ))} */}
-
         {!isEmpty(fileList) && (
-          // <GridLayoutWrapper>
-          //   {fileList.map((data) => (
-          //     <DownloadCard key={data.id} content={data} />
-          //   ))}
-          // </GridLayoutWrapper>
-
           <ListWrapper>
             {!isEmpty(fileList) &&
-              fileList.map((data) => <ListCardTemplate key={data.id} content={data} />)}
+              fileList.map((data) => (
+                <li key={data.id}>
+                  <Link to={`/blockfish/download/detail/${data.id}`}>
+                    <ListCardTemplate content={data} />
+                  </Link>
+                </li>
+              ))}
           </ListWrapper>
         )}
       </div>
