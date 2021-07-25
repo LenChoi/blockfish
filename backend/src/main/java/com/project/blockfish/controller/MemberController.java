@@ -5,6 +5,8 @@ import com.project.blockfish.member.service.*;
 import com.project.blockfish.response.Response;
 import com.project.blockfish.request.RequestLoginUser;
 import com.project.blockfish.request.RequestVerifyEmail;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 
@@ -28,8 +30,9 @@ public class MemberController {
     private final RedisUtil redisUtil;
     private final EmailService emailService;
 
+    @ApiOperation(value = "회원 가입", notes = "회원가입 api 입니다.")
     @PostMapping("/signup")
-    public Response signUpUser(@RequestBody Member member) {
+    public Response signUpUser(@RequestBody @ApiParam(value = "회원정보") Member member) {
         Response response = new Response();
         System.out.println(member);
         logger.debug("signUp Start");
