@@ -14,6 +14,7 @@ import com.project.blockfish.file.service.klay.KlayService;
 import com.project.blockfish.dto.SearchedFileDto;
 import com.project.blockfish.file.FileInformation;
 
+import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
@@ -84,6 +85,7 @@ public class FileController {
 
     // 서버에 파일및 로컬에 이미지가 업로드 되는지 테스트
     @PostMapping("/uploadTest")
+    @ApiOperation(value = "업로드하기", notes = "파일과 이미지 둘다 업로드 시키는 api 입니다.")
     public Response uploadTest(@RequestParam("files") MultipartFile file,
                                @RequestParam("image") MultipartFile imageFile,
                                @RequestParam(value = "fileUploadDto") String fileUploadString) throws IOException {
@@ -129,6 +131,7 @@ public class FileController {
     }
 
     @PostMapping("/downloadTest")
+    @ApiOperation(value = "파일 다운로드", notes = "File 타입을 다운로드 후 반환하는 API ")
     public File downloadTest(@RequestParam("fileName") String fileName) {
         sftpSender.sftpConnect();
 
@@ -140,52 +143,9 @@ public class FileController {
         return file;
     }
 
-    //    로컬에 파일이 업로드 되는지 테스트
-    @PostMapping("/uploadLocalTest")
-    public Response uploadLocalTest(@RequestParam(value = "files") MultipartFile file,
-                                    @RequestParam(value = "fileUploadDto") String fileUploadString) throws IOException {
-        System.out.println("----upload test-----");
-
-        String absolutePath = System.getProperty("user.dir");
-        String savedPath = absolutePath + "/backend/src/main/java/testuploads/" + file.getOriginalFilename();
-
-        File targetFile = new File(savedPath);
-        System.out.println("targetFile = " + targetFile);
-
-        try {
-            InputStream fileStream = file.getInputStream();
-            FileUtils.copyInputStreamToFile(fileStream, targetFile);
-        } catch (IOException e) {
-            FileUtils.deleteQuietly(targetFile);
-            e.printStackTrace();
-        }
-        // klayDto생성
-        System.out.println("klay test");
-        String fileHash = sftpSender.getHash(file.getOriginalFilename());
-        KlayDto klayDto = klayService.sendHashToKlay(fileHash, "test");
-
-        FileUploadDto fileUploadDto = new ObjectMapper().readValue(fileUploadString, FileUploadDto.class);
-        fileUploadDto.setName(file.getOriginalFilename());
-
-        Response response = new Response();
-
-        try {
-            fileInformationService.saveFileInfo(fileUploadDto, klayDto);
-            response.setResponse("success");
-            response.setMessage("파일 업로드가 성공적으로 완료했습니다.");
-        } catch (Exception e) {
-            response.setResponse("fail");
-            response.setMessage("파일 업로드 중 오류가 발생했습니다.");
-            response.setData(e.toString());
-        }
-
-        System.out.println("파일이 저장된 위치/ 파일명 = " + savedPath);
-
-        return response;
-    }
-
     // 모든 파일정보 검색 하기
     @GetMapping("/searchAll")
+    @ApiOperation(value = "전체 검색", notes = "모든 파일을 검색")
     public ResponseEntity searchAllFileInfo(final Pageable pageable) {
         Page<SearchedFileDto> searchedFileDtos = searchService.searchAll(pageable);
 
@@ -194,6 +154,7 @@ public class FileController {
 
     // Os로 파일 검색하기
     @GetMapping("/searchByOs")
+    @ApiOperation(value = "OS로 검색", notes = "해당 OS의 모든 파일 검색")
     public ResponseEntity searchFileInfoByOs(final Pageable pageable,
                                              @RequestParam(value = "osType") String osType) {
         Page<SearchedFileDto> searchedFileDtos = searchService.searchByOs(osType, pageable);
@@ -203,6 +164,7 @@ public class FileController {
 
     // Keyword로 파일 검색하기
     @GetMapping("/searchByKeyword")
+    @ApiOperation(value = "키워드로 검색", notes = "본문과 파일명에 해당 키워드가 포함된 모든  파일을 검색")
     public ResponseEntity searchFileInfoByKeyword(final Pageable pageable,
                                                   @RequestParam(value = "keyword") String keyword) {
         Page<SearchedFileDto> searchedFileDtos = searchService.searchByKeyWord(keyword, pageable);
@@ -212,6 +174,7 @@ public class FileController {
 
     // category로 파일 검색하기
     @GetMapping("/searchByCategory")
+    @ApiOperation(value = "카테고리로 검색", notes = "특정 OS의 특정 카테고리로 검색")
     public ResponseEntity searchFileInfoByCategory(final Pageable pageable,
                                                    @RequestParam(value = "osType") String osType,
                                                    @RequestParam(value = "category") String category) {
