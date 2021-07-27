@@ -64,6 +64,50 @@ public class SearchServiceImpl implements SearchService {
     }
 
     @Override
+    public Page<SearchedFileDto> searchByOsByRank(String osType, Pageable pageable) {
+        Page<FileInformation> fileInformationByOs = fileInformationRepository.findByOsOrderByRank(osType, pageable);
+
+        Page<SearchedFileDto> searchedFilesDto =
+                fileInformationByOs.map(
+                        fileInformation -> new SearchedFileDto(
+                                fileInformation.getId(),
+                                fileInformation.getName(),
+                                fileInformation.getImageAddress(),
+                                fileInformation.getInfo(),
+                                fileInformation.getOsType(),
+                                fileInformation.getDownCount(),
+                                fileInformation.getStarRankAverage(),
+                                Category.findNameByCode(fileInformation.getCategoryCode()),
+                                fileInformation.getComments(),
+                                fileInformation.getUpdateAt()
+                        ));
+
+        return searchedFilesDto;
+    }
+
+    @Override
+    public Page<SearchedFileDto> searchByOsByDate(String osType, Pageable pageable) {
+        Page<FileInformation> fileInformationByOs = fileInformationRepository.findByOsOrderByDate(osType, pageable);
+
+        Page<SearchedFileDto> searchedFilesDto =
+                fileInformationByOs.map(
+                        fileInformation -> new SearchedFileDto(
+                                fileInformation.getId(),
+                                fileInformation.getName(),
+                                fileInformation.getImageAddress(),
+                                fileInformation.getInfo(),
+                                fileInformation.getOsType(),
+                                fileInformation.getDownCount(),
+                                fileInformation.getStarRankAverage(),
+                                Category.findNameByCode(fileInformation.getCategoryCode()),
+                                fileInformation.getComments(),
+                                fileInformation.getUpdateAt()
+                        ));
+
+        return searchedFilesDto;
+    }
+
+    @Override
     public Page<SearchedFileDto> searchByKeyWord(String keyWard, Pageable pageable) {
         Page<FileInformation> fileInformationByOs = fileInformationRepository.findByKeyword(keyWard, pageable);
 

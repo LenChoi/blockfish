@@ -16,6 +16,19 @@ public interface FileInformationRepository extends JpaRepository<FileInformation
     Page<FileInformation> findByOs(String osType, Pageable pageable);
 
     @Query(
+            value = "SELECT * FROM file_informations WHERE os_type LIKE :osType ORDER BY update_at",
+            countQuery = "SELECT COUNT(file_id) FROM file_informations WHERE os_type LIKE :osType ORDER BY update_at", nativeQuery = true
+    )
+    Page<FileInformation> findByOsOrderByDate(String osType, Pageable pageable);
+
+    @Query(
+            value = "SELECT * FROM file_informations WHERE os_type LIKE :osType ORDER BY star_rank_average",
+            countQuery = "SELECT COUNT(file_id) FROM file_informations WHERE os_type LIKE :osType ORDER BY star_rank_average", nativeQuery = true
+    )
+    Page<FileInformation> findByOsOrderByRank(String osType, Pageable pageable);
+
+
+    @Query(
             value = "SELECT * FROM file_informations WHERE name LIKE %:keyword% OR info LIKE %:keyword%",
             countQuery = "SELECT COUNT(file_id) FROM file_informations WHERE name LIKE %:keyword% OR info LIKE %:keyword%", nativeQuery = true
     )

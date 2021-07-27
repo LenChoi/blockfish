@@ -9,6 +9,10 @@ public interface SearchService {
 
     Page<SearchedFileDto> searchByOs(String osType, Pageable pageable);
 
+    Page<SearchedFileDto> searchByOsByDate(String osType, Pageable pageable);
+
+    Page<SearchedFileDto> searchByOsByRank(String osType, Pageable pageable);
+
     Page<SearchedFileDto> searchByKeyWord(String keyWard, Pageable pageable);
 
     Page<SearchedFileDto> searchByCategory(String osType, String category, Pageable pageable);

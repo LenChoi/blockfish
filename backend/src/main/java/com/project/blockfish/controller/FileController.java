@@ -11,7 +11,6 @@ import com.project.blockfish.file.service.FileInformationService;
 import com.project.blockfish.member.service.JwtUtil;
 import com.project.blockfish.file.service.klay.KlayService;
 
-import com.project.blockfish.dto.SearchedFileDto;
 import com.project.blockfish.file.FileInformation;
 
 import io.swagger.annotations.ApiOperation;
@@ -20,10 +19,6 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -141,45 +136,5 @@ public class FileController {
         sftpSender.sftpDisconnect();
 
         return file;
-    }
-
-    // 모든 파일정보 검색 하기
-    @GetMapping("/searchAll")
-    @ApiOperation(value = "전체 검색", notes = "모든 파일을 검색")
-    public ResponseEntity searchAllFileInfo(final Pageable pageable) {
-        Page<SearchedFileDto> searchedFileDtos = searchService.searchAll(pageable);
-
-        return new ResponseEntity<>(searchedFileDtos, HttpStatus.OK);
-    }
-
-    // Os로 파일 검색하기
-    @GetMapping("/searchByOs")
-    @ApiOperation(value = "OS로 검색", notes = "해당 OS의 모든 파일 검색")
-    public ResponseEntity searchFileInfoByOs(final Pageable pageable,
-                                             @RequestParam(value = "osType") String osType) {
-        Page<SearchedFileDto> searchedFileDtos = searchService.searchByOs(osType, pageable);
-
-        return new ResponseEntity<>(searchedFileDtos, HttpStatus.OK);
-    }
-
-    // Keyword로 파일 검색하기
-    @GetMapping("/searchByKeyword")
-    @ApiOperation(value = "키워드로 검색", notes = "본문과 파일명에 해당 키워드가 포함된 모든  파일을 검색")
-    public ResponseEntity searchFileInfoByKeyword(final Pageable pageable,
-                                                  @RequestParam(value = "keyword") String keyword) {
-        Page<SearchedFileDto> searchedFileDtos = searchService.searchByKeyWord(keyword, pageable);
-
-        return new ResponseEntity<>(searchedFileDtos, HttpStatus.OK);
-    }
-
-    // category로 파일 검색하기
-    @GetMapping("/searchByCategory")
-    @ApiOperation(value = "카테고리로 검색", notes = "특정 OS의 특정 카테고리로 검색")
-    public ResponseEntity searchFileInfoByCategory(final Pageable pageable,
-                                                   @RequestParam(value = "osType") String osType,
-                                                   @RequestParam(value = "category") String category) {
-        Page<SearchedFileDto> searchedFileDtos = searchService.searchByCategory(osType, category, pageable);
-
-        return new ResponseEntity<>(searchedFileDtos, HttpStatus.OK);
     }
 }
