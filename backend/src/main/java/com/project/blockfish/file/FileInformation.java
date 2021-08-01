@@ -1,6 +1,7 @@
 package com.project.blockfish.file;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "fileInformations")
 public class FileInformation {
@@ -40,13 +42,14 @@ public class FileInformation {
     @NotBlank
     private String blockChainAddress;
 
-    private int starRankAverage;
+    private double starRankAverage;
 
-    private int starRankSum;
+    private double starRankSum;
 
-    private int starRankCount;
+    private double starRankCount;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    //mappedBy 어디서 거는지 확인할것
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "comment_id")
     private List<Comment> comments = new ArrayList<>();
 
@@ -57,7 +60,8 @@ public class FileInformation {
     private Boolean fileLock = false;
 
     @Builder
-    public FileInformation(String name, String imageAddress, String fileAddress, String info, String osType, String categoryCode, int downCount, String blockChainAddress, LocalDateTime createAt) {
+    public FileInformation(String name, String imageAddress, String fileAddress, String info, String osType,
+                           String categoryCode, int downCount, String blockChainAddress, double starRankAverage, double starRankSum, double starRankCount, LocalDateTime createAt) {
         this.name = name;
         this.imageAddress = imageAddress;
         this.fileAddress = fileAddress;
@@ -66,16 +70,23 @@ public class FileInformation {
         this.categoryCode = categoryCode;
         this.downCount = downCount;
         this.blockChainAddress = blockChainAddress;
+        this.starRankAverage = starRankAverage;
+        this.starRankSum = starRankSum;
+        this.starRankCount = starRankCount;
         this.createAt = createAt;
         this.updateAt = createAt;
     }
 
-    public int addStarRank(int starRank) {
+    public double addStarRank(int starRank) {
         this.starRankCount += 1;
         this.starRankSum += starRank;
-        this.starRankAverage = this.getStarRankSum() / this.getStarRankAverage();
+        this.starRankAverage = Math.round((this.starRankSum / this.starRankCount)*10)/10.0;
 
         return this.starRankAverage;
+    }
+
+    public void addDownCount() {
+        this.downCount++;
     }
 
     public void addComment(Comment comment) {

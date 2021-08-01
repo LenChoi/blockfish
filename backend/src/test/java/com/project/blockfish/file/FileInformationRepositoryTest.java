@@ -37,12 +37,14 @@ public class FileInformationRepositoryTest {
         LocalDateTime createAt = LocalDateTime.of(now.getYear(),
                 now.getMonth(), now.getDayOfMonth(), now.getHour(), now.getMinute(), 0);
 
-        FileInformation file = new FileInformation(name, imageAddress, fileAddress, info, osType, categoryCode, downCount, blockChainAddress, createAt);
+        FileInformation file = new FileInformation(name, imageAddress, fileAddress, info, osType, categoryCode,
+                downCount, blockChainAddress,0,0,0, createAt);
         FileInformation newFileInformation;
 
         // mock으로 생성된 Repository에 save 실행시 하드코딩된 객체 리턴
         when(fileInformationRepository.save(file))
-                .thenReturn(new FileInformation("테스트 파일","imageAddress","테스트주소","임시 파일 정보","MAC",categoryCode,0,"0xAxabcx3ctest",createAt));
+                .thenReturn(new FileInformation("테스트 파일","imageAddress","테스트주소","임시 파일 정보","MAC",categoryCode,
+                        0,"0xAxabcx3ctest",0,0,0,createAt));
 
         newFileInformation = fileInformationRepository.save(file);
         // save가 정상적으로 1회 호출 되었는지 검증하기
