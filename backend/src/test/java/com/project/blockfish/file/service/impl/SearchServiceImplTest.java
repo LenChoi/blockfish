@@ -56,15 +56,15 @@ public class SearchServiceImplTest {
         String videoCategoryCode = Category.findCodeByName("동영상");
 
         //9개 저장
-        fileInformationRepository.save(new FileInformation(name, imageAddress, fileAddress, info, osType, etcCategoryCode, downCount, blockChainAddress, createAt));
-        fileInformationRepository.save(new FileInformation(name, imageAddress, fileAddress, info, osType, etcCategoryCode, downCount, blockChainAddress, createAt));
-        fileInformationRepository.save(new FileInformation("블록피쉬 비디오 플레이어", imageAddress, fileAddress, info, osType, videoCategoryCode, downCount, blockChainAddress, createAt));
-        fileInformationRepository.save(new FileInformation(name, imageAddress, fileAddress, info, windowOsType, etcCategoryCode, downCount, blockChainAddress, createAt));
-        fileInformationRepository.save(new FileInformation(name, imageAddress, fileAddress, info, windowOsType, etcCategoryCode, downCount, blockChainAddress, createAt));
-        fileInformationRepository.save(new FileInformation(name, imageAddress, fileAddress, info, windowOsType, vaccineCategoryCode, downCount, blockChainAddress, createAt));
-        fileInformationRepository.save(new FileInformation(name, imageAddress, fileAddress, info, windowOsType, vaccineCategoryCode, downCount, blockChainAddress, createAt));
-        fileInformationRepository.save(new FileInformation(name, imageAddress, fileAddress, "여러가지 비디오들을 볼 수있는 프로그램", windowOsType, videoCategoryCode, downCount, blockChainAddress, createAt));
-        fileInformationRepository.save(new FileInformation(name, imageAddress, fileAddress, "비디오 관련 파일입니다.", windowOsType, videoCategoryCode, downCount, blockChainAddress, createAt));
+        fileInformationRepository.save(new FileInformation(name, imageAddress, fileAddress, info, osType, etcCategoryCode, downCount, blockChainAddress, 0, 0, 0, createAt));
+        fileInformationRepository.save(new FileInformation(name, imageAddress, fileAddress, info, osType, etcCategoryCode, downCount, blockChainAddress, 0, 0, 0, createAt));
+        fileInformationRepository.save(new FileInformation("블록피쉬 비디오 플레이어", imageAddress, fileAddress, info, osType, videoCategoryCode, downCount, blockChainAddress, 0, 0, 0, createAt));
+        fileInformationRepository.save(new FileInformation(name, imageAddress, fileAddress, info, windowOsType, etcCategoryCode, downCount, blockChainAddress, 0, 0, 0, createAt));
+        fileInformationRepository.save(new FileInformation(name, imageAddress, fileAddress, info, windowOsType, etcCategoryCode, downCount, blockChainAddress, 0, 0, 0, createAt));
+        fileInformationRepository.save(new FileInformation(name, imageAddress, fileAddress, info, windowOsType, vaccineCategoryCode, downCount, blockChainAddress, 0, 0, 0, createAt));
+        fileInformationRepository.save(new FileInformation(name, imageAddress, fileAddress, info, windowOsType, vaccineCategoryCode, downCount, blockChainAddress, 0, 0, 0, createAt));
+        fileInformationRepository.save(new FileInformation(name, imageAddress, fileAddress, "여러가지 비디오들을 볼 수있는 프로그램", windowOsType, videoCategoryCode, downCount, blockChainAddress, 0, 0, 0, createAt));
+        fileInformationRepository.save(new FileInformation(name, imageAddress, fileAddress, "비디오 관련 파일입니다.", windowOsType, videoCategoryCode, downCount, blockChainAddress, 0, 0, 0, createAt));
     }
 
     @DisplayName("모든 파일들 불러오기")
@@ -72,7 +72,7 @@ public class SearchServiceImplTest {
     void searchAll() {
         Page<SearchedFileDto> searchedFileDtos = searchService.searchAll(pageRequest);
 
-        assertThat(searchedFileDtos.stream().count()).isEqualTo(beforeSearchAllCount+9);
+        assertThat(searchedFileDtos.stream().count()).isEqualTo(beforeSearchAllCount + 9);
     }
 
     @DisplayName("MacOS로 검색한 결과 가져오기")

@@ -1,11 +1,15 @@
 package com.project.blockfish.dto;
 
 import com.project.blockfish.file.Comment;
+import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
-public class SearchedFileDto {
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Getter
+public class AddStarRankResponse {
     private Long id;
 
     private String name;
@@ -23,24 +27,6 @@ public class SearchedFileDto {
     private String categoryName;
 
     List<Comment> comments;
-
-    public SearchedFileDto(Long id, String name, String imageAddress, String info, String osType, int downCount, double starRank, String categoryName, List<Comment> comments, LocalDateTime updateAt) {
-        this.id = id;
-        this.name = name;
-        this.imageAddress = imageAddress;
-        this.info = info;
-        this.osType = osType;
-        this.downCount = downCount;
-        this.starRank = starRank;
-        this.categoryName = categoryName;
-        this.comments = comments;
-        this.updateAt = updateAt;
-    }
-
-    private LocalDateTime updateAt;
-
-    public SearchedFileDto() {
-    }
 
     public Long getId() {
         return id;
@@ -94,7 +80,7 @@ public class SearchedFileDto {
         return starRank;
     }
 
-    public void setStarRank(int starRank) {
+    public void setStarRank(double starRank) {
         this.starRank = starRank;
     }
 
@@ -102,11 +88,15 @@ public class SearchedFileDto {
         return categoryName;
     }
 
-    public LocalDateTime getUpdateAt() {
-        return updateAt;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public void setUpdateAt(LocalDateTime updateAt) {
-        this.updateAt = updateAt;
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

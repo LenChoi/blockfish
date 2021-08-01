@@ -92,8 +92,6 @@ public class SFTPSender {
     public File download(String fileName) {
 
         try {
-//            sftpConnect();
-
             channel = session.openChannel("sftp");
             channel.connect();
             sftpChannel = (ChannelSftp) channel;
@@ -102,18 +100,13 @@ public class SFTPSender {
 
             InputStream inputStream = sftpChannel.get(fileName);
 
-            //테스트 코드(SFTPSenderTest#downloadTest())에선 돌아감
-//             InputStream inputStream = sftpChannel.get("Test.md");
-
             File file = Converter.convertInputStreamToFile(inputStream);
             file.deleteOnExit();
 
-//            sftpDisconnect();
             return file;
 
         } catch (JSchException | SftpException e) {
             e.printStackTrace();
-//            sftpDisconnect();
             return null;
         }
     }
