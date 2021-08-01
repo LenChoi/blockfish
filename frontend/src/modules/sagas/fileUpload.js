@@ -8,9 +8,16 @@ export function* reqUpload({ payload }) {
   const data = yield postApi('/file/uploadTest', payload);
 
   try {
-    // console.log('upload Data', data);
     if (!isEmpty(data) && data.status === 200) {
-      yield put(reqFileUploadSuccess(data));
+      const resData = data.data;
+
+      if (resData.response === 'fail') {
+        yield put(reqFileUploadError(data));
+        yield alert('업로드에 실패했습니다. 다시 시도해주세요.');
+      } else {
+        yield put(reqFileUploadSuccess(data));
+        yield alert('업로드 완료되었습니다.');
+      }
     }
   } catch (error) {
     yield put(reqFileUploadError(data));

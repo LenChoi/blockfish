@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router';
 import { Button } from '@material-ui/core';
 
@@ -17,7 +17,7 @@ import SelectDefault from '../../components/ui/SelectDefault';
 import CheckboxWithLabel from '../../components/ui/CheckboxWithLabel';
 import QuillEditor from '../../components/editor/QuillEditor';
 import { isEmpty } from '../../utils/utils';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { reqFileUpload } from '../../modules/actions/fileUpload';
 import useFileUpload from '../../hooks/useFileUpload';
 
@@ -25,7 +25,10 @@ const Upload = () => {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
-
+  // const { data, error } = useSelector((state) => ({
+  //   data: state.fileUpload.data,
+  //   error: state.fileUpload.error,
+  // }));
   const [filename, onChangeFilename] = useInput('');
   const [file, onChangeFile] = useFileUpload('');
   const [fileImage, onChangeFileImage] = useFileUpload('');
@@ -103,28 +106,45 @@ const Upload = () => {
       return;
     }
 
-    const FileInformationDto = {
+    const fileUploadDto = {
       name: '',
       imageAddress: '',
       info: '',
       osType: '',
+      categoryName: '문서/사무',
     };
     const formData = new FormData();
-    formData.append('files', fileImage);
+    formData.append('files', file);
+    formData.append('image', fileImage);
 
-    FileInformationDto.name = filename;
-    FileInformationDto.imageAddress = null;
-    FileInformationDto.info = content;
-    FileInformationDto.osType = 'Mac';
+    fileUploadDto.name = filename;
+    fileUploadDto.imageAddress = null;
+    fileUploadDto.info = content;
+    fileUploadDto.osType = 'Mac';
 
-    formData.append('FileInformationDto', JSON.stringify(FileInformationDto));
+    formData.append('fileUploadDto ', JSON.stringify(fileUploadDto));
 
-    console.log('fileObject', FileInformationDto);
+    console.log('fileObject', fileUploadDto);
     console.log(formData.get('files'));
-    console.log(formData.get('FileInformationDto'));
+    console.log(formData.get('image'));
+    console.log(formData.get('fileUploadDto '));
 
     dispatch(reqFileUpload(formData));
   };
+
+  // useEffect(() => {
+  //   console.log('data', data);
+  //   console.log('error', error);
+
+  //   if (!isEmpty(data)) {
+  //     alert('업로드가 ');
+  //   }
+
+  //   if (!isEmpty(error)) {
+  //     alert('업로드에 실패했습니다. 다시 시도해주세요.');
+  //     return;
+  //   }
+  // }, [data, error]);
 
   return (
     <>

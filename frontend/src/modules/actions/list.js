@@ -4,6 +4,8 @@ export const GET_LIST_ERROR = 'GET_LIST_ERROR';
 export const SET_LIST = 'SET_LIST';
 export const RESET_LIST = 'RESET_LIST';
 
+export const GET_LIST_BY_OS = 'GET_LIST_BY_OS';
+
 // 액션 함수 정의
 export const getListStart = () => ({
   type: GET_LIST,
@@ -19,4 +21,7 @@ export const getListError = (data) => ({
 export const setList = (data) => ({
   type: SET_LIST,
   payload: data,
+});
+export const getListByOsStart = () => ({
+  type: GET_LIST_BY_OS,
 });

@@ -4,13 +4,14 @@ import HalfRating from '../ui/HalfRating';
 import TextDefault from '../ui/TextDefault';
 
 const ListCardTemplate = ({ content }) => {
-  const baseUrl = 'http://3.141.28.160:8080';
+  const baseUrl = 'http://3.141.28.160';
 
   return (
     <ListCardLayout>
       <ListCardContainer>
         {/* Content 이미지 */}
-        <img alt="" width="70" height="70" src={`${baseUrl}${content.imageAddress}`} />
+        {/* <img alt="" width="70" height="70" src={`${baseUrl}${content.imageAddress}`} /> */}
+        <img alt="" width="70" height="70" src={`${baseUrl}${'/blockfish.png'}`} />
         {/* Content - 시작 */}
         <div>
           {/* Content 타이틀 - 시작 */}
