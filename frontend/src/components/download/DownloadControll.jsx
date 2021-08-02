@@ -42,18 +42,18 @@ const DownloadControll = () => {
         selectName="카테고리"
         onChangeMenu={onChangeCategory}
       />
-      <SelectDefault
+      {/* <SelectDefault
         value={price}
         menuItems={priceList}
         selectName="가격"
         onChangeMenu={onChangePrice}
-      />
-      <SelectDefault
+      /> */}
+      {/* <SelectDefault
         value={rating}
         menuItems={ratingList}
         selectName="별점"
         onChangeMenu={onChangeRating}
-      />
+      /> */}
     </div>
   );
 };
