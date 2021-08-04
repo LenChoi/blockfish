@@ -28,7 +28,7 @@ const DownloadDetailRight = () => {
             </TextDefault>
           </DnldDetailItem>
 
-          <DnldDetailItem style={{ marginTop: 25 }}>
+          {/* <DnldDetailItem style={{ marginTop: 25 }}>
             <DnldDetailItemLeft>
               <TextDefault size="18px" color="#505050">
                 버전
@@ -37,9 +37,9 @@ const DownloadDetailRight = () => {
             <TextDefault size="18px" color="#505050">
               v3.4.9
             </TextDefault>
-          </DnldDetailItem>
+          </DnldDetailItem> */}
 
-          <DnldDetailItem style={{ marginTop: 25 }}>
+          {/* <DnldDetailItem style={{ marginTop: 25 }}>
             <DnldDetailItemLeft>
               <TextDefault size="18px" color="#505050">
                 크기
@@ -48,9 +48,9 @@ const DownloadDetailRight = () => {
             <TextDefault size="18px" color="#505050">
               89 M
             </TextDefault>
-          </DnldDetailItem>
+          </DnldDetailItem> */}
 
-          <DnldDetailItem style={{ marginTop: 25 }}>
+          {/* <DnldDetailItem style={{ marginTop: 25 }}>
             <DnldDetailItemLeft>
               <TextDefault size="18px" color="#505050">
                 언어
@@ -59,7 +59,7 @@ const DownloadDetailRight = () => {
             <TextDefault size="18px" color="#505050">
               한글/영어
             </TextDefault>
-          </DnldDetailItem>
+          </DnldDetailItem> */}
 
           <DnldDetailItem style={{ marginTop: 25 }}>
             <DnldDetailItemLeft>
