@@ -84,7 +84,7 @@ const Login = () => {
             onChange={onChangePassword}
           />
           <FormGroup row>
-            <input type="checkbox" checked={remembered} onChange={handleChange} />
+            {/* <input type="checkbox" checked={remembered} onChange={handleChange} /> */}
             <span style={{ alignSelf: 'center' }}>
               <Link href="/#">아이디 찾기</Link> | <Link href="/#">비밀번호 찾기</Link>
             </span>

@@ -6,7 +6,7 @@ export const initState = {
   logOutLoading: false,
   logOutDone: false,
   logOutError: null,
-  emailDuplicate: false,
+  emailVerify: false,
   signUpLoading: false,
   signUpDone: false,
   signUpError: null,
@@ -22,17 +22,17 @@ export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST';
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
 export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE';
 
-export const EMAIL_DUPLICATE_REQUEST = 'EMAIL_DUPLICATE_REQUEST';
-export const EMAIL_DUPLICATE_SUCCESS = 'EMAIL_DUPLICATE_SUCCESS';
-export const EMAIL_DUPLICATE_FAILURE = 'EMAIL_DUPLICATE_FAILURE';
+export const EMAIL_VERIFY_REQUEST = 'EMAIL_VERIFY_REQUEST';
+export const EMAIL_VERIFY_SUCCESS = 'EMAIL_VERIFY_SUCCESS';
+export const EMAIL_VERIFY_FAILURE = 'EMAIL_VERIFY_FAILURE';
 
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
 
 // 액션 함수 정의
-export const emailduplicateRequestAction = (data) => ({
-  type: EMAIL_DUPLICATE_REQUEST,
+export const emailVerifyRequestAction = (data) => ({
+  type: EMAIL_VERIFY_REQUEST,
   data,
 });
 export const loginRequestAction = (data) => ({
@@ -85,17 +85,17 @@ const user = (state = initState, action) => {
         logOutDone: false,
         logOutError: null,
       };
-    case EMAIL_DUPLICATE_REQUEST:
+    case EMAIL_VERIFY_REQUEST:
       return {
-        emailDuplicate: false,
+        emailVerify: false,
       };
-    case EMAIL_DUPLICATE_SUCCESS:
+    case EMAIL_VERIFY_SUCCESS:
       return {
-        emailDuplicate: true,
+        emailVerify: true,
       };
-    case EMAIL_DUPLICATE_FAILURE:
+    case EMAIL_VERIFY_FAILURE:
       return {
-        emailDuplicate: false,
+        emailVERIFY: false,
       };
     case SIGN_UP_REQUEST:
       return {

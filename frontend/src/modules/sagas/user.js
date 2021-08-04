@@ -3,9 +3,12 @@ import {
   LOG_IN_REQUEST,
   LOG_IN_SUCCESS,
   LOG_IN_FAILURE,
-  EMAIL_DUPLICATE_REQUEST,
-  EMAIL_DUPLICATE_SUCCESS,
-  EMAIL_DUPLICATE_FAILURE,
+  LOG_OUT_REQUEST,
+  LOG_OUT_SUCCESS,
+  LOG_OUT_FAILURE,
+  EMAIL_VERIFY_REQUEST,
+  EMAIL_VERIFY_SUCCESS,
+  EMAIL_VERIFY_FAILURE,
   SIGN_UP_FAILURE,
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
@@ -48,28 +51,54 @@ function* logIn(action) {
   }
 }
 
-function emailduplicateAPI(data) {
-  return axios.post('/user/duplicate', data);
+function logoutAPI(data) {
+  return axios.post('/user/logout');
 }
 
-function* emailDuplicate(action) {
+function* logout(action) {
   try {
-    const result = yield call(emailduplicateAPI, action.data);
+    const result = yield call(logoutAPI);
     if (result.data.response === 'success') {
       yield put({
-        type: EMAIL_DUPLICATE_SUCCESS,
+        type: LOG_OUT_SUCCESS,
         data: result.data,
       });
     } else {
       yield put({
-        type: EMAIL_DUPLICATE_FAILURE,
+        type: LOG_OUT_FAILURE,
+        data: result.data,
+      });
+    }
+  } catch (error) {
+    yield put({
+      type: LOG_OUT_FAILURE,
+      error: error.response.data,
+    });
+  }
+}
+
+function emailVerifyAPI(data) {
+  return axios.post('/user/duplicate', data);
+}
+
+function* emailVerify(action) {
+  try {
+    const result = yield call(emailVerifyAPI, action.data);
+    if (result.data.response === 'success') {
+      yield put({
+        type: EMAIL_VERIFY_SUCCESS,
+        data: result.data,
+      });
+    } else {
+      yield put({
+        type: EMAIL_VERIFY_FAILURE,
         data: result.data,
       });
     }
   } catch (err) {
     console.log(err);
     yield put({
-      type: EMAIL_DUPLICATE_FAILURE,
+      type: EMAIL_VERIFY_FAILURE,
       error: err.response.data,
     });
   }
@@ -113,8 +142,12 @@ function* watchLogIn() {
   yield takeLatest(LOG_IN_REQUEST, logIn);
 }
 
-function* watchEmailDuplicate() {
-  yield takeLatest(EMAIL_DUPLICATE_REQUEST, emailDuplicate);
+function* watchLogOut() {
+  yield takeLatest(LOG_OUT_REQUEST, logout);
+}
+
+function* watchEmailVerify() {
+  yield takeLatest(EMAIL_VERIFY_REQUEST, emailVerify);
 }
 
 function* watchSignUp() {
@@ -123,5 +156,5 @@ function* watchSignUp() {
 
 // API 호출 SAGA
 export function* fetchUserSaga() {
-  yield all([fork(watchLogIn), fork(watchSignUp), fork(watchEmailDuplicate)]);
+  yield all([fork(watchLogIn), fork(watchSignUp), fork(watchEmailVerify), fork(watchLogOut)]);
 }

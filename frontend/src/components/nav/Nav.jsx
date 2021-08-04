@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ReactComponent as SearchSvg } from '../../assets/search-black.svg';
 import { openModal } from '../../modules/actions/modal';
 import { isEmpty } from '../../utils/utils';
-import cookies from 'react-cookies';
+import { logoutRequestAction } from '../../modules/actions/user';
 
 const Nav = () => {
   const history = useHistory();
@@ -30,9 +30,9 @@ const Nav = () => {
   const onClickLogout = () => {
     // 쿠키 제거 또는 로그아웃 API 연동 필요
     window.localStorage.removeItem('user');
-    cookies.remove('accessToken', { path: '/' });
-    cookies.remove('refreshToken', { path: '/' });
+    dispatch(logoutRequestAction());
     alert('로그아웃 되었습니다');
+    window.location.href = '/blockfish';
   };
   const onClickUploadBtn = () => {
     // 로그인 검증 작업 필요

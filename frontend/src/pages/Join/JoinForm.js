@@ -5,9 +5,9 @@ import { Button } from '@material-ui/core';
 import { UserInfoFieldWrapper, UserInfoBottomWrapper, UserInfoInput } from '../../styles/MyPage';
 import useInput from '../../hooks/useInput';
 import { useStyles } from '../../styles/materialsStyle';
-import { regExpPwd, debounce } from '../../utils/utils';
+import { regExpPwd, debounce, isEmpty } from '../../utils/utils';
 import { useDispatch, useSelector } from 'react-redux';
-import { signupRequestAction, emailduplicateRequestAction } from '../../modules/actions/user';
+import { signupRequestAction, emailVerifyRequestAction } from '../../modules/actions/user';
 import { useHistory } from 'react-router-dom';
 
 const JoinForm = () => {
@@ -19,8 +19,9 @@ const JoinForm = () => {
   const [pwdState, setPwdState] = useState(false);
   const [pwdCheck, setPwdCheck] = useState(false);
   const [error, setError] = useState('');
-  const { emailDuplicate } = useSelector((state) => ({
-    emailDuplicate: state.user.emailDuplicate,
+  const [verifyBtn, setVerifyBtn] = useState(false);
+  const { emailVerify } = useSelector((state) => ({
+    emailVerify: state.user.emailVerify,
   }));
 
   const history = useHistory();
@@ -28,7 +29,8 @@ const JoinForm = () => {
   const onCheckEmail = (e) => {
     const result = e.target.value;
     e.preventDefault();
-    dispatch(emailduplicateRequestAction({ result }));
+    dispatch(emailVerifyRequestAction({ result }));
+    setVerifyBtn(!verifyBtn);
   };
 
   const onChangePwd = (e) => {
@@ -57,7 +59,7 @@ const JoinForm = () => {
 
   const onSignup = (e) => {
     e.preventDefault();
-    if (!emailDuplicate) {
+    if (!emailVerify) {
       alert('이메일 중복확인을 해주세요.');
       return;
     }
@@ -92,7 +94,8 @@ const JoinForm = () => {
                 onChange={onChangeEmail}
               />
               <span style={{ marginLeft: 15 }}>
-                {emailDuplicate ? '사용 가능' : '사용 불가능'}
+                {verifyBtn && emailVerify && '사용 가능'}
+                {verifyBtn && !emailVerify && '사용 불가능'}
                 <Button className={`${classes.emailChkBtn}`} onClick={onCheckEmail}>
                   중복확인
                 </Button>
