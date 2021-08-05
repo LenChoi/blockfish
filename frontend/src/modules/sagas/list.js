@@ -21,17 +21,24 @@ export function* getList() {
 }
 
 // OS별 다운로드 목록
-export function* getListByOS() {
-  const data = yield getApi('/search/byOs');
+export function* getListByOS(param) {
+  const { orderType, osType } = param.payload;
+  const data = yield getApi(`/search/byOs?orderType=${orderType}&osType=${osType}`);
 
   try {
     if (!isEmpty(data) && data.status === 200) {
       yield put(getListSuccess(data.data));
+
+      if (isEmpty(data.data.content)) {
+        yield alert('데이터가 비어있습니다.');
+      }
     } else {
       yield put(getListError(data.data));
+      yield alert('데이터를 가져오는데 실패했습니다.');
     }
   } catch (error) {
     yield put(getListError(data.data));
+    yield alert('데이터를 가져오는데 실패했습니다.');
   }
 
   return data;

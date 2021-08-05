@@ -10,7 +10,7 @@ import {
   ListWrapper,
 } from '../../styles/Main';
 import { useDispatch, useSelector } from 'react-redux';
-import { getListStart } from '../../modules/actions/list';
+import { getListByOsStart, getListStart } from '../../modules/actions/list';
 import { Link } from 'react-router-dom';
 
 const DownloadMain = () => {
@@ -21,21 +21,68 @@ const DownloadMain = () => {
     list: state.list.success,
   }));
 
-  const [selectItems, setSelectItems] = useState([
-    { id: 0, name: 'Windows', clicked: false },
-    { id: 1, name: 'Mac', clicked: false },
-    { id: 2, name: 'Android', clicked: false },
-    { id: 3, name: 'iOS', clicked: false },
+  const [recentItems, setRecentItems] = useState([
+    { id: 0, name: '전체', clicked: true },
+    { id: 1, name: 'Windows', clicked: false },
+    { id: 2, name: 'Mac', clicked: false },
   ]);
 
-  const onClickListSelection = (e) => {
-    const name = e.target.dataset.name;
-    setSelectItems(
-      selectItems.map((data) => ({
+  const [ratingItems, setRatingItems] = useState([
+    { id: 0, name: '전체', clicked: true },
+    { id: 1, name: 'Windows', clicked: false },
+    { id: 2, name: 'Mac', clicked: false },
+  ]);
+
+  const onClickListRecentItem = (e, idx) => {
+    const filtered = recentItems.filter((data) => data.clicked)[0];
+    if (filtered.id === idx) {
+      return;
+    }
+
+    setRecentItems(
+      recentItems.map((data) => ({
         ...data,
-        clicked: data.name === name ? true : false,
+        clicked: data.id === idx ? true : false,
       })),
     );
+
+    // 전체를 클릭시 search/all api 호출
+    if (idx === 0) {
+      dispatch(getListStart());
+    } else {
+      dispatch(
+        getListByOsStart({
+          orderType: 'Date',
+          osType: recentItems[idx].name,
+        }),
+      );
+    }
+  };
+
+  const onClickListRatingItem = (e, idx) => {
+    const filtered = ratingItems.filter((data) => data.clicked)[0];
+    if (filtered.id === idx) {
+      return;
+    }
+
+    setRatingItems(
+      ratingItems.map((data) => ({
+        ...data,
+        clicked: data.id === idx ? true : false,
+      })),
+    );
+
+    // 전체를 클릭시 search/all api 호출
+    if (idx === 0) {
+      dispatch(getListStart());
+    } else {
+      dispatch(
+        getListByOsStart({
+          orderType: 'Rank',
+          osType: ratingItems[idx].name,
+        }),
+      );
+    }
   };
 
   // api 호출 시작
@@ -59,12 +106,11 @@ const DownloadMain = () => {
 
         <div>
           <SelectionWrapper>
-            {!isEmpty(selectItems) &&
-              selectItems.map((data) => (
+            {!isEmpty(recentItems) &&
+              recentItems.map((data) => (
                 <SelectionWrapperLi
                   key={data.id}
-                  data-name={data.name}
-                  onClick={onClickListSelection}
+                  onClick={(e) => onClickListRecentItem(e, data.id)}
                 >
                   <TextDefault size="16px" lineHeight="35px">
                     {data.name}
@@ -87,19 +133,19 @@ const DownloadMain = () => {
         </ListWrapper>
       </MainSection>
 
-      <MainSection>
+      <MainSection style={{ marginTop: 80 }}>
         <TextDefault size="25px" weight="700">
           인기
         </TextDefault>
 
         <div>
           <SelectionWrapper>
-            {!isEmpty(selectItems) &&
-              selectItems.map((data) => (
+            {!isEmpty(ratingItems) &&
+              ratingItems.map((data) => (
                 <SelectionWrapperLi
                   key={data.id}
                   data-name={data.name}
-                  onClick={onClickListSelection}
+                  onClick={(e) => onClickListRatingItem(e, data.id)}
                 >
                   <TextDefault size="16px" lineHeight="35px">
                     {data.name}

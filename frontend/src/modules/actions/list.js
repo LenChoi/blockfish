@@ -22,6 +22,7 @@ export const setList = (data) => ({
   type: SET_LIST,
   payload: data,
 });
-export const getListByOsStart = () => ({
+export const getListByOsStart = (data) => ({
   type: GET_LIST_BY_OS,
+  payload: data,
 });
