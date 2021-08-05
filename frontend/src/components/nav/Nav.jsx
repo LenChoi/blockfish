@@ -35,7 +35,11 @@ const Nav = () => {
     window.location.href = '/blockfish';
   };
   const onClickUploadBtn = () => {
-    // 로그인 검증 작업 필요
+    if (isEmpty(user)) {
+      alert('로그인이 필요합니다.');
+      history.push('/login');
+      return;
+    }
     history.push('/my-page/upload');
   };
 
