@@ -38,6 +38,7 @@ export const NavTopBarUnderLine = styled.div`
 `;
 export const NavContainer = styled.div`
   width: 100%;
+  min-width: 1080px;
 `;
 export const NavMainContainer = styled.div`
   display: flex;
@@ -146,7 +147,7 @@ export const MainConentContainer = styled.section`
   margin: 0 auto;
 `;
 export const MainConentWrapper = styled.div`
-  padding: 50px 20px 80px 20px;
+  padding: 50px 0px 80px 0px;
 `;
 
 // MyPage Layout

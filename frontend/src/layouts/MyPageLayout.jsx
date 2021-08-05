@@ -39,15 +39,15 @@ const MyPageLayout = (props) => {
               <TextDefault size="16px">개인정보</TextDefault>
             </Link>
           </MyPageListItem>
-          <MyPageListItem viewState={listState[1]}>
+          {/* <MyPageListItem viewState={listState[1]}>
             <Link to="/my-page/review">
               <div style={{ marginBottom: 10 }}>
                 <EditSvg width="50" height="50" fill={listState[1] ? '#4169e1' : '#808080'} />
               </div>
               <TextDefault size="16px">리뷰</TextDefault>
             </Link>
-          </MyPageListItem>
-          <MyPageListItem viewState={listState[2]}>
+          </MyPageListItem> */}
+          {/* <MyPageListItem viewState={listState[2]}>
             <Link to="/my-page/withdrawal">
               <div style={{ marginBottom: 10 }}>
                 <AddressCardSvg
@@ -58,8 +58,8 @@ const MyPageLayout = (props) => {
               </div>
               <TextDefault size="16px">회원탈퇴</TextDefault>
             </Link>
-          </MyPageListItem>
-          <MyPageListItem viewState={listState[3]}>
+          </MyPageListItem> */}
+          {/* <MyPageListItem viewState={listState[3]}>
             <Link to="/my-page/history/download">
               <div style={{ marginBottom: 10 }}>
                 <DownloadSvg width="50" height="50" fill={listState[3] ? '#4169e1' : '#808080'} />
@@ -74,7 +74,7 @@ const MyPageLayout = (props) => {
               </div>
               <TextDefault size="16px">업로드 내역</TextDefault>
             </Link>
-          </MyPageListItem>
+          </MyPageListItem> */}
           <MyPageListItem viewState={listState[5]}>
             <Link to="/my-page/upload">
               <div style={{ marginBottom: 10 }}>

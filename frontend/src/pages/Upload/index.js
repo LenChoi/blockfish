@@ -39,8 +39,7 @@ const Upload = () => {
     ios: false,
   });
   const [checkedPrice, setCheckedPrice] = useState({
-    paid: false,
-    free: false,
+    free: true,
   });
   const [largeMenu, setLargeMenu] = useState('');
   const [smallMenu, setSmallMenu] = useState('');
@@ -53,15 +52,27 @@ const Upload = () => {
 
   // 더미데이터
   const largeMenuList = [
-    { id: 0, name: '대분류1' },
-    { id: 1, name: '대분류2' },
-    { id: 2, name: '대분류3' },
+    { id: 0, name: '관리/보안' },
+    { id: 1, name: '백신' },
+    { id: 2, name: '파일 압축' },
+    { id: 3, name: '시스템 관리' },
+    { id: 4, name: '동영상 녹화' },
+    { id: 5, name: '동영상 플레이어' },
+    { id: 6, name: '동영상 편집' },
+    { id: 7, name: '동영상 코덱' },
+    { id: 8, name: '브라우저' },
+    { id: 9, name: '메신저' },
+    { id: 10, name: '파일 전송' },
+    { id: 11, name: '문서/사무' },
+    { id: 12, name: '문서 뷰어' },
+    { id: 13, name: '문서 편집' },
+    { id: 14, name: '기타' },
   ];
-  const smallMenuList = [
-    { id: 0, name: '소분류1' },
-    { id: 1, name: '소분류2' },
-    { id: 2, name: '소분류3' },
-  ];
+  // const smallMenuList = [
+  //   { id: 0, name: '소분류1' },
+  //   { id: 1, name: '소분류2' },
+  //   { id: 2, name: '소분류3' },
+  // ];
 
   const onChangeCheckedOs = (e) => {
     setCheckedOs({ ...checkedOs, [e.target.name]: e.target.checked });
@@ -77,9 +88,9 @@ const Upload = () => {
   const onChangeLargeMenu = (e) => {
     setLargeMenu(e.target.value);
   };
-  const onChangeSmallMenu = (e) => {
-    setSmallMenu(e.target.value);
-  };
+  // const onChangeSmallMenu = (e) => {
+  //   setSmallMenu(e.target.value);
+  // };
 
   const onClickFileUploadBtn = () => {
     fileInputRef.current.click();
@@ -124,11 +135,6 @@ const Upload = () => {
 
     formData.append('fileUploadDto ', JSON.stringify(fileUploadDto));
 
-    console.log('fileObject', fileUploadDto);
-    console.log(formData.get('files'));
-    console.log(formData.get('image'));
-    console.log(formData.get('fileUploadDto '));
-
     dispatch(reqFileUpload(formData));
   };
 
@@ -161,16 +167,16 @@ const Upload = () => {
               <SelectDefault
                 value={largeMenu}
                 menuItems={largeMenuList}
-                selectName="대분류"
+                selectName="분류"
                 onChangeMenu={onChangeLargeMenu}
               />
 
-              <SelectDefault
+              {/* <SelectDefault
                 value={smallMenu}
                 menuItems={smallMenuList}
                 selectName="소분류"
                 onChangeMenu={onChangeSmallMenu}
-              />
+              /> */}
             </UploadContentItem>
             {/* 카테고리 - 끝 */}
 
@@ -250,16 +256,16 @@ const Upload = () => {
               <CheckboxWithLabel
                 checked={checkedOs.window}
                 onChangeChecked={onChangeCheckedOs}
-                name="window"
+                name="Window"
                 label="Window"
               />
               <CheckboxWithLabel
                 checked={checkedOs.mac}
                 onChangeChecked={onChangeCheckedOs}
-                name="mac"
+                name="Mac"
                 label="Mac"
               />
-              <CheckboxWithLabel
+              {/* <CheckboxWithLabel
                 checked={checkedOs.android}
                 onChangeChecked={onChangeCheckedOs}
                 name="android"
@@ -270,7 +276,7 @@ const Upload = () => {
                 onChangeChecked={onChangeCheckedOs}
                 name="ios"
                 label="iOS"
-              />
+              /> */}
             </UploadContentItem>
             {/* OS - 끝 */}
 
@@ -286,12 +292,12 @@ const Upload = () => {
                 name="free"
                 label="Free"
               />
-              <CheckboxWithLabel
+              {/* <CheckboxWithLabel
                 checked={checkedPrice.paid}
                 onChangeChecked={onChangeCheckedPrice}
                 name="paid"
                 label="Paid"
-              />
+              /> */}
             </UploadContentItem>
             {/* 가격 - 끝 */}
 
