@@ -56,6 +56,7 @@ public class MemberController {
             authService.sendVerificationMail(member);
             response = new Response("success", "성공적으로 인증메일을 보냈습니다.", null);
         } catch (Exception exception) {
+            exception.printStackTrace();
             response = new Response("error", "인증메일을 보내는데 문제가 발생했습니다.", exception);
         }
         return response;
