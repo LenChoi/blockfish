@@ -58,7 +58,8 @@ public class SearchController {
     }
 
     @GetMapping("/byCategory")
-    @ApiOperation(value = "카테고리로 검색", notes = "특정 OS의 특정 카테고리의 파일 검색")
+    @ApiOperation(value = "카테고리로 검색"
+            , notes = "특정 OS의 특정 카테고리의 파일 검색(category - PC 관리/보안,백신,파일 압축,시스템 관리,동영상,동영상 녹화,동영상 플레이어,동영상 편집,동영상 코덱,인터넷/네트워크,브라우저,메신저,파일 전송,문서/사무,문서 뷰어,문서 편집,기타")
     public ResponseEntity searchFileInfoByCategory(final Pageable pageable,
                                                    @RequestParam(value = "osType") String osType,
                                                    @RequestParam(value = "category") String category) {
