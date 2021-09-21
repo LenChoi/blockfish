@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 // 엔티티와 엔티티 리포지토리는 항상 같은 곳에 위치해야한다.
 // JPA에선 단순히 인터페이스 생성 후 JpaRepository 를 상속하면 기본적인 crud 생성
@@ -39,4 +40,9 @@ public interface FileInformationRepository extends JpaRepository<FileInformation
             countQuery = "SELECT COUNT(file_id) FROM file_informations WHERE os_type LIKE :osType AND category_code LIKE :category", nativeQuery = true
     )
     Page<FileInformation> findByCategory(String osType, String category, Pageable pageable);
+
+    @Query(
+            value = "SELECT * FROM file_informations WHERE file_id = :fileId", nativeQuery = true
+    )
+    FileInformation SelectOneFileInfo(@Param("fileId") String fileId);
 }
