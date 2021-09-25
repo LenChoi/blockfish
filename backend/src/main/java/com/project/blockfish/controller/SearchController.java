@@ -69,7 +69,7 @@ public class SearchController {
         return new ResponseEntity<>(searchedFileDtos, HttpStatus.OK);
     }
 
-    @GetMapping("/SelectOneFileInfo")
+    @GetMapping("/detail")
     @ApiOperation(value = "상세조회", notes = "파일아이디가 키값")
     public ResponseEntity SelectOneFileInfo(@RequestParam(value = "fileId") String fileId) {
         FileInformation SelectOneFileInfo = searchService.SelectOneFileInfo(fileId);
