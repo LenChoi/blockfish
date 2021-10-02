@@ -73,7 +73,7 @@ public class FileController {
 
     //    디비에서 파일 이름을 아이디로 불러오기
     @GetMapping("/getFile")
-    public String getFile(@RequestBody Long fileId) throws NotFoundException {
+    public String getFile(@RequestParam("fileId") Long fileId) throws NotFoundException {
         FileInformation file = fileInformationService.findByFileId(fileId);
         System.out.println("file.getName() = " + file.getName());
 
