@@ -1,6 +1,7 @@
 package com.project.blockfish.controller;
 
 import com.project.blockfish.dto.SearchedFileDto;
+import com.project.blockfish.file.FileInformation;
 import com.project.blockfish.file.service.SearchService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -66,5 +67,12 @@ public class SearchController {
         Page<SearchedFileDto> searchedFileDtos = searchService.searchByCategory(osType, category, pageable);
 
         return new ResponseEntity<>(searchedFileDtos, HttpStatus.OK);
+    }
+
+    @GetMapping("/detail")
+    @ApiOperation(value = "상세조회", notes = "파일아이디가 키값")
+    public ResponseEntity SelectOneFileInfo(@RequestParam(value = "fileId") String fileId) {
+        FileInformation SelectOneFileInfo = searchService.SelectOneFileInfo(fileId);
+        return new ResponseEntity<>(SelectOneFileInfo, HttpStatus.OK);
     }
 }

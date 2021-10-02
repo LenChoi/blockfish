@@ -150,4 +150,9 @@ public class SearchServiceImpl implements SearchService {
 
         return searchedFilesDto;
     }
+
+    @Override
+    public FileInformation SelectOneFileInfo(String fileId) {
+        return fileInformationRepository.SelectOneFileInfo(fileId);
+    }
 }
