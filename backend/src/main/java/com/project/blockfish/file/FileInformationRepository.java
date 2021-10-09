@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Optional;
+
 // 엔티티와 엔티티 리포지토리는 항상 같은 곳에 위치해야한다.
 // JPA에선 단순히 인터페이스 생성 후 JpaRepository 를 상속하면 기본적인 crud 생성
 // 상속시 파라미터로 <엔티티클래스,Pk타입>을 지정
@@ -45,4 +47,12 @@ public interface FileInformationRepository extends JpaRepository<FileInformation
             value = "SELECT * FROM file_informations WHERE file_id = :fileId", nativeQuery = true
     )
     FileInformation SelectOneFileInfo(@Param("fileId") String fileId);
+
+    Optional<FileInformation> findById(Long fileId);
+
+    Page<FileInformation> findByOsType(String osType, Pageable paging);
+
+    Page<FileInformation> findByOsTypeAndCategoryCode(String osType, String categoryCode, Pageable paging);
+
+    Page<FileInformation> findByNameLikeOrInfoLike(String name, String info, Pageable paging);
 }
